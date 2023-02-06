@@ -40,18 +40,20 @@ export const Global = createGlobalStyle`
 	}
 	body {
 		line-height: 1;
-		font-family: $fontFamily;
+		font-family: 'Mulish';
 		//text-rendering: optimizeLegibility;
 		-ms-text-size-adjust: 100%;
 		-moz-text-size-adjust: 100%;
 		-webkit-text-size-adjust: 100%;
 		width: 100%;
 		height: 100%;
+		background-color: #000;
+		color: rgba(255, 251, 251, 1);
 	}
 	input,
 	button,
 	textarea {
-		font-family: $fontFamily;
+		font-family: 'Mulish';
 		font-size: inherit;
 	}
 	input::-ms-clear {
@@ -68,6 +70,7 @@ export const Global = createGlobalStyle`
 	a,
 	a:visited {
 		text-decoration: none;
+		color: rgba(255, 251, 251, 1);
 	}
 	a:hover {
 		text-decoration: none;
@@ -100,4 +103,10 @@ export const Global = createGlobalStyle`
 		width: 100%;
 		height: 100%;
 	}
+`;
+
+export const Container = styled.div`
+	max-width: 1140px;
+	padding: 0 15px;
+	margin: 0 auto;
 `
