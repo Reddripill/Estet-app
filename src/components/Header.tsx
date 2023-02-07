@@ -52,7 +52,7 @@ function Header() {
 					</Logo>
 					<Actions>
 						<NavLinks />
-						<Button>
+						<Button isBlue={true}>
 							Sign In
 						</Button>
 					</Actions>

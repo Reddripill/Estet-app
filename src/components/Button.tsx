@@ -1,18 +1,22 @@
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-const ButtonItem = styled.button`
+interface Props {
+	isBlue: boolean;
+}
+
+const ButtonItem = styled.button<Props>`
 	color: #fff;
 	padding: 0 24px;
 	height: 42px;
-	background: #1DAEFF;
-	box-shadow: 0px 4px 40px #2D5981;
+	background: ${props => props.isBlue ? '#1DAEFF' : 'linear-gradient(90deg, #FEAC6D 0%, #AE61ED 100%)'};
+	box-shadow: ${props => props.isBlue ? '0px 4px 40px #2D5981' : '0px 17px 33px rgba(255, 255, 255, 0.2);'};
 	border-radius: 8px;
 `
 
-function Button({ children }: PropsWithChildren) {
+function Button({ children, isBlue }: PropsWithChildren<Props>) {
 	return (
-		<ButtonItem type='button'>
+		<ButtonItem type='button' isBlue={isBlue}>
 			{children}
 		</ButtonItem>
 	)
