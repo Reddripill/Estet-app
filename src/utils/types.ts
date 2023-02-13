@@ -1,5 +1,3 @@
-
-
 export type HouseCard = {
 	id: string,
 	price: string,
@@ -11,3 +9,5 @@ export type HouseCard = {
 	productType: string,
 	serice: string,
 }
+
+export type CategoryType = 'all' | '1 bedroom' | '2 bedroom' | 'studio';

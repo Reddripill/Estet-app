@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { Container } from '../../utils/styles';
+import { CategoryType } from '../../utils/types';
 import Button from '../Button';
 import CategoryButton from '../CategoryButton';
 import ProductItems from './ProductItems';
@@ -28,15 +29,16 @@ const ProductBody = styled.div`
 `
 
 function Product() {
+	const [currentCategory, setCurrentCategory] = useState<CategoryType>('all');
 	return (
 		<section>
 			<Container>
 				<FilteredItems>
 					<CategoryContainer>
-						<CategoryButton isActive={true}>All</CategoryButton>
-						<CategoryButton>Studio</CategoryButton>
-						<CategoryButton>1 Bed Room</CategoryButton>
-						<CategoryButton>2 Bed Room</CategoryButton>
+						<CategoryButton id='all' isActive={true}>All</CategoryButton>
+						<CategoryButton id='studio'>Studio</CategoryButton>
+						<CategoryButton id='1 bedroom'>1 Bed Room</CategoryButton>
+						<CategoryButton id='2 bedroom'>2 Bed Room</CategoryButton>
 					</CategoryContainer>
 					<Button isBlue={true}>
 						<ButtonContent>
@@ -46,7 +48,7 @@ function Product() {
 					</Button>
 				</FilteredItems>
 				<ProductBody>
-					<ProductItems />
+					<ProductItems filterParam={currentCategory} />
 				</ProductBody>
 			</Container>
 		</section>

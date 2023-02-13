@@ -1,8 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
+import { CategoryType } from '../utils/types';
 
 interface Props {
 	isActive?: boolean;
+	id: CategoryType;
 }
 
 const Button = styled.button`
@@ -21,9 +23,9 @@ const Button = styled.button`
 	}
 `
 
-function CategoryButton({ children, isActive }: PropsWithChildren<Props>) {
+function CategoryButton({ children, isActive, id }: PropsWithChildren<Props>) {
 	return (
-		<Button type='button' className={isActive ? 'active' : ''} >
+		<Button type='button' id={id} className={isActive ? 'active' : ''} >
 			{children}
 		</Button>
 	)

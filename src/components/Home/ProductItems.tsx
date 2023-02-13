@@ -1,12 +1,16 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
-import { HouseCard } from '../../utils/types';
+import { CategoryType, HouseCard } from '../../utils/types';
 import Button from '../Button';
 import { IoIosArrowForward } from 'react-icons/io';
 
 interface ProductProps {
 	product: HouseCard;
+}
+
+interface ProductItemsProps {
+	filterParam: CategoryType;
 }
 
 const ProductsContainer = styled.ul`
@@ -87,6 +91,7 @@ const FeatureItem = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	gap: 4px;
 	&:not(:last-child) {
 		border-right: 1px solid rgba(255, 251, 251, 0.35);
 	}
@@ -128,8 +133,11 @@ function Product({ product }: ProductProps) {
 }
 
 
-const ProductItems: FC = () => {
-	const allProducts = useAppSelector(state => state.houses.entities);
+const ProductItems: FC<ProductItemsProps> = ({ filterParam }) => {
+	let allProducts = useAppSelector(state => state.houses.entities);
+	if (filterParam !== 'all') {
+		allProducts = allProducts.filter(item => item.type === filterParam)
+	}
 	return (
 		<ProductsContainer>
 			{allProducts.length !== 0 &&
