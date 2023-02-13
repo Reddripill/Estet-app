@@ -53,14 +53,14 @@ function Product() {
 							Studio
 						</CategoryButton>
 						<CategoryButton
-							id='1 bedroom'
+							id='1 bedrooms'
 							currentCategory={currentCategory}
 							clickHandler={clickHandler}
 						>
 							1 Bed Room
 						</CategoryButton>
 						<CategoryButton
-							id='2 bedroom'
+							id='2 bedrooms'
 							currentCategory={currentCategory}
 							clickHandler={clickHandler}
 						>

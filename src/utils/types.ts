@@ -10,4 +10,4 @@ export type HouseCard = {
 	serice: string,
 }
 
-export type CategoryType = 'all' | '1 bedroom' | '2 bedroom' | 'studio';
+export type CategoryType = 'all' | '1 bedrooms' | '2 bedrooms' | 'studio';

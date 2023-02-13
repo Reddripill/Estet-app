@@ -2,7 +2,7 @@
 	{
 		"id": "1asdf",
 		"price": "100.000",
-		"type": "1 Bedrooms",
+		"type": "1 bedrooms",
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
@@ -13,7 +13,7 @@
 	{
 		"id": "2dfgh",
 		"price": "390.000",
-		"type": "2 Bedrooms",
+		"type": "2 bedrooms",
 		"bath": 3,
 		"square": 1000,
 		"owner": "Mark Siemens",
@@ -24,7 +24,7 @@
 	{
 		"id": "3fghj",
 		"price": "143.000",
-		"type": "1 Bedrooms",
+		"type": "1 bedrooms",
 		"bath": 1,
 		"square": 535,
 		"owner": "George Kvarz",
@@ -35,7 +35,7 @@
 	{
 		"id": "4sdfh",
 		"price": "211.200",
-		"type": "1 Bedrooms",
+		"type": "1 bedrooms",
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
@@ -46,7 +46,7 @@
 	{
 		"id": "5sadhvbb",
 		"price": "132.000",
-		"type": "1 Bedrooms",
+		"type": "1 bedrooms",
 		"bath": 1,
 		"square": 535,
 		"owner": "Teylor Lamar",
@@ -57,7 +57,7 @@
 	{
 		"id": "6zxcvdsagf",
 		"price": "190.400",
-		"type": "1 Bedrooms",
+		"type": "1 bedrooms",
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
