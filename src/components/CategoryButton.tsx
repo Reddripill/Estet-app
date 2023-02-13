@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { CategoryType } from '../utils/types';
 
 interface Props {
-	isActive?: boolean;
 	id: CategoryType;
+	currentCategory: CategoryType;
+	clickHandler: (id: CategoryType) => void;
 }
 
 const Button = styled.button`
@@ -23,9 +24,14 @@ const Button = styled.button`
 	}
 `
 
-function CategoryButton({ children, isActive, id }: PropsWithChildren<Props>) {
+function CategoryButton({ children, currentCategory, id, clickHandler }: PropsWithChildren<Props>) {
 	return (
-		<Button type='button' id={id} className={isActive ? 'active' : ''} >
+		<Button
+			type='button'
+			id={id}
+			className={currentCategory === id ? 'active' : ''}
+			onClick={() => clickHandler(id)}
+		>
 			{children}
 		</Button>
 	)

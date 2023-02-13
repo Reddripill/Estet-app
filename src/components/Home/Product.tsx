@@ -30,15 +30,42 @@ const ProductBody = styled.div`
 
 function Product() {
 	const [currentCategory, setCurrentCategory] = useState<CategoryType>('all');
+	const clickHandler = (id: CategoryType) => {
+		setCurrentCategory(id);
+	}
 	return (
 		<section>
 			<Container>
 				<FilteredItems>
 					<CategoryContainer>
-						<CategoryButton id='all' isActive={true}>All</CategoryButton>
-						<CategoryButton id='studio'>Studio</CategoryButton>
-						<CategoryButton id='1 bedroom'>1 Bed Room</CategoryButton>
-						<CategoryButton id='2 bedroom'>2 Bed Room</CategoryButton>
+						<CategoryButton
+							id='all'
+							currentCategory={currentCategory}
+							clickHandler={clickHandler}
+						>
+							All
+						</CategoryButton>
+						<CategoryButton
+							id='studio'
+							currentCategory={currentCategory}
+							clickHandler={clickHandler}
+						>
+							Studio
+						</CategoryButton>
+						<CategoryButton
+							id='1 bedroom'
+							currentCategory={currentCategory}
+							clickHandler={clickHandler}
+						>
+							1 Bed Room
+						</CategoryButton>
+						<CategoryButton
+							id='2 bedroom'
+							currentCategory={currentCategory}
+							clickHandler={clickHandler}
+						>
+							2 Bed Room
+						</CategoryButton>
 					</CategoryContainer>
 					<Button isBlue={true}>
 						<ButtonContent>

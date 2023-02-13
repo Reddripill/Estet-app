@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 
 export default function useIntersection(targetRef: React.RefObject<HTMLElement>) {
-	const target = targetRef.current;
 	const [isVisible, setIsVisible] = useState(true);
 
 	const intersectionCallback: IntersectionObserverCallback = function (entries) {
@@ -11,6 +10,7 @@ export default function useIntersection(targetRef: React.RefObject<HTMLElement>)
 	}
 
 	useEffect(() => {
+		const target = targetRef.current;
 		const options: IntersectionObserverInit = {
 			root: null,
 			rootMargin: '0px',
@@ -21,6 +21,6 @@ export default function useIntersection(targetRef: React.RefObject<HTMLElement>)
 		return () => {
 			if (target) observer.unobserve(target)
 		}
-	}, [target])
+	}, [targetRef])
 	return isVisible;
 }
