@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
 import { CategoryType, HouseCard } from '../../utils/types';
 import Button from '../Button';
 import { IoIosArrowForward } from 'react-icons/io';
+import useIntersection from '../../utils/hooks/useIntersection';
 
 interface ProductProps {
 	product: HouseCard;
@@ -25,6 +26,10 @@ const Card = styled.div`
 	flex-direction: column;
 	border-radius: 8px;
 	overflow: hidden;
+	background-color: #161616;
+`
+const CardSkeleton = styled(Card)`
+	height: 582px;
 `
 
 const Image = styled.div`
@@ -61,7 +66,6 @@ const Arrow = styled.div`
 `
 const Information = styled.div`
 	padding: 16px;
-	background-color: #161616;
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
@@ -98,37 +102,53 @@ const FeatureItem = styled.div`
 `
 
 function Product({ product }: ProductProps) {
+	const productTarget = useRef<HTMLDivElement>(null);
+	const isVisible = useIntersection(productTarget, true);
 	return (
-		<Card>
-			<Image>
-				<img src={product.url} alt="House" />
-				<Arrow className='prev-arrow'>
-					<IoIosArrowForward />
-				</Arrow>
-				<Arrow className='next-arrow'>
-					<IoIosArrowForward />
-				</Arrow>
-			</Image>
-			<Information>
-				<Details>
-					<Price>{product.price} $</Price>
-					<Button isBlue={false}>View Details</Button>
-				</Details>
-				<Feature>
-					<FeatureItem>
-						<img src="./images/icons/bed.svg" alt="Bed" />
-						{product.type}
-					</FeatureItem>
-					<FeatureItem>
-						<img src="./images/icons/shower.svg" alt="Shower" />
-						{`${product.bath} Bath`}
-					</FeatureItem>
-					<FeatureItem>
-						{`${product.square} sq ft`}
-					</FeatureItem>
-				</Feature>
-			</Information>
-		</Card>
+		<div ref={productTarget}>
+			{isVisible ?
+				<Card ref={productTarget}>
+					<Image>
+						<img src={product.url} alt="House" />
+						<Arrow className='prev-arrow'>
+							<IoIosArrowForward />
+						</Arrow>
+						<Arrow className='next-arrow'>
+							<IoIosArrowForward />
+						</Arrow>
+					</Image>
+					<Information>
+						<Details>
+							<Price>{product.price} $</Price>
+							<Button isBlue={false}>View Details</Button>
+						</Details>
+						<Feature>
+							<FeatureItem>
+								<img src="./images/icons/bed.svg" alt="Bed" />
+								{product.type}
+							</FeatureItem>
+							<FeatureItem>
+								<img src="./images/icons/shower.svg" alt="Shower" />
+								{`${product.bath} Bath`}
+							</FeatureItem>
+							<FeatureItem>
+								{`${product.square} sq ft`}
+							</FeatureItem>
+						</Feature>
+					</Information>
+				</Card> :
+				<CardSkeleton>
+					<Image>
+						<Arrow className='prev-arrow'>
+							<IoIosArrowForward />
+						</Arrow>
+						<Arrow className='next-arrow'>
+							<IoIosArrowForward />
+						</Arrow>
+					</Image>
+				</CardSkeleton>
+			}
+		</div>
 	)
 }
 
@@ -142,7 +162,7 @@ const ProductItems: FC<ProductItemsProps> = ({ filterParam }) => {
 		<ProductsContainer>
 			{allProducts.length !== 0 &&
 				allProducts.map(product => (
-					<Product key={product.id} product={product} />
+					<Product key={`${product.id}`} product={product} />
 				))
 			}
 		</ProductsContainer>

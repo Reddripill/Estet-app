@@ -33,7 +33,7 @@ export const housesSlice = createSlice({
 				state.loading = 'pending';
 			})
 			.addCase(fetchProducts.fulfilled, (state, action) => {
-				state.entities = action.payload;
+				state.entities = state.entities.concat(action.payload);
 				state.loading = 'succeeded';
 			})
 			.addCase(fetchProducts.rejected, (state, action) => {

@@ -5,6 +5,9 @@ import { CategoryType } from '../../utils/types';
 import Button from '../Button';
 import CategoryButton from '../CategoryButton';
 import ProductItems from './ProductItems';
+import { MdArrowForwardIos } from 'react-icons/md';
+import { useAppDispatch } from '../../app/hooks';
+import { fetchProducts } from '../../features/housesSlice';
 
 const FilteredItems = styled.div`
 	display: flex;
@@ -25,11 +28,37 @@ const ButtonContent = styled.div`
 `
 
 const ProductBody = styled.div`
-	
+	margin-bottom: 34px;
+`
+
+const MoreProducts = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+`
+
+const Arrow = styled(MdArrowForwardIos)`
+	transform: rotate(90deg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+`
+
+const MoreProductsButton = styled.button`
+	background-color: rgba(255, 251, 251, 0.65);
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `
 
 function Product() {
 	const [currentCategory, setCurrentCategory] = useState<CategoryType>('all');
+	const dispatch = useAppDispatch();
 	const clickHandler = (id: CategoryType) => {
 		setCurrentCategory(id);
 	}
@@ -77,6 +106,12 @@ function Product() {
 				<ProductBody>
 					<ProductItems filterParam={currentCategory} />
 				</ProductBody>
+				<MoreProducts>
+					<MoreProductsButton type='button' onClick={() => dispatch(fetchProducts())}>
+						<Arrow />
+					</MoreProductsButton>
+					View More
+				</MoreProducts>
 			</Container>
 		</section>
 	)
