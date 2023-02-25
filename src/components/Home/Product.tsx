@@ -4,10 +4,11 @@ import { Container } from '../../utils/styles';
 import { CategoryType } from '../../utils/types';
 import Button from '../Button';
 import CategoryButton from '../CategoryButton';
-import ProductItems from './ProductItems';
+import ProductItems from './ProductItems'
 import { MdArrowForwardIos } from 'react-icons/md';
 import { useAppDispatch } from '../../app/hooks';
 import { fetchProducts } from '../../features/housesSlice';
+import Filters from '../Filter/Filters';
 
 const FilteredItems = styled.div`
 	display: flex;
@@ -58,9 +59,14 @@ const MoreProductsButton = styled.button`
 
 function Product() {
 	const [currentCategory, setCurrentCategory] = useState<CategoryType>('all');
+	const [showFilters, setShowFilters] = useState<boolean>(false)
 	const dispatch = useAppDispatch();
 	const clickHandler = (id: CategoryType) => {
+		setShowFilters(false);
 		setCurrentCategory(id);
+	}
+	const filterClickHandler = () => {
+		setShowFilters(prev => !prev)
 	}
 	return (
 		<section>
@@ -96,22 +102,27 @@ function Product() {
 							2 Bed Room
 						</CategoryButton>
 					</CategoryContainer>
-					<Button isBlue={true}>
+					<Button isBlue={true} clickHandler={filterClickHandler}>
 						<ButtonContent>
 							Filters
 							<img src="./images/icons/filter.svg" alt="Filter" />
 						</ButtonContent>
 					</Button>
 				</FilteredItems>
+				{showFilters &&
+					<Filters />
+				}
 				<ProductBody>
 					<ProductItems filterParam={currentCategory} />
 				</ProductBody>
-				<MoreProducts>
-					<MoreProductsButton type='button' onClick={() => dispatch(fetchProducts())}>
-						<Arrow />
-					</MoreProductsButton>
-					View More
-				</MoreProducts>
+				{currentCategory === 'all' &&
+					<MoreProducts>
+						<MoreProductsButton type='button' onClick={() => dispatch(fetchProducts())}>
+							<Arrow />
+						</MoreProductsButton>
+						View More
+					</MoreProducts>
+				}
 			</Container>
 		</section>
 	)

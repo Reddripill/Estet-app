@@ -105,50 +105,38 @@ function Product({ product }: ProductProps) {
 	const productTarget = useRef<HTMLDivElement>(null);
 	const isVisible = useIntersection(productTarget, true);
 	return (
-		<div ref={productTarget}>
-			{isVisible ?
-				<Card ref={productTarget}>
-					<Image>
-						<img src={product.url} alt="House" />
-						<Arrow className='prev-arrow'>
-							<IoIosArrowForward />
-						</Arrow>
-						<Arrow className='next-arrow'>
-							<IoIosArrowForward />
-						</Arrow>
-					</Image>
-					<Information>
-						<Details>
-							<Price>{product.price} $</Price>
-							<Button isBlue={false}>View Details</Button>
-						</Details>
-						<Feature>
-							<FeatureItem>
-								<img src="./images/icons/bed.svg" alt="Bed" />
-								{product.type}
-							</FeatureItem>
-							<FeatureItem>
-								<img src="./images/icons/shower.svg" alt="Shower" />
-								{`${product.bath} Bath`}
-							</FeatureItem>
-							<FeatureItem>
-								{`${product.square} sq ft`}
-							</FeatureItem>
-						</Feature>
-					</Information>
-				</Card> :
-				<CardSkeleton>
-					<Image>
-						<Arrow className='prev-arrow'>
-							<IoIosArrowForward />
-						</Arrow>
-						<Arrow className='next-arrow'>
-							<IoIosArrowForward />
-						</Arrow>
-					</Image>
-				</CardSkeleton>
-			}
-		</div>
+		<Card>
+			<Image ref={productTarget}>
+				{isVisible &&
+					<img src={product.url} alt="House" />
+				}
+				<Arrow className='prev-arrow'>
+					<IoIosArrowForward />
+				</Arrow>
+				<Arrow className='next-arrow'>
+					<IoIosArrowForward />
+				</Arrow>
+			</Image>
+			<Information>
+				<Details>
+					<Price>{product.price} $</Price>
+					<Button isBlue={false}>View Details</Button>
+				</Details>
+				<Feature>
+					<FeatureItem>
+						<img src="./images/icons/bed.svg" alt="Bed" />
+						{product.type}
+					</FeatureItem>
+					<FeatureItem>
+						<img src="./images/icons/shower.svg" alt="Shower" />
+						{`${product.bath} Bath`}
+					</FeatureItem>
+					<FeatureItem>
+						{`${product.square} sq ft`}
+					</FeatureItem>
+				</Feature>
+			</Information>
+		</Card>
 	)
 }
 
