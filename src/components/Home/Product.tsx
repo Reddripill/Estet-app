@@ -109,9 +109,7 @@ function Product() {
 						</ButtonContent>
 					</Button>
 				</FilteredItems>
-				{showFilters &&
-					<Filters />
-				}
+				<Filters isActive={showFilters} />
 				<ProductBody>
 					<ProductItems filterParam={currentCategory} />
 				</ProductBody>

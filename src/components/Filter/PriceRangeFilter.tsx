@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface Props {
 	min: number;
 	max: number;
+	gap: number;
 }
 
 const RangeWrapper = styled.div`
@@ -12,7 +13,7 @@ const RangeWrapper = styled.div`
 
 const InputRange = styled.input`
 	-webkit-appearance: none;
-	background-color: transparent;
+	-webkit-tap-highlight-color: transparent;
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -41,50 +42,60 @@ const Slider = styled.div`
 const SliderTrack = styled.div`
 	position: absolute;
 	width: 100%;
-	height: 10px;
+	height: 8px;
 	background: #EDEDED;
 	border-radius: 8px;
 	z-index: 1;
 `
 const SliderRange = styled.div`
 	position: absolute;
-	height: 10px;
+	height: 8px;
 	background: #0957CB;
 	border-radius: 8px;
 	z-index: 2;
 `
-const SliderMinVal = styled.div`
+
+const PriceLabel = styled.div`
 	position: absolute;
-`
-const SliderMaxVal = styled.div`
-	position: absolute;
+	top: 20px;
+	background-color: #0957CB;
+	padding: 8px;
+	border-radius: 8px;
+	font-size: 14px;
+	&.min-price-label {
+		left: 0;
+	}
 `
 
-const PriceRangeFilter: React.FC<Props> = function ({ min, max }) {
+const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap }) {
 	const [minVal, setMinVal] = useState<number>(min);
 	const [maxVal, setMaxVal] = useState<number>(max);
 	const minValRef = useRef(min);
 	const maxValRef = useRef(max);
+	const minPriceLabel = useRef<HTMLDivElement>(null);
+	const maxPriceLabel = useRef<HTMLDivElement>(null);
 	const range = useRef<HTMLDivElement>(null);
 
 	const getPercent = useCallback((value: number) => {
-		return Math.round(((value - min) / (max - min)) * 100)
+		return ((value - min) / (max - min)) * 100
 	}, [max, min]);
 
 	useEffect(() => {
 		const minPercent = getPercent(minVal);
 		const maxPercent = getPercent(maxValRef.current);
-		if (range.current) {
+		if (range.current && minPriceLabel.current) {
 			range.current.style.left = `${minPercent}%`;
 			range.current.style.width = `${maxPercent - minPercent}%`;
+			minPriceLabel.current.style.left = `${minPercent}%`;
 		}
 	}, [minVal, getPercent])
 
 	useEffect(() => {
 		const minPercent = getPercent(minValRef.current);
 		const maxPercent = getPercent(maxVal);
-		if (range.current) {
+		if (range.current && maxPriceLabel.current) {
 			range.current.style.width = `${maxPercent - minPercent}%`;
+			maxPriceLabel.current.style.left = `${maxPercent - minPercent}%`;
 		}
 	}, [maxVal, getPercent])
 
@@ -98,8 +109,9 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max }) {
 				step={100}
 				value={minVal}
 				onChange={(event) => {
-					const value = Math.min(Number(event.target.value), maxVal - 1);
-					setMinVal(value)
+					const value = Math.min(Number(event.target.value), maxVal - gap);
+					setMinVal(value);
+					minValRef.current = value;
 				}}
 			/>
 			<InputRange
@@ -110,15 +122,16 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max }) {
 				step={100}
 				value={maxVal}
 				onChange={(event) => {
-					const value = Math.max(Number(event.target.value), minVal + 1);
-					setMaxVal(value)
+					const value = Math.max(Number(event.target.value), minVal + gap);
+					setMaxVal(value);
+					maxValRef.current = value;
 				}}
 			/>
 			<Slider>
 				<SliderTrack />
 				<SliderRange ref={range} />
-				<SliderMinVal />
-				<SliderMaxVal />
+				<PriceLabel ref={minPriceLabel} className='min-price-label'>{minVal}</PriceLabel>
+				<PriceLabel ref={maxPriceLabel} className='max-price-label'>{maxVal}</PriceLabel>
 			</Slider>
 		</RangeWrapper>
 	)

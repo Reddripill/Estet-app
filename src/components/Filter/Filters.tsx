@@ -8,25 +8,37 @@ import { BiEuro } from 'react-icons/bi';
 import FilterInput from './FilterInput';
 import PriceRangeFilter from './PriceRangeFilter';
 
+interface Props {
+	isActive: boolean;
+}
+
 const FilterWrapper = styled.div`
-	margin-bottom: 32px;
+	max-height: 0px;
+	overflow: hidden;
+	transition: max-height .3s ease-in-out 0s;
+	&._active {
+		max-height: 1000px;
+		transition: max-height .3s ease-in-out 0s;
+	}
 `
 
 const FilterContainer = styled(Container)`
+	margin-bottom: 32px;
 	background-color: #161616;
 	border-radius: 10.269px;
 `
 
 const FilterBody = styled.div`
-	padding: 20px 15px;
+	padding: 30px 15px;
 	display: flex;
 	justify-content: space-between;
+	gap: 100px;
 `
 
 const FilterContent = styled.div`
 	width: 100%;
 	display: grid;
-	grid-template-columns: 120px 1fr 120px;
+	grid-template-columns: 150px 1fr 150px;
 	gap: 24px 14px;
 `
 
@@ -37,12 +49,49 @@ const PriceCurrency = styled.div`
 	gap: 8px;
 `
 
-const SearchBlcok = styled.div`
+const SearchBlock = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -50px;
+		height: 100%;
+		width: 2px;
+		background-color: #2e2e2e;
+	}
 `
 
-function Filters() {
+const SearchResults = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 3px;
+`
+
+const SearchResultsNumber = styled.div`
+`
+
+const SearchResultsText = styled.div`
+	color: rgba(255, 255, 255, 0.751);
+`
+
+const SearchResultsButton = styled.button`
+	height: 42px;
+	width: 120px;
+	background-color: #0957CB;
+	border-radius: 8px;
+	color: #fff;
+`
+
+function Filters({ isActive }: Props) {
 	return (
-		<FilterWrapper>
+		<FilterWrapper className={isActive ? '_active' : ''}>
 			<FilterContainer>
 				<FilterBody>
 					<FilterContent>
@@ -55,10 +104,16 @@ function Filters() {
 								icon={[<CgDollar style={{ fontSize: 18 }} />, <BiEuro style={{ fontSize: 18 }} />]}
 							/>
 						</PriceCurrency>
-						<PriceRangeFilter min={1000} max={20000} />
+						<PriceRangeFilter min={1000} max={20000} gap={1000} />
+						<Select options={['1 Rooms', '2 Rooms', 'Studio']} icon={<FaHouseUser style={{ fontSize: 18 }} />} />
 					</FilterContent>
-					<SearchBlcok>
-					</SearchBlcok>
+					<SearchBlock>
+						<SearchResults>
+							<SearchResultsNumber>500</SearchResultsNumber>
+							<SearchResultsText>Results</SearchResultsText>
+						</SearchResults>
+						<SearchResultsButton>Search</SearchResultsButton>
+					</SearchBlock>
 				</FilterBody>
 			</FilterContainer>
 		</FilterWrapper>

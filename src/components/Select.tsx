@@ -8,12 +8,11 @@ interface SelectProps {
 }
 
 const SelectWrapper = styled.div`
-	position: relative;
 `
 
 const SelectItem = styled.div`
 	height: 38px;
-	width: 120px;
+	width: 150px;
 	background-color: rgba(255, 251, 251, 1);
 	border-radius: 13.5913px;
 	padding: 0 12px;
@@ -22,9 +21,7 @@ const SelectItem = styled.div`
 	justify-content: space-between;
 	gap: 15px;
 	cursor: pointer;
-	position: relative;
 	color: #000;
-	z-index: 5;
 	transition: border-radius 0.3s 0s;
 	&._active {
 		border-radius: 13.5913px 13.5913px 0 0;
@@ -50,20 +47,15 @@ const Text = styled.div`
 `
 
 const SelectSubtitle = styled.ul`
-	position: absolute;
-	top: 0%;
-	left: 0;
 	width: 100%;
-	z-index: 2;
 	background-color: rgba(255, 251, 251, 1);
 	border-radius: 0 0 13.5913px 13.5913px;
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.3s 0s;
+	transition: all 0.3s ease 0s;
+	max-height: 0px;
+	overflow: hidden;
 	&._show {
-		top: 100%;
-		opacity: 1;
-		visibility: visible;
+		max-height: 108px;
+		transition: all 0.3s ease-in-out 0s;
 	}
 `
 
