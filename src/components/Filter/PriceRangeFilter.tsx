@@ -5,6 +5,7 @@ interface Props {
 	min: number;
 	max: number;
 	gap: number;
+	step: number;
 }
 
 const RangeWrapper = styled.div`
@@ -16,7 +17,8 @@ const InputRange = styled.input`
 	-webkit-tap-highlight-color: transparent;
 	position: absolute;
 	top: 0;
-	width: 100%;
+	left: -9px;
+	width: calc(100% + 18px);
 	height: 0;
 	pointer-events: none;
 	outline: none;
@@ -67,7 +69,7 @@ const PriceLabel = styled.div`
 	}
 `
 
-const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap }) {
+const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step }) {
 	const [minVal, setMinVal] = useState<number>(min);
 	const [maxVal, setMaxVal] = useState<number>(max);
 	const minValRef = useRef(min);
@@ -95,7 +97,7 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap }) {
 		const maxPercent = getPercent(maxVal);
 		if (range.current && maxPriceLabel.current) {
 			range.current.style.width = `${maxPercent - minPercent}%`;
-			maxPriceLabel.current.style.left = `${maxPercent - minPercent}%`;
+			maxPriceLabel.current.style.left = `${maxPercent}%`;
 		}
 	}, [maxVal, getPercent])
 
@@ -106,7 +108,7 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap }) {
 				className='thumb-left'
 				min={min}
 				max={max}
-				step={100}
+				step={step}
 				value={minVal}
 				onChange={(event) => {
 					const value = Math.min(Number(event.target.value), maxVal - gap);
@@ -119,7 +121,7 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap }) {
 				className='thumb-right'
 				min={min}
 				max={max}
-				step={100}
+				step={step}
 				value={maxVal}
 				onChange={(event) => {
 					const value = Math.max(Number(event.target.value), minVal + gap);

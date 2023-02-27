@@ -104,7 +104,12 @@ function Filters({ isActive }: Props) {
 								icon={[<CgDollar style={{ fontSize: 18 }} />, <BiEuro style={{ fontSize: 18 }} />]}
 							/>
 						</PriceCurrency>
-						<PriceRangeFilter min={1000} max={20000} gap={1000} />
+						<PriceRangeFilter
+							min={1000}
+							max={20000}
+							gap={1000}
+							step={100}
+						/>
 						<Select options={['1 Rooms', '2 Rooms', 'Studio']} icon={<FaHouseUser style={{ fontSize: 18 }} />} />
 					</FilterContent>
 					<SearchBlock>
