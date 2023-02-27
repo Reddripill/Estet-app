@@ -22,9 +22,10 @@ const SelectItem = styled.div`
 	gap: 15px;
 	cursor: pointer;
 	color: #000;
-	transition: border-radius 0.3s 0s;
+	transition: border-radius .3s ease-in-out .15s;
 	&._active {
 		border-radius: 13.5913px 13.5913px 0 0;
+		transition: border-radius 0s ease-in-out 0s;
 	}
 `
 const SelectBody = styled.div`
@@ -53,9 +54,9 @@ const SelectSubtitle = styled.ul`
 	transition: all 0.3s ease 0s;
 	max-height: 0px;
 	overflow: hidden;
+	transition: max-height 0.3s ease-in-out 0s;
 	&._show {
 		max-height: 108px;
-		transition: all 0.3s ease-in-out 0s;
 	}
 `
 

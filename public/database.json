@@ -8,7 +8,8 @@
 		"owner": "Mark Siemens",
 		"url": "./images/home/houses/1.jpg",
 		"productType": "villa",
-		"serice": "rent"
+		"serice": "rent",
+		"location": "USA"
 	},
 	{
 		"id": "2dfgh",
@@ -19,7 +20,8 @@
 		"owner": "Mark Siemens",
 		"url": "./images/home/houses/2.jpg",
 		"productType": "villa",
-		"serice": "buy"
+		"serice": "buy",
+		"location": "UK"
 	},
 	{
 		"id": "3fghj",
@@ -30,7 +32,8 @@
 		"owner": "George Kvarz",
 		"url": "./images/home/houses/3.jpg",
 		"productType": "house",
-		"serice": "rent"
+		"serice": "rent",
+		"location": "Russia"
 	},
 	{
 		"id": "4sdfh",
@@ -41,7 +44,8 @@
 		"owner": "Mark Siemens",
 		"url": "./images/home/houses/4.jpg",
 		"productType": "villa",
-		"serice": "rent"
+		"serice": "rent",
+		"location": "Monaco"
 	},
 	{
 		"id": "5sadhvbb",
@@ -52,7 +56,8 @@
 		"owner": "Teylor Lamar",
 		"url": "./images/home/houses/5.jpg",
 		"productType": "house",
-		"serice": "rent"
+		"serice": "rent",
+		"location": "Canada"
 	},
 	{
 		"id": "6zxcvdsagf",
@@ -63,6 +68,7 @@
 		"owner": "Mark Siemens",
 		"url": "./images/home/houses/6.jpg",
 		"productType": "house",
-		"serice": "buy"
+		"serice": "buy",
+		"location": "OAO"
 	}
 ]

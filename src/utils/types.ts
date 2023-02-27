@@ -8,6 +8,7 @@ export type HouseCard = {
 	url: string,
 	productType: string,
 	serice: string,
+	location: string,
 }
 
 export type CategoryType = 'all' | '1 bedrooms' | '2 bedrooms' | 'studio';
