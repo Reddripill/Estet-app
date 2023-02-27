@@ -107,7 +107,7 @@ function Filters({ isActive }: Props) {
 						<PriceRangeFilter
 							min={1000}
 							max={20000}
-							gap={1000}
+							gap={2000}
 							step={100}
 						/>
 						<Select options={['1 Rooms', '2 Rooms', 'Studio']} icon={<FaHouseUser style={{ fontSize: 18 }} />} />

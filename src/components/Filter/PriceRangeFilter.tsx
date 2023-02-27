@@ -10,6 +10,7 @@ interface Props {
 
 const RangeWrapper = styled.div`
 	position: relative;
+	margin: 0 15px;
 `
 
 const InputRange = styled.input`
@@ -57,15 +58,34 @@ const SliderRange = styled.div`
 	z-index: 2;
 `
 
-const PriceLabel = styled.div`
-	position: absolute;
-	top: 20px;
+const PriceLabelBlock = styled.div`
+	position: relative;
 	background-color: #0957CB;
+	box-shadow: 0px 3.02029px 8.45681px rgba(9, 87, 203, 0.26);
 	padding: 8px;
 	border-radius: 8px;
 	font-size: 14px;
-	&.min-price-label {
-		left: 0;
+	&::before {
+		content: '';
+		position: absolute;
+		left: 10px;
+		bottom: 100%;
+		height: 0;
+		width: 0;
+		border-bottom: 10px solid #0957CB;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+	}
+`
+
+const PriceLabel = styled.div`
+	position: absolute;
+	top: 25px;
+	&._opposit ${PriceLabelBlock} {
+		&::before {
+			right: 10px;
+			left: auto;
+		}
 	}
 `
 
@@ -86,9 +106,18 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step }) {
 		const minPercent = getPercent(minVal);
 		const maxPercent = getPercent(maxValRef.current);
 		if (range.current && minPriceLabel.current) {
+			const width = maxPercent - minPercent;
 			range.current.style.left = `${minPercent}%`;
-			range.current.style.width = `${maxPercent - minPercent}%`;
-			minPriceLabel.current.style.left = `${minPercent}%`;
+			range.current.style.width = `${width}%`;
+			if (width > 15) {
+				minPriceLabel.current.classList.remove('_opposit')
+				minPriceLabel.current.style.left = `calc(${minPercent}% - 20px)`;
+				minPriceLabel.current.style.right = `auto`;
+			} else {
+				minPriceLabel.current.classList.add('_opposit')
+				minPriceLabel.current.style.right = `calc(100% - ${minPercent}% - 20px)`;
+				minPriceLabel.current.style.left = `auto`;
+			}
 		}
 	}, [minVal, getPercent])
 
@@ -96,8 +125,17 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step }) {
 		const minPercent = getPercent(minValRef.current);
 		const maxPercent = getPercent(maxVal);
 		if (range.current && maxPriceLabel.current) {
-			range.current.style.width = `${maxPercent - minPercent}%`;
-			maxPriceLabel.current.style.left = `${maxPercent}%`;
+			const width = maxPercent - minPercent;
+			range.current.style.width = `${width}%`;
+			if (maxPercent < 90) {
+				maxPriceLabel.current.classList.remove('_opposit')
+				maxPriceLabel.current.style.left = `calc(${maxPercent}% - 20px)`;
+				maxPriceLabel.current.style.right = `auto`;
+			} else {
+				maxPriceLabel.current.classList.add('_opposit')
+				maxPriceLabel.current.style.right = `calc(100% - ${maxPercent}% - 20px)`;
+				maxPriceLabel.current.style.left = `auto`;
+			}
 		}
 	}, [maxVal, getPercent])
 
@@ -132,8 +170,16 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step }) {
 			<Slider>
 				<SliderTrack />
 				<SliderRange ref={range} />
-				<PriceLabel ref={minPriceLabel} className='min-price-label'>{minVal}</PriceLabel>
-				<PriceLabel ref={maxPriceLabel} className='max-price-label'>{maxVal}</PriceLabel>
+				<PriceLabel ref={minPriceLabel}>
+					<PriceLabelBlock className='min-price-label'>
+						{minVal}
+					</PriceLabelBlock>
+				</PriceLabel>
+				<PriceLabel ref={maxPriceLabel}>
+					<PriceLabelBlock className='max-price-label'>
+						{maxVal}
+					</PriceLabelBlock>
+				</PriceLabel>
 			</Slider>
 		</RangeWrapper>
 	)
