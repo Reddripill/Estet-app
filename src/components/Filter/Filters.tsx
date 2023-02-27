@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Container } from '../../utils/styles';
 import Select from '../Select';
@@ -90,18 +90,39 @@ const SearchResultsButton = styled.button`
 `
 
 function Filters({ isActive }: Props) {
+	const [service, setService] = useState<number>(0);
+	const [location, setLocation] = useState<string | null>(null);
+	const [productType, setProductType] = useState<number>(0);
+	const [priceCurrency, setPriceCurrency] = useState<number>(0);
+	const [priceRange, setPriceRange] = useState<number[]>([]);
+	const [type, setType] = useState<number>(0);
 	return (
 		<FilterWrapper className={isActive ? '_active' : ''}>
 			<FilterContainer>
 				<FilterBody>
 					<FilterContent>
-						<Select options={['Rent', 'Buy']} icon={<FaHouseUser style={{ fontSize: 18 }} />} />
-						<FilterInput placeholder='Your desiered location goes here' />
-						<Select options={['House', 'Villa']} icon={<FaHouseUser style={{ fontSize: 18 }} />} />
+						<Select
+							options={['Rent', 'Buy']}
+							icon={<FaHouseUser style={{ fontSize: 18 }} />}
+							state={service}
+							stateChanger={setService}
+						/>
+						<FilterInput
+							placeholder='Your desiered location goes here'
+							locationChanger={setLocation}
+						/>
+						<Select
+							options={['House', 'Villa']}
+							icon={<FaHouseUser style={{ fontSize: 18 }} />}
+							state={productType}
+							stateChanger={setProductType}
+						/>
 						<PriceCurrency>
 							<Select
 								options={['USD', 'Euro']}
 								icon={[<CgDollar style={{ fontSize: 18 }} />, <BiEuro style={{ fontSize: 18 }} />]}
+								state={priceCurrency}
+								stateChanger={setPriceCurrency}
 							/>
 						</PriceCurrency>
 						<PriceRangeFilter
@@ -109,8 +130,14 @@ function Filters({ isActive }: Props) {
 							max={20000}
 							gap={2000}
 							step={100}
+							rangeChanger={setPriceRange}
 						/>
-						<Select options={['1 Rooms', '2 Rooms', 'Studio']} icon={<FaHouseUser style={{ fontSize: 18 }} />} />
+						<Select
+							options={['1 Rooms', '2 Rooms', 'Studio']}
+							icon={<FaHouseUser style={{ fontSize: 18 }} />}
+							state={type}
+							stateChanger={setType}
+						/>
 					</FilterContent>
 					<SearchBlock>
 						<SearchResults>

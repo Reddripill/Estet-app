@@ -70,5 +70,77 @@
 		"productType": "house",
 		"serice": "buy",
 		"location": "OAO"
+	},
+	{
+		"id": "1asfsadfasdf",
+		"price": "100.000",
+		"type": "1 bedrooms",
+		"bath": 1,
+		"square": 535,
+		"owner": "Mark Siemens",
+		"url": "./images/home/houses/1.jpg",
+		"productType": "villa",
+		"serice": "rent",
+		"location": "USA"
+	},
+	{
+		"id": "2dghjdsvefgh",
+		"price": "390.000",
+		"type": "2 bedrooms",
+		"bath": 3,
+		"square": 1000,
+		"owner": "Mark Siemens",
+		"url": "./images/home/houses/2.jpg",
+		"productType": "villa",
+		"serice": "buy",
+		"location": "UK"
+	},
+	{
+		"id": "3fgcxvbsfhj",
+		"price": "143.000",
+		"type": "1 bedrooms",
+		"bath": 1,
+		"square": 535,
+		"owner": "George Kvarz",
+		"url": "./images/home/houses/3.jpg",
+		"productType": "house",
+		"serice": "rent",
+		"location": "Russia"
+	},
+	{
+		"id": "dsfg4sasddfh",
+		"price": "211.200",
+		"type": "1 bedrooms",
+		"bath": 1,
+		"square": 535,
+		"owner": "Mark Siemens",
+		"url": "./images/home/houses/4.jpg",
+		"productType": "villa",
+		"serice": "rent",
+		"location": "Monaco"
+	},
+	{
+		"id": "5sadyukhgjvcbhvbb",
+		"price": "132.000",
+		"type": "1 bedrooms",
+		"bath": 1,
+		"square": 535,
+		"owner": "Teylor Lamar",
+		"url": "./images/home/houses/5.jpg",
+		"productType": "house",
+		"serice": "rent",
+		"location": "Canada"
+	},
+	{
+		"id": "6zxcvsdfncxsdsagf",
+		"price": "190.400",
+		"type": "1 bedrooms",
+		"bath": 1,
+		"square": 535,
+		"owner": "Mark Siemens",
+		"url": "./images/home/houses/6.jpg",
+		"productType": "house",
+		"serice": "buy",
+		"location": "OAO"
 	}
 ]

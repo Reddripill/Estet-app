@@ -5,6 +5,8 @@ import { MdArrowForwardIos } from 'react-icons/md';
 interface SelectProps {
 	options: string[];
 	icon: JSX.Element | JSX.Element[];
+	state: number;
+	stateChanger: (item: number) => void;
 }
 
 const SelectWrapper = styled.div`
@@ -78,14 +80,13 @@ const SelectOptionText = styled.div`
 `
 
 
-const Select: React.FC<SelectProps> = ({ options, icon }) => {
+const Select: React.FC<SelectProps> = ({ options, icon, state, stateChanger }) => {
 	const [active, setActive] = useState(false);
-	const [currentOption, setCurrentOption] = useState(options[0]);
 	const [currentIcon, setCurrentIcon] = useState<number>(0);
 
 	const selectOptionHandler = (event: React.MouseEvent<HTMLLIElement>, item: string) => {
 		const index = options.findIndex(option => option === item);
-		setCurrentOption(item);
+		stateChanger(index);
 		setCurrentIcon(index);
 		setActive(false);
 	}
@@ -98,7 +99,7 @@ const Select: React.FC<SelectProps> = ({ options, icon }) => {
 						icon[currentIcon]
 					}
 					<Text>
-						{currentOption}
+						{options[state]}
 					</Text>
 				</SelectBody>
 				<Arrow className={active ? '_active' : ''} />
@@ -108,7 +109,7 @@ const Select: React.FC<SelectProps> = ({ options, icon }) => {
 					<SelectOption
 						key={index}
 						onClick={(event) => selectOptionHandler(event, item)}
-						className={currentOption === item ? '_active' : ''}
+						className={options[state] === item ? '_active' : ''}
 					>
 						<SelectOptionText>
 							{item}

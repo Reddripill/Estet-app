@@ -6,6 +6,7 @@ interface Props {
 	max: number;
 	gap: number;
 	step: number;
+	rangeChanger: React.Dispatch<React.SetStateAction<number[]>>
 }
 
 const RangeWrapper = styled.div`
@@ -89,7 +90,7 @@ const PriceLabel = styled.div`
 	}
 `
 
-const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step }) {
+const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step, rangeChanger }) {
 	const [minVal, setMinVal] = useState<number>(min);
 	const [maxVal, setMaxVal] = useState<number>(max);
 	const minValRef = useRef(min);
@@ -105,6 +106,7 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step }) {
 	useEffect(() => {
 		const minPercent = getPercent(minVal);
 		const maxPercent = getPercent(maxValRef.current);
+		rangeChanger(prev => prev.splice(0, 1, minVal))
 		if (range.current && minPriceLabel.current) {
 			const width = maxPercent - minPercent;
 			range.current.style.left = `${minPercent}%`;
@@ -119,11 +121,12 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step }) {
 				minPriceLabel.current.style.left = `auto`;
 			}
 		}
-	}, [minVal, getPercent])
+	}, [minVal, getPercent, rangeChanger])
 
 	useEffect(() => {
 		const minPercent = getPercent(minValRef.current);
 		const maxPercent = getPercent(maxVal);
+		rangeChanger(prev => prev.splice(1, 1, maxVal))
 		if (range.current && maxPriceLabel.current) {
 			const width = maxPercent - minPercent;
 			range.current.style.width = `${width}%`;
@@ -137,7 +140,7 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step }) {
 				maxPriceLabel.current.style.left = `auto`;
 			}
 		}
-	}, [maxVal, getPercent])
+	}, [maxVal, getPercent, rangeChanger])
 
 	return (
 		<RangeWrapper>
