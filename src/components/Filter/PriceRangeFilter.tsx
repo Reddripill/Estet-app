@@ -106,7 +106,7 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step, range
 	useEffect(() => {
 		const minPercent = getPercent(minVal);
 		const maxPercent = getPercent(maxValRef.current);
-		rangeChanger(prev => prev.splice(0, 1, minVal))
+		rangeChanger([minVal, maxValRef.current])
 		if (range.current && minPriceLabel.current) {
 			const width = maxPercent - minPercent;
 			range.current.style.left = `${minPercent}%`;
@@ -126,7 +126,7 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step, range
 	useEffect(() => {
 		const minPercent = getPercent(minValRef.current);
 		const maxPercent = getPercent(maxVal);
-		rangeChanger(prev => prev.splice(1, 1, maxVal))
+		rangeChanger([minValRef.current, maxVal])
 		if (range.current && maxPriceLabel.current) {
 			const width = maxPercent - minPercent;
 			range.current.style.width = `${width}%`;

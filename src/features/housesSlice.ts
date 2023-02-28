@@ -25,11 +25,10 @@ export const housesSlice = createSlice({
 	name: 'houses',
 	initialState,
 	reducers: {
-
 	},
 	extraReducers(builder) {
 		builder
-			.addCase(fetchProducts.pending, (state, action) => {
+			.addCase(fetchProducts.pending, (state) => {
 				state.loading = 'pending';
 			})
 			.addCase(fetchProducts.fulfilled, (state, action) => {

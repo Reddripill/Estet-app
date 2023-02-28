@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Container } from '../../utils/styles';
 import Select from '../Select';
@@ -7,6 +7,9 @@ import { CgDollar } from 'react-icons/cg';
 import { BiEuro } from 'react-icons/bi';
 import FilterInput from './FilterInput';
 import PriceRangeFilter from './PriceRangeFilter';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
+import useFiltering from '../../utils/hooks/useFiltering';
 
 interface Props {
 	isActive: boolean;
@@ -81,21 +84,28 @@ const SearchResultsText = styled.div`
 	color: rgba(255, 255, 255, 0.751);
 `
 
-const SearchResultsButton = styled.button`
+const SearchResultsButton = styled(Link)`
 	height: 42px;
 	width: 120px;
 	background-color: #0957CB;
 	border-radius: 8px;
 	color: #fff;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 `
 
 function Filters({ isActive }: Props) {
-	const [service, setService] = useState<number>(0);
+	const [service, setService] = useState<string>('Rent');
 	const [location, setLocation] = useState<string | null>(null);
-	const [productType, setProductType] = useState<number>(0);
-	const [priceCurrency, setPriceCurrency] = useState<number>(0);
+	const [productType, setProductType] = useState<string>('House');
+	const [priceCurrency, setPriceCurrency] = useState<string>('USD');
 	const [priceRange, setPriceRange] = useState<number[]>([]);
-	const [type, setType] = useState<number>(0);
+	const [type, setType] = useState<string>('1 Rooms');
+
+	// const houses = useAppSelector(state => state.houses.entities)
+
+	const filter = useFiltering({ service, location, productType, priceCurrency, priceRange, type })
 	return (
 		<FilterWrapper className={isActive ? '_active' : ''}>
 			<FilterContainer>
@@ -127,9 +137,9 @@ function Filters({ isActive }: Props) {
 						</PriceCurrency>
 						<PriceRangeFilter
 							min={1000}
-							max={20000}
-							gap={2000}
-							step={100}
+							max={400000}
+							gap={50000}
+							step={1000}
 							rangeChanger={setPriceRange}
 						/>
 						<Select
@@ -141,14 +151,18 @@ function Filters({ isActive }: Props) {
 					</FilterContent>
 					<SearchBlock>
 						<SearchResults>
-							<SearchResultsNumber>500</SearchResultsNumber>
+							<SearchResultsNumber>{filter.housesCount}</SearchResultsNumber>
 							<SearchResultsText>Results</SearchResultsText>
 						</SearchResults>
-						<SearchResultsButton>Search</SearchResultsButton>
+						<SearchResultsButton
+							to={`/${productType}/${type}/${priceRange.join('-')}/${priceCurrency}/${location}`}
+						>
+							Search
+						</SearchResultsButton>
 					</SearchBlock>
 				</FilterBody>
 			</FilterContainer>
-		</FilterWrapper>
+		</FilterWrapper >
 	)
 }
 

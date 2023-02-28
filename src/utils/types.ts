@@ -1,14 +1,23 @@
 export type HouseCard = {
 	id: string,
-	price: string,
+	price: number,
 	type: string,
 	bath: number,
 	square: number,
 	owner: string,
 	url: string,
 	productType: string,
-	serice: string,
+	service: string,
 	location: string,
 }
 
-export type CategoryType = 'all' | '1 bedrooms' | '2 bedrooms' | 'studio';
+export type HouseFilter = {
+	service: string;
+	location: string | null;
+	productType: string;
+	priceCurrency: string;
+	priceRange: number[];
+	type: string;
+}
+
+export type CategoryType = 'all' | '1 rooms' | '2 rooms' | 'studio';

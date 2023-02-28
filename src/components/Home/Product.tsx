@@ -88,18 +88,18 @@ function Product() {
 							Studio
 						</CategoryButton>
 						<CategoryButton
-							id='1 bedrooms'
+							id='1 rooms'
 							currentCategory={currentCategory}
 							clickHandler={clickHandler}
 						>
-							1 Bed Room
+							1 Room
 						</CategoryButton>
 						<CategoryButton
-							id='2 bedrooms'
+							id='2 rooms'
 							currentCategory={currentCategory}
 							clickHandler={clickHandler}
 						>
-							2 Bed Room
+							2 Rooms
 						</CategoryButton>
 					</CategoryContainer>
 					<Button isBlue={true} clickHandler={filterClickHandler}>
