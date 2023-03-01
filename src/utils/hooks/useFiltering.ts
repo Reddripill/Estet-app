@@ -13,8 +13,10 @@ export default function useFiltering({
 }: HouseFilter) {
 	const houses = useAppSelector(state => state.houses.entities);
 	const [housesCount, setHousesCount] = useState<number>(0);
+	const [linkPath, setLinkPath] = useState<string>();
 	const [filteredHouses, setFilteredHouses] = useState<HouseCard[] | undefined>();
 	useEffect(() => {
+		const link = [`/${service}`, `${productType}`, `${priceRange.join(';')}`, `${type}`];
 		const exactHouses = houses.filter(house => {
 			if (
 				(!location || house.location === location)
@@ -27,6 +29,11 @@ export default function useFiltering({
 			}
 			return false;
 		})
+		if (location) {
+			link.push(`${location}`);
+		}
+
+		setLinkPath(link.join('/'));
 		setHousesCount(exactHouses.length);
 		setFilteredHouses(exactHouses);
 	}, [
@@ -41,5 +48,6 @@ export default function useFiltering({
 		housesCount,
 		filteredHouses,
 		priceCurrency,
+		linkPath,
 	}
 }

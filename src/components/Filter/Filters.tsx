@@ -8,7 +8,6 @@ import { BiEuro } from 'react-icons/bi';
 import FilterInput from './FilterInput';
 import PriceRangeFilter from './PriceRangeFilter';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
 import useFiltering from '../../utils/hooks/useFiltering';
 
 interface Props {
@@ -93,6 +92,10 @@ const SearchResultsButton = styled(Link)`
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	&._disabled {
+		pointer-events: none;
+		opacity: 0.5;
+	}
 `
 
 function Filters({ isActive }: Props) {
@@ -102,8 +105,6 @@ function Filters({ isActive }: Props) {
 	const [priceCurrency, setPriceCurrency] = useState<string>('USD');
 	const [priceRange, setPriceRange] = useState<number[]>([1000, 400000]);
 	const [type, setType] = useState<string>('1 Rooms');
-
-	// const houses = useAppSelector(state => state.houses.entities)
 
 	const filter = useFiltering({ service, location, productType, priceCurrency, priceRange, type })
 	return (
@@ -155,7 +156,8 @@ function Filters({ isActive }: Props) {
 							<SearchResultsText>Results</SearchResultsText>
 						</SearchResults>
 						<SearchResultsButton
-							to={`/${productType}/${type}/${priceRange.join('-')}/${priceCurrency}/${location}`}
+							to={`${filter.linkPath}`}
+							className={filter.housesCount ? '' : '_disabled'}
 						>
 							Search
 						</SearchResultsButton>
