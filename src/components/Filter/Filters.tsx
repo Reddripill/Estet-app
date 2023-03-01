@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Container } from '../../utils/styles';
 import Select from '../Select';
@@ -100,7 +100,7 @@ function Filters({ isActive }: Props) {
 	const [location, setLocation] = useState<string | null>(null);
 	const [productType, setProductType] = useState<string>('House');
 	const [priceCurrency, setPriceCurrency] = useState<string>('USD');
-	const [priceRange, setPriceRange] = useState<number[]>([]);
+	const [priceRange, setPriceRange] = useState<number[]>([1000, 400000]);
 	const [type, setType] = useState<string>('1 Rooms');
 
 	// const houses = useAppSelector(state => state.houses.entities)

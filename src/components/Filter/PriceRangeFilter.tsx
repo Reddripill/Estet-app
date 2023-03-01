@@ -106,7 +106,6 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step, range
 	useEffect(() => {
 		const minPercent = getPercent(minVal);
 		const maxPercent = getPercent(maxValRef.current);
-		rangeChanger([minVal, maxValRef.current])
 		if (range.current && minPriceLabel.current) {
 			const width = maxPercent - minPercent;
 			range.current.style.left = `${minPercent}%`;
@@ -121,12 +120,11 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step, range
 				minPriceLabel.current.style.left = `auto`;
 			}
 		}
-	}, [minVal, getPercent, rangeChanger])
+	}, [minVal, getPercent])
 
 	useEffect(() => {
 		const minPercent = getPercent(minValRef.current);
 		const maxPercent = getPercent(maxVal);
-		rangeChanger([minValRef.current, maxVal])
 		if (range.current && maxPriceLabel.current) {
 			const width = maxPercent - minPercent;
 			range.current.style.width = `${width}%`;
@@ -140,7 +138,7 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step, range
 				maxPriceLabel.current.style.left = `auto`;
 			}
 		}
-	}, [maxVal, getPercent, rangeChanger])
+	}, [maxVal, getPercent])
 
 	return (
 		<RangeWrapper>
@@ -156,6 +154,9 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step, range
 					setMinVal(value);
 					minValRef.current = value;
 				}}
+				onMouseUp={() => {
+					rangeChanger([minVal, maxVal])
+				}}
 			/>
 			<InputRange
 				type="range"
@@ -168,6 +169,9 @@ const PriceRangeFilter: React.FC<Props> = function ({ min, max, gap, step, range
 					const value = Math.max(Number(event.target.value), minVal + gap);
 					setMaxVal(value);
 					maxValRef.current = value;
+				}}
+				onMouseUp={() => {
+					rangeChanger([minVal, maxVal])
 				}}
 			/>
 			<Slider>

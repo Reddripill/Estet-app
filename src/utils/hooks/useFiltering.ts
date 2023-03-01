@@ -17,19 +17,23 @@ export default function useFiltering({
 	useEffect(() => {
 		const exactHouses = houses.filter(house => {
 			if (
-				house.service.toLocaleLowerCase() === service.toLocaleLowerCase()
+				(!location || house.location === location)
+				&& house.service.toLocaleLowerCase() === service.toLocaleLowerCase()
 				&& house.productType.toLocaleLowerCase() === productType.toLocaleLowerCase()
 				&& house.type.toLocaleLowerCase() === type.toLocaleLowerCase()
+				&& house.price >= priceRange[0] && house.price <= priceRange[1]
 			) {
 				return true;
 			}
 			return false;
 		})
 		setHousesCount(exactHouses.length);
-		setFilteredHouses(exactHouses)
+		setFilteredHouses(exactHouses);
 	}, [
 		service,
 		productType,
+		location,
+		priceRange,
 		type,
 		houses,
 	])
