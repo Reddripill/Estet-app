@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useAppDispatch } from './app/hooks';
 import FilteredElements from './components/Filter/FilteredElements';
-import Home from './components/Home/Home';
+import Home from './components/Page/Page';
 import Layout from './components/Layout';
 import NotFoundPage from './components/NotFoundPage';
 import { fetchProducts } from './features/housesSlice';

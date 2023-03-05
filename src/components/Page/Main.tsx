@@ -1,38 +1,19 @@
 import React from 'react'
 import styled from 'styled-components';
-import { Container } from '../../utils/styles';
+import { Container, Image, Overlay } from '../../utils/styles';
 
 const Wrapper = styled.section`
 	position: relative;
 	/* margin-bottom: 64px; */
 `
 
-const Overlay = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+const MainOverlay = styled(Overlay)`
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
 `
-
-
 const Content = styled(Container)`
 	position: relative;
 	z-index: 2;
 `
-const Image = styled.div`
-	img {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: center;
-	}
-`
-
 const Title = styled.div`
 	font-family: 'Montserrat';
 	padding: 295px 0;
@@ -58,7 +39,7 @@ function Main() {
 					Find Your <span>Dream Home</span> with Crypto
 				</Title>
 			</Content>
-			<Overlay />
+			<MainOverlay />
 		</Wrapper>
 	)
 }

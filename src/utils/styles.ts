@@ -124,3 +124,21 @@ export const Text = styled.div`
 	line-height: 158.52%;
 	color: #FFFBFB;
 `
+export const Image = styled.div`
+	img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+`
+export const Overlay = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+`

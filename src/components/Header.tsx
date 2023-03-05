@@ -16,7 +16,6 @@ const HeaderElement = styled.header`
 		background-color: rgba(48, 48, 48, 0.8);
 	}
 `
-
 const Wrapper = styled.div`
 	position: fixed;
 	top: 0;
@@ -29,7 +28,6 @@ const Wrapper = styled.div`
 	justify-content: space-between;
 	transition: background-color 0.2s 0s;
 `
-
 const HeaderContainer = styled(Container)`
 	display: flex;
 	align-items: center;
@@ -37,7 +35,6 @@ const HeaderContainer = styled(Container)`
 	width: 100%;
 	min-height: 82px;
 `
-
 const Logo = styled(Link)`
 	display: flex;
 	align-items: center;
@@ -47,7 +44,6 @@ const Logo = styled(Link)`
 		max-width: 30px;
 	}
 `
-
 const Actions = styled.div`
 	display: flex;
 	align-items: center;
