@@ -15,11 +15,7 @@ function App() {
 			<Route path='/' element={<Layout />}>
 				<Route index element={<Home />} />
 				<Route
-					path=':service/:productType/:type/:priceRange/:location'
-					element={<FilteredElements />}
-				/>
-				<Route
-					path=':service/:productType/:type/:priceRange'
+					path='filteredHouses'
 					element={<FilteredElements />}
 				/>
 			</Route>

@@ -15,7 +15,6 @@ export type HouseFilter = {
 	service: string;
 	location: string | null;
 	productType: string;
-	priceCurrency: string;
 	priceRange: number[];
 	type: string;
 }

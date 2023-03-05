@@ -10,6 +10,7 @@ interface SelectProps {
 }
 
 const SelectWrapper = styled.div`
+	user-select: none;
 `
 
 const SelectItem = styled.div`

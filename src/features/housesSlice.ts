@@ -1,14 +1,16 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { HouseCard } from "../utils/types";
 
 interface HousesState {
 	entities: HouseCard[];
+	filteredHouses: HouseCard[];
 	loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 	error: null | string
 }
 
 const initialState: HousesState = {
 	entities: [],
+	filteredHouses: [],
 	loading: 'idle',
 	error: null,
 }
@@ -25,6 +27,9 @@ export const housesSlice = createSlice({
 	name: 'houses',
 	initialState,
 	reducers: {
+		addFilteredHouses(state, action: PayloadAction<HouseCard[]>) {
+			state.filteredHouses = action.payload;
+		},
 	},
 	extraReducers(builder) {
 		builder
@@ -42,5 +47,6 @@ export const housesSlice = createSlice({
 	},
 });
 
+export const { addFilteredHouses } = housesSlice.actions;
 
 export default housesSlice.reducer;

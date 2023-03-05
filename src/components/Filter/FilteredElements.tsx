@@ -1,16 +1,29 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import { useAppSelector } from '../../app/hooks';
+import { Container } from '../../utils/styles';
+import ProductCards from '../ProductCard';
+
+const FilteredHousesWrapper = styled.div`
+	display: grid;
+	grid-template-columns: repeat(2, 577px);
+	gap: 16px;
+	padding-top: 150px;
+	padding-bottom: 50px;
+`
 
 function FilteredElements() {
-	const {
-		productType,
-		type,
-		priceRange,
-		priceCurrency,
-		location
-	} = useParams();
+	const filteredHouses = useAppSelector(state => state.houses.filteredHouses);
 	return (
-		<div>FilteredElements</div>
+		<Container>
+			<FilteredHousesWrapper>
+				{filteredHouses &&
+					filteredHouses.map(house => (
+						<ProductCards key={house.id} product={house} />
+					))
+				}
+			</FilteredHousesWrapper>
+		</Container>
 	)
 }
 

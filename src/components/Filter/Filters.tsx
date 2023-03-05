@@ -9,6 +9,8 @@ import FilterInput from './FilterInput';
 import PriceRangeFilter from './PriceRangeFilter';
 import { Link } from 'react-router-dom';
 import useFiltering from '../../utils/hooks/useFiltering';
+import { useAppDispatch } from '../../app/hooks';
+import { addFilteredHouses } from '../../features/housesSlice';
 
 interface Props {
 	isActive: boolean;
@@ -17,10 +19,10 @@ interface Props {
 const FilterWrapper = styled.div`
 	max-height: 0px;
 	overflow: hidden;
-	transition: max-height .3s ease-in-out 0s;
+	transition: max-height .4s linear 0s;
 	&._active {
-		max-height: 1000px;
-		transition: max-height .3s ease-in-out 0s;
+		max-height: 300px;
+		transition: max-height .4s linear 0s;
 	}
 `
 
@@ -106,7 +108,9 @@ function Filters({ isActive }: Props) {
 	const [priceRange, setPriceRange] = useState<number[]>([1000, 400000]);
 	const [type, setType] = useState<string>('1 Rooms');
 
-	const filter = useFiltering({ service, location, productType, priceCurrency, priceRange, type })
+	const dispatch = useAppDispatch();
+
+	const filter = useFiltering({ service, location, productType, priceRange, type })
 	return (
 		<FilterWrapper className={isActive ? '_active' : ''}>
 			<FilterContainer>
@@ -156,8 +160,13 @@ function Filters({ isActive }: Props) {
 							<SearchResultsText>Results</SearchResultsText>
 						</SearchResults>
 						<SearchResultsButton
-							to={`${filter.linkPath}`}
+							to={`/filteredHouses`}
 							className={filter.housesCount ? '' : '_disabled'}
+							onClick={() => {
+								if (filter.filteredHouses) {
+									dispatch(addFilteredHouses(filter.filteredHouses))
+								}
+							}}
 						>
 							Search
 						</SearchResultsButton>

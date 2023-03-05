@@ -12,6 +12,7 @@ interface Props {
 const RangeWrapper = styled.div`
 	position: relative;
 	margin: 0 15px;
+	user-select: none;
 `
 
 const InputRange = styled.input`
