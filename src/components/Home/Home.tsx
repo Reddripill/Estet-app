@@ -1,5 +1,6 @@
 import React from 'react'
 import Main from './Main';
+import Map from './Map';
 import Product from './Product';
 
 function Home() {
@@ -7,6 +8,7 @@ function Home() {
 		<>
 			<Main />
 			<Product />
+			<Map />
 		</>
 	)
 }

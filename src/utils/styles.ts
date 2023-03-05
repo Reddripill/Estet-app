@@ -110,3 +110,17 @@ export const Container = styled.div`
 	padding: 0 15px;
 	margin: 0 auto;
 `
+
+export const Title = styled.div`
+	font-family: 'Montserrat';
+	color: #1DAEFF;
+	font-weight: 600;
+	font-size: 32px;
+	line-height: 139.52%;
+`
+export const Text = styled.div`
+	font-family: 'Montserrat';
+	font-size: 16px;
+	line-height: 158.52%;
+	color: #FFFBFB;
+`
