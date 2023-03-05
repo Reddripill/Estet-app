@@ -4,11 +4,10 @@ import { Container } from '../../utils/styles';
 import { CategoryType } from '../../utils/types';
 import Button from '../Button';
 import CategoryButton from '../CategoryButton';
-import ProductItems from './ProductItems'
 import { MdArrowForwardIos } from 'react-icons/md';
-import { useAppDispatch } from '../../app/hooks';
-import { fetchProducts } from '../../features/housesSlice';
 import Filters from '../Filter/Filters';
+import { useAppSelector } from '../../app/hooks';
+import ProductCards from '../ProductCard';
 
 const FilteredItems = styled.div`
 	display: flex;
@@ -16,29 +15,24 @@ const FilteredItems = styled.div`
 	justify-content: space-between;
 	margin-bottom: 32px;
 `
-
 const CategoryContainer = styled.div`
 	display: flex;
 	gap: 24px;
 `
-
 const ButtonContent = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 10px;
 `
-
 const ProductBody = styled.div`
 	margin-bottom: 34px;
 `
-
 const MoreProducts = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 6px;
 `
-
 const Arrow = styled(MdArrowForwardIos)`
 	transform: rotate(90deg);
 	display: flex;
@@ -46,7 +40,6 @@ const Arrow = styled(MdArrowForwardIos)`
 	justify-content: center;
 	font-size: 18px;
 `
-
 const MoreProductsButton = styled.button`
 	background-color: rgba(255, 251, 251, 0.65);
 	width: 44px;
@@ -56,11 +49,24 @@ const MoreProductsButton = styled.button`
 	align-items: center;
 	justify-content: center;
 `
+const ProductsContainer = styled.ul`
+	display: grid;
+	grid-template-columns: repeat(2, 577px);
+	gap: 16px;
+`
 
 function Product() {
 	const [currentCategory, setCurrentCategory] = useState<CategoryType>('all');
-	const [showFilters, setShowFilters] = useState<boolean>(false)
-	const dispatch = useAppDispatch();
+	const [showFilters, setShowFilters] = useState<boolean>(false);
+	const [cardsCount, setCardsCount] = useState<number>(6);
+
+	const allProducts = useAppSelector(state => state.houses.entities);
+	let showingProducts = allProducts.slice(0, Math.min(allProducts.length, cardsCount))
+
+	if (currentCategory !== 'all') {
+		showingProducts = allProducts.filter(item => item.type === currentCategory)
+	}
+
 	const clickHandler = (id: CategoryType) => {
 		setShowFilters(false);
 		setCurrentCategory(id);
@@ -111,11 +117,18 @@ function Product() {
 				</FilteredItems>
 				<Filters isActive={showFilters} />
 				<ProductBody>
-					<ProductItems filterParam={currentCategory} />
+					<ProductsContainer>
+						{showingProducts.length !== 0 &&
+							showingProducts.map((product) => (
+								<ProductCards key={`${product.id}`} product={product} />
+							))
+						}
+					</ProductsContainer>
 				</ProductBody>
-				{currentCategory === 'all' &&
+				{currentCategory === 'all'
+					&& cardsCount < allProducts.length &&
 					<MoreProducts>
-						<MoreProductsButton type='button' onClick={() => dispatch(fetchProducts())}>
+						<MoreProductsButton type='button' onClick={() => setCardsCount(prev => prev + 6)}>
 							<Arrow />
 						</MoreProductsButton>
 						View More
