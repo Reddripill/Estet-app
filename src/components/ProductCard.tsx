@@ -4,11 +4,15 @@ import { HouseCard } from "../utils/types";
 import Button from './Button';
 import { IoIosArrowForward } from 'react-icons/io';
 import useIntersection from '../utils/hooks/useIntersection';
+import CustomSlider, { SliderItem } from './CustomSlider';
 
 interface ProductProps {
 	product: HouseCard;
 }
 
+interface ContentProps {
+	image: string[];
+}
 
 const Card = styled.div`
 	width: 577px;
@@ -18,16 +22,9 @@ const Card = styled.div`
 	overflow: hidden;
 	background-color: #161616;
 `
-
-const Image = styled.div`
+const CardTop = styled.div`
 	height: 450px;
 	position: relative;
-	img {
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-		object-position: center;
-	}
 `
 const Arrow = styled.div`
 	position: absolute;
@@ -41,6 +38,7 @@ const Arrow = styled.div`
 	justify-content: center;
 	color: #FFFBFB;
 	font-size: 24px;
+	z-index: 5;
 	&.prev-arrow {
 		left: 0;
 		svg {
@@ -87,24 +85,54 @@ const FeatureItem = styled.div`
 		border-right: 1px solid rgba(255, 251, 251, 0.35);
 	}
 `
+const ContentImage = styled(SliderItem)`
+	img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+`
+
+const SliderContent = ({ image }: ContentProps) => {
+	return (
+		<>
+			{image.map(item => (
+				<ContentImage key={item}>
+					<img src={item} alt="House" />
+				</ContentImage>
+			))
+			}
+		</>
+	)
+}
 
 
 export default function ProductCards({ product }: ProductProps) {
 	const productTarget = useRef<HTMLDivElement>(null);
+	const prevArrow = useRef<HTMLDivElement>(null);
+	const nextArrow = useRef<HTMLDivElement>(null);
 	const isVisible = useIntersection(productTarget, true);
 	return (
 		<Card>
-			<Image ref={productTarget}>
-				{isVisible &&
-					<img src={product.url} alt="House" />
-				}
-				<Arrow className='prev-arrow'>
+			<CardTop ref={productTarget}>
+				<CustomSlider
+					prevElement={prevArrow}
+					nextElement={nextArrow}
+					width={577}
+					productCount={product.url.length}
+				>
+					{isVisible &&
+						<SliderContent image={product.url} />
+					}
+				</CustomSlider>
+				<Arrow className='prev-arrow' ref={prevArrow}>
 					<IoIosArrowForward />
 				</Arrow>
-				<Arrow className='next-arrow'>
+				<Arrow className='next-arrow' ref={nextArrow}>
 					<IoIosArrowForward />
 				</Arrow>
-			</Image>
+			</CardTop>
 			<Information>
 				<Details>
 					<Price>{product.price} $</Price>

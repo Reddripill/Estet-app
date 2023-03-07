@@ -21,7 +21,7 @@ const FilterWrapper = styled.div`
 	overflow: hidden;
 	transition: max-height .4s linear 0s;
 	&._active {
-		max-height: 300px;
+		max-height: 250px;
 		transition: max-height .4s linear 0s;
 	}
 `

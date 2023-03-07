@@ -6,7 +6,10 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
-		"url": "./images/home/houses/1.jpg",
+		"url": [
+			"./images/home/houses/1.jpg",
+			"./images/home/houses/2.jpg"
+		],
 		"productType": "villa",
 		"service": "rent",
 		"location": "USA"
@@ -18,7 +21,9 @@
 		"bath": 3,
 		"square": 1000,
 		"owner": "Mark Siemens",
-		"url": "./images/home/houses/2.jpg",
+		"url": [
+			"./images/home/houses/2.jpg"
+		],
 		"productType": "villa",
 		"service": "buy",
 		"location": "UK"
@@ -30,7 +35,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "George Kvarz",
-		"url": "./images/home/houses/3.jpg",
+		"url": [
+			"./images/home/houses/3.jpg"
+		],
 		"productType": "house",
 		"service": "rent",
 		"location": "Russia"
@@ -42,7 +49,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
-		"url": "./images/home/houses/4.jpg",
+		"url": [
+			"./images/home/houses/4.jpg"
+		],
 		"productType": "villa",
 		"service": "rent",
 		"location": "Monaco"
@@ -54,7 +63,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "Teylor Lamar",
-		"url": "./images/home/houses/5.jpg",
+		"url": [
+			"./images/home/houses/5.jpg"
+		],
 		"productType": "house",
 		"service": "rent",
 		"location": "Canada"
@@ -66,7 +77,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
-		"url": "./images/home/houses/6.jpg",
+		"url": [
+			"./images/home/houses/6.jpg"
+		],
 		"productType": "house",
 		"service": "buy",
 		"location": "OAO"
@@ -78,7 +91,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
-		"url": "./images/home/houses/1.jpg",
+		"url": [
+			"./images/home/houses/1.jpg"
+		],
 		"productType": "villa",
 		"service": "rent",
 		"location": "USA"
@@ -90,7 +105,9 @@
 		"bath": 3,
 		"square": 1000,
 		"owner": "Mark Siemens",
-		"url": "./images/home/houses/2.jpg",
+		"url": [
+			"./images/home/houses/2.jpg"
+		],
 		"productType": "villa",
 		"service": "buy",
 		"location": "UK"
@@ -102,7 +119,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "George Kvarz",
-		"url": "./images/home/houses/3.jpg",
+		"url": [
+			"./images/home/houses/3.jpg"
+		],
 		"productType": "house",
 		"service": "rent",
 		"location": "Russia"
@@ -114,7 +133,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
-		"url": "./images/home/houses/4.jpg",
+		"url": [
+			"./images/home/houses/4.jpg"
+		],
 		"productType": "villa",
 		"service": "rent",
 		"location": "Monaco"
@@ -126,7 +147,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "Teylor Lamar",
-		"url": "./images/home/houses/5.jpg",
+		"url": [
+			"./images/home/houses/5.jpg"
+		],
 		"productType": "house",
 		"service": "rent",
 		"location": "Canada"
@@ -138,7 +161,9 @@
 		"bath": 1,
 		"square": 535,
 		"owner": "Mark Siemens",
-		"url": "./images/home/houses/6.jpg",
+		"url": [
+			"./images/home/houses/6.jpg"
+		],
 		"productType": "house",
 		"service": "buy",
 		"location": "OAO"
