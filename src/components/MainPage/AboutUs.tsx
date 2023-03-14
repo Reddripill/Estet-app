@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Container, Image, Overlay, Text, Title } from '../../utils/styles';
+import { Sections } from '../../utils/types';
 import Button from '../Button';
 
-const Wrapper = styled.div`
+interface IProps {
+	id: Sections
+}
+
+const Wrapper = styled.section`
 	position: relative;
 	flex: 0 0 735px;
 	width: 100%;
@@ -75,9 +80,9 @@ const FeaturesText = styled(Text)`
 	color: rgba(255, 251, 251, 0.65);
 `
 
-function AboutUs() {
+function AboutUs({ id }: IProps) {
 	return (
-		<Wrapper>
+		<Wrapper id={id}>
 			<Image>
 				<img src="./images/home/aboutUsBg.jpg" alt="About Us Bg" />
 			</Image>

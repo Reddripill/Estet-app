@@ -9,15 +9,16 @@ interface SelectProps {
 	stateChanger: (item: string) => void;
 }
 
+
 const SelectWrapper = styled.div`
 	user-select: none;
+	border-radius: 13.5913px;
+	overflow: hidden;
 `
-
 const SelectItem = styled.div`
 	height: 38px;
 	width: 150px;
 	background-color: rgba(255, 251, 251, 1);
-	border-radius: 13.5913px;
 	padding: 0 12px;
 	display: flex;
 	align-items: center;
@@ -25,18 +26,12 @@ const SelectItem = styled.div`
 	gap: 15px;
 	cursor: pointer;
 	color: #000;
-	transition: border-radius .3s ease-in-out .15s;
-	&._active {
-		border-radius: 13.5913px 13.5913px 0 0;
-		transition: border-radius 0s ease-in-out 0s;
-	}
 `
 const SelectBody = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 7px;
 `
-
 const Arrow = styled(MdArrowForwardIos)`
 	font-size: 12px;
 	transform: rotate(90deg);
@@ -45,24 +40,21 @@ const Arrow = styled(MdArrowForwardIos)`
 		transform: rotate(-90deg);
 	}
 `
-
 const Text = styled.div`
 	font-size: 16px;
 `
-
 const SelectSubtitle = styled.ul`
 	width: 100%;
 	background-color: rgba(255, 251, 251, 1);
 	border-radius: 0 0 13.5913px 13.5913px;
-	transition: all 0.3s ease 0s;
 	max-height: 0px;
 	overflow: hidden;
-	transition: max-height 0.3s ease-in-out 0s;
+	transition: max-height 0.3s linear 0s;
 	&._show {
 		max-height: 108px;
+		transition: max-height 0.3s linear 0s;
 	}
 `
-
 const SelectOption = styled.li`
 	color: #000;
 	cursor: pointer;
@@ -75,7 +67,6 @@ const SelectOption = styled.li`
 		color: #fff;
 	}
 `
-
 const SelectOptionText = styled.div`
 	margin-left: 37px;
 `
@@ -86,6 +77,8 @@ const Select: React.FC<SelectProps> = ({ options, icon, state, stateChanger }) =
 	const [currentIcon, setCurrentIcon] = useState<number>(0);
 
 	const selectOptionHandler = (event: React.MouseEvent<HTMLLIElement>, item: string) => {
+		// const target = event.target as HTMLLIElement;
+		// const targetContainer = target.closest('ul');
 		const index = options.findIndex(option => option === item);
 		stateChanger(options[index]);
 		setCurrentIcon(index);
@@ -93,7 +86,7 @@ const Select: React.FC<SelectProps> = ({ options, icon, state, stateChanger }) =
 	}
 	return (
 		<SelectWrapper>
-			<SelectItem onClick={() => setActive(prev => !prev)} className={active ? '_active' : ''}>
+			<SelectItem onClick={() => setActive(prev => !prev)}>
 				<SelectBody>
 					{!Array.isArray(icon) ?
 						icon :

@@ -8,7 +8,10 @@
 		"owner": "Mark Siemens",
 		"url": [
 			"./images/home/houses/1.jpg",
-			"./images/home/houses/2.jpg"
+			"./images/home/houses/2.jpg",
+			"./images/home/houses/3.jpg",
+			"./images/home/houses/4.jpg",
+			"./images/home/houses/5.jpg"
 		],
 		"productType": "villa",
 		"service": "rent",
@@ -22,7 +25,9 @@
 		"square": 1000,
 		"owner": "Mark Siemens",
 		"url": [
-			"./images/home/houses/2.jpg"
+			"./images/home/houses/2.jpg",
+			"./images/home/houses/6.jpg",
+			"./images/home/houses/1.jpg"
 		],
 		"productType": "villa",
 		"service": "buy",
@@ -36,7 +41,8 @@
 		"square": 535,
 		"owner": "George Kvarz",
 		"url": [
-			"./images/home/houses/3.jpg"
+			"./images/home/houses/3.jpg",
+			"./images/home/houses/4.jpg"
 		],
 		"productType": "house",
 		"service": "rent",
@@ -50,7 +56,8 @@
 		"square": 535,
 		"owner": "Mark Siemens",
 		"url": [
-			"./images/home/houses/4.jpg"
+			"./images/home/houses/4.jpg",
+			"./images/home/houses/5.jpg"
 		],
 		"productType": "villa",
 		"service": "rent",
@@ -64,7 +71,9 @@
 		"square": 535,
 		"owner": "Teylor Lamar",
 		"url": [
-			"./images/home/houses/5.jpg"
+			"./images/home/houses/5.jpg",
+			"./images/home/houses/1.jpg",
+			"./images/home/houses/3.jpg"
 		],
 		"productType": "house",
 		"service": "rent",
@@ -78,7 +87,8 @@
 		"square": 535,
 		"owner": "Mark Siemens",
 		"url": [
-			"./images/home/houses/6.jpg"
+			"./images/home/houses/6.jpg",
+			"./images/home/houses/4.jpg"
 		],
 		"productType": "house",
 		"service": "buy",
@@ -92,7 +102,9 @@
 		"square": 535,
 		"owner": "Mark Siemens",
 		"url": [
-			"./images/home/houses/1.jpg"
+			"./images/home/houses/1.jpg",
+			"./images/home/houses/2.jpg",
+			"./images/home/houses/3.jpg"
 		],
 		"productType": "villa",
 		"service": "rent",
@@ -106,7 +118,11 @@
 		"square": 1000,
 		"owner": "Mark Siemens",
 		"url": [
-			"./images/home/houses/2.jpg"
+			"./images/home/houses/2.jpg",
+			"./images/home/houses/4.jpg",
+			"./images/home/houses/5.jpg",
+			"./images/home/houses/6.jpg",
+			"./images/home/houses/1.jpg"
 		],
 		"productType": "villa",
 		"service": "buy",
@@ -120,7 +136,8 @@
 		"square": 535,
 		"owner": "George Kvarz",
 		"url": [
-			"./images/home/houses/3.jpg"
+			"./images/home/houses/3.jpg",
+			"./images/home/houses/6.jpg"
 		],
 		"productType": "house",
 		"service": "rent",
@@ -134,7 +151,9 @@
 		"square": 535,
 		"owner": "Mark Siemens",
 		"url": [
-			"./images/home/houses/4.jpg"
+			"./images/home/houses/4.jpg",
+			"./images/home/houses/3.jpg",
+			"./images/home/houses/1.jpg"
 		],
 		"productType": "villa",
 		"service": "rent",
@@ -148,7 +167,8 @@
 		"square": 535,
 		"owner": "Teylor Lamar",
 		"url": [
-			"./images/home/houses/5.jpg"
+			"./images/home/houses/5.jpg",
+			"./images/home/houses/2.jpg"
 		],
 		"productType": "house",
 		"service": "rent",

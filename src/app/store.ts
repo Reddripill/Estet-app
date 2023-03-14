@@ -5,7 +5,7 @@ import housesReducer from "../features/housesSlice";
 const store = configureStore({
 	reducer: {
 		houses: housesReducer
-	}
+	},
 })
 
 

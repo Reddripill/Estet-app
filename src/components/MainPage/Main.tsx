@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Container, Image, Overlay } from '../../utils/styles';
+import { Sections } from '../../utils/types';
+
+interface IProps {
+	id: Sections
+}
 
 const Wrapper = styled.section`
 	position: relative;
-	/* margin-bottom: 64px; */
 `
-
 const MainOverlay = styled(Overlay)`
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
 `
@@ -28,9 +31,9 @@ const Title = styled.div`
 	}
 `
 
-function Main() {
+const Main = ({ id }: IProps) => {
 	return (
-		<Wrapper>
+		<Wrapper id={id}>
 			<Image>
 				<img src="./images/home/mainBg.jpg" alt="Main BackGround" />
 			</Image>
@@ -43,5 +46,6 @@ function Main() {
 		</Wrapper>
 	)
 }
+
 
 export default Main;

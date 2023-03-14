@@ -23,4 +23,8 @@ export type HouseFilter = {
 
 export type CategoryType = 'all' | '1 rooms' | '2 rooms' | 'studio';
 
+export type Sections = 'home' | 'aboutUs' | 'otherProjects';
+
+export type Currency = 'Dol' | 'Eu';
+
 export type FCWidthChildren<T> = FC<PropsWithChildren<T>>

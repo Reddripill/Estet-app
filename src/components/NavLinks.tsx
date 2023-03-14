@@ -1,6 +1,6 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Sections } from '../utils/types';
 
 const Container = styled.ul`
 	display: flex;
@@ -13,7 +13,10 @@ const Item = styled.li`
 	font-weight: 600;
 	font-size: 14px;
 	line-height: 139.52%;
-	& > .active {
+	pointer-events: all;
+	cursor: pointer;
+	&._active {
+		pointer-events: none;
 		&::before {
 			content: '';
 			position: absolute;
@@ -29,20 +32,38 @@ const Item = styled.li`
 `
 
 function NavLinks() {
+	const [active, setActive] = useState('home');
+	const navigateHandler = (id: Sections) => {
+		const section = document.getElementById(id);
+		if (section) {
+			const sectionTop = section.offsetTop;
+			setActive(id)
+			window.scrollTo({
+				top: sectionTop,
+				behavior: 'smooth',
+				left: 0
+			})
+		}
+	}
 	return (
 		<Container>
-			<Item>
-				<NavLink
-					to='/'
-				>
-					Home
-				</NavLink>
+			<Item
+				onClick={() => navigateHandler('home')}
+				className={active === 'home' ? '_active' : ''}
+			>
+				Home
 			</Item>
-			<Item>
-				<NavLink to='/about'>About Us</NavLink>
+			<Item
+				onClick={() => navigateHandler('aboutUs')}
+				className={active === 'aboutUs' ? '_active' : ''}
+			>
+				About Us
 			</Item>
-			<Item>
-				<NavLink to='/projects'>Other Projects</NavLink>
+			<Item
+				onClick={() => navigateHandler('otherProjects')}
+				className={active === 'otherProjects' ? '_active' : ''}
+			>
+				Other Projects
 			</Item>
 		</Container>
 	)
