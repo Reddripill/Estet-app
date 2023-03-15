@@ -1,10 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import logger from "redux-logger";
 import housesReducer from "../features/housesSlice";
+import connectReducer from "../features/connectSlice";
 
+const middleware = [...getDefaultMiddleware(), logger]
 
 const store = configureStore({
 	reducer: {
-		houses: housesReducer
+		houses: housesReducer,
+		connect: connectReducer,
 	},
 })
 

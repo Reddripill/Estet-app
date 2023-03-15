@@ -1,5 +1,6 @@
 import React from 'react'
 import AboutUs from './AboutUs';
+import Connect from './Connect';
 import Main from './Main';
 import Map from './Map';
 import OtherProjects from './OtherProjects';
@@ -13,6 +14,7 @@ function Page() {
 			<Map />
 			<AboutUs id='aboutUs' />
 			<OtherProjects id='otherProjects' />
+			<Connect />
 		</>
 	)
 }

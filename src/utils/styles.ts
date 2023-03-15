@@ -142,3 +142,26 @@ export const Overlay = styled.div`
 	width: 100%;
 	height: 100%;
 `
+export const Arrow = styled.div`
+position: absolute;
+top: 0;
+height: 100%;
+width: 60px;
+background: rgba(0, 0, 0, 0.3);
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #FFFBFB;
+font-size: 24px;
+z-index: 5;
+&.prev-arrow {
+	left: 0;
+	svg {
+		transform: rotate(180deg);
+	}
+}
+&.next-arrow {
+	right: 0;
+}
+`
