@@ -43,7 +43,11 @@ export const useInput = (initial: string, checkList?: string[]) => {
 		}
 	}, [validation.errors, isClear])
 
-	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const sendData = () => {
+		setValue('');
+		setIsClear(true);
+	}
+	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		setValue(event.currentTarget.value)
 	}
 	const onBlurHandler = () => {
@@ -51,11 +55,11 @@ export const useInput = (initial: string, checkList?: string[]) => {
 	}
 	return {
 		value,
-		setValue,
 		onChangeHandler,
 		onBlurHandler,
 		isClear,
 		isError,
+		sendData,
 		...validation
 	}
 }

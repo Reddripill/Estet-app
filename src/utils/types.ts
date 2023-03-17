@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from "react";
 
 export type HouseCard = {
 	id: string,
-	price: number,
+	price: string,
 	type: string,
 	bath: number,
 	square: number,

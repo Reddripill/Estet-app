@@ -20,7 +20,7 @@ export default function useFiltering({
 				&& house.service.toLocaleLowerCase() === service.toLocaleLowerCase()
 				&& house.productType.toLocaleLowerCase() === productType.toLocaleLowerCase()
 				&& house.type.toLocaleLowerCase() === type.toLocaleLowerCase()
-				&& house.price >= priceRange[0] && house.price <= priceRange[1]
+				&& +house.price >= priceRange[0] && +house.price <= priceRange[1]
 			) {
 				return true;
 			}

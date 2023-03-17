@@ -103,15 +103,25 @@ const Connect = () => {
 	const name = useInput('', ['emptyCheck']);
 	const email = useInput('', ['emptyCheck']);
 	const number = useInput('', ['emptyCheck']);
+	const interest = useInput('');
+	const message = useInput('');
 
 	const dispatch = useAppDispatch();
 
 	const onSubmitHandler = () => {
 		if (!name.isError || !email.isError || !number.isError) {
-			dispatch(createConnect({ name: name.value, email: email.value, phoneNumber: number.value }));
-			name.setValue('')
-			email.setValue('')
-			number.setValue('')
+			dispatch(createConnect({
+				name: name.value,
+				email: email.value,
+				phoneNumber: number.value,
+				interest: interest.value,
+				message: message.value,
+			}));
+			name.sendData();
+			email.sendData();
+			number.sendData();
+			interest.sendData();
+			message.sendData();
 		}
 	}
 	return (
@@ -166,11 +176,15 @@ const Connect = () => {
 						<InputItem>
 							<InputField
 								placeholder='Interested in'
+								value={interest.value}
+								onChange={event => interest.onChangeHandler(event)}
 							/>
 						</InputItem>
 						<InputItem>
 							<TextareaField
 								placeholder='Message'
+								value={message.value}
+								onChange={event => message.onChangeHandler(event)}
 							/>
 						</InputItem>
 					</InputsContainer>

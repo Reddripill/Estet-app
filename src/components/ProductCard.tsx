@@ -5,6 +5,7 @@ import Button from './Button';
 import { IoIosArrowForward } from 'react-icons/io';
 import useIntersection from '../utils/hooks/useIntersection';
 import CustomSlider, { SliderItem } from './CustomSlider';
+import { priceConvertion } from '../utils/functions/priceConvertion';
 
 interface ProductProps {
 	product: HouseCard;
@@ -135,7 +136,7 @@ export default function ProductCards({ product }: ProductProps) {
 			</CardTop>
 			<Information>
 				<Details>
-					<Price>{product.price} $</Price>
+					<Price>{priceConvertion(product.price)} $</Price>
 					<Button isBlue={false}>View Details</Button>
 				</Details>
 				<Feature>

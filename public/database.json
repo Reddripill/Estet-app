@@ -1,7 +1,7 @@
 [
 	{
 		"id": "1asdf",
-		"price": 100000,
+		"price": "100000",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -19,7 +19,7 @@
 	},
 	{
 		"id": "2dfgh",
-		"price": 390000,
+		"price": "390000",
 		"type": "2 rooms",
 		"bath": 3,
 		"square": 1000,
@@ -35,7 +35,7 @@
 	},
 	{
 		"id": "3fghj",
-		"price": 143000,
+		"price": "143000",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -50,7 +50,7 @@
 	},
 	{
 		"id": "4sdfh",
-		"price": 211200,
+		"price": "211200",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -65,7 +65,7 @@
 	},
 	{
 		"id": "5sadhvbb",
-		"price": 132000,
+		"price": "132000",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -81,7 +81,7 @@
 	},
 	{
 		"id": "6zxcvdsagf",
-		"price": 190400,
+		"price": "190400",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -96,7 +96,7 @@
 	},
 	{
 		"id": "1asfsadfasdf",
-		"price": 100000,
+		"price": "100000",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -112,7 +112,7 @@
 	},
 	{
 		"id": "2dghjdsvefgh",
-		"price": 390000,
+		"price": "390000",
 		"type": "2 rooms",
 		"bath": 3,
 		"square": 1000,
@@ -130,7 +130,7 @@
 	},
 	{
 		"id": "3fgcxvbsfhj",
-		"price": 143000,
+		"price": "143000",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -145,7 +145,7 @@
 	},
 	{
 		"id": "dsfg4sasddfh",
-		"price": 211200,
+		"price": "211200",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -161,7 +161,7 @@
 	},
 	{
 		"id": "5sadyukhgjvcbhvbb",
-		"price": 132000,
+		"price": "132000",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
@@ -176,7 +176,7 @@
 	},
 	{
 		"id": "6zxcvsdfncxsdsagf",
-		"price": 190400,
+		"price": "190400",
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,

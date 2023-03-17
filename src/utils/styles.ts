@@ -143,18 +143,18 @@ export const Overlay = styled.div`
 	height: 100%;
 `
 export const Arrow = styled.div`
-position: absolute;
-top: 0;
-height: 100%;
-width: 60px;
-background: rgba(0, 0, 0, 0.3);
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-color: #FFFBFB;
-font-size: 24px;
-z-index: 5;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 60px;
+	background: rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #FFFBFB;
+	font-size: 24px;
+	z-index: 5;
 &.prev-arrow {
 	left: 0;
 	svg {
@@ -164,4 +164,25 @@ z-index: 5;
 &.next-arrow {
 	right: 0;
 }
+`
+export const Dropdown = styled.ul`
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	max-height: 200px;
+	background: rgba(255, 255, 255, 0.05);
+	color: #fff;
+	overflow-y: auto;
+`
+export const DropdownItem = styled.li`
+	height: 50px;
+	font-family: 'Ubuntu';
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	color: #CDCDCD;
+	display: flex;
+	align-items: center;
+	padding: 0 16px;
 `
