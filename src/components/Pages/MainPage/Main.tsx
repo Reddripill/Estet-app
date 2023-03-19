@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import { Container, Image, Overlay } from '../../utils/styles';
-import { Sections } from '../../utils/types';
+import { Container, Image, Overlay } from '../../../utils/styles';
+import { Sections } from '../../../utils/types';
 
 interface IProps {
 	id: Sections

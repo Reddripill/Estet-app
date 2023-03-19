@@ -1,10 +1,10 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import useIntersection from '../utils/hooks/useIntersection';
-import { Container } from '../utils/styles';
+import useIntersection from '../../utils/hooks/useIntersection';
+import { Container } from '../../utils/styles';
 import Button from './Button';
-import NavLinks from './NavLinks';
+import NavLinks from '../NavLinks';
 
 const HeaderElement = styled.header`
 	position: absolute;

@@ -5,6 +5,5 @@ export function priceConvertion(price: string): string {
 		const reverseStrPart = reverseStr.slice(3 * (i - 1), 3 * i);
 		arr.push(reverseStrPart.split('').reverse().join(''))
 	}
-	console.log(arr);
 	return arr.reverse().join('.');
 }

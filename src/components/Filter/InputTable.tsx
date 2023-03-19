@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
+import { selectAllHouse } from '../../features/housesSlice';
 
 interface Props {
 	data: string;
@@ -36,7 +37,7 @@ const TableItem = styled.li`
 `
 
 function InputTable({ data, changeData, changeActive, locationChanger }: Props) {
-	const houses = useAppSelector(state => state.houses.entities);
+	const houses = useAppSelector(selectAllHouse);
 	const filteredHouses = houses.filter(house => (
 		house.location.toLowerCase().includes(data.toLowerCase())
 	))

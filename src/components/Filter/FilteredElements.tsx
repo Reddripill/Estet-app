@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
 import { Container } from '../../utils/styles';
-import ProductCards from '../ProductCard';
+import ProductCards from '../HouseCard';
 
 const FilteredHousesWrapper = styled.div`
 	display: grid;

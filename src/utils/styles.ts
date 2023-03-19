@@ -49,6 +49,24 @@ export const Global = createGlobalStyle`
 		height: 100%;
 		background-color: #000;
 		color: rgba(255, 251, 251, 1);
+		&::-webkit-scrollbar {
+			-webkit-appearance: none;
+			width: 10px;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		&::-webkit-scrollbar-track {
+			background: #010101;
+			border-radius: 10px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: #161616;
+			border-radius: 9px;
+			transition: all .3s ease 0s;
+			&:hover {
+				/* background-color: #fff; */
+			}
+		}
 	}
 	input,
 	button,

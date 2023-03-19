@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Container, Dropdown, DropdownItem } from '../utils/styles';
+import { Container, Dropdown, DropdownItem } from '../../utils/styles';
 import { HiOutlineEnvelope } from 'react-icons/hi2';
 import { TbPhoneCall } from 'react-icons/tb';
 import { AiOutlineInstagram } from 'react-icons/ai';

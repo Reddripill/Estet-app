@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigation } from '../utils/hooks/useNavigation';
 import { Sections } from '../utils/types';
 
 const Container = styled.ul`
@@ -45,6 +46,12 @@ function NavLinks() {
 			})
 		}
 	}
+	const currentActiveId = useNavigation(['home', 'aboutUs', 'otherProjects']);
+	useEffect(() => {
+		if (currentActiveId) {
+			setActive(currentActiveId);
+		}
+	}, [currentActiveId])
 	return (
 		<Container>
 			<Item

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Container, Image, Overlay, Text, Title } from '../../utils/styles';
-import { Sections } from '../../utils/types';
-import Button from '../Button';
+import { Container, Image, Overlay, Text, Title } from '../../../utils/styles';
+import { Sections } from '../../../utils/types';
+import Button from '../../UI/Button';
 
 interface IProps {
 	id: Sections

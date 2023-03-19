@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { Container } from '../../utils/styles';
-import { CategoryType } from '../../utils/types';
-import Button from '../Button';
-import CategoryButton from '../CategoryButton';
+import { Container } from '../../../utils/styles';
+import { CategoryType } from '../../../utils/types';
+import Button from '../../UI/Button';
+import CategoryButton from '../../CategoryButton';
 import { MdArrowForwardIos } from 'react-icons/md';
-import Filters from '../Filter/Filters';
-import { useAppSelector } from '../../app/hooks';
-import ProductCards from '../ProductCard';
+import Filters from '../../Filter/Filters';
+import { useAppSelector } from '../../../app/hooks';
+import HouseCard from '../../HouseCard';
+import { selectAllHouse } from '../../../features/housesSlice';
 
 const FilteredItems = styled.div`
 	display: flex;
@@ -60,7 +61,7 @@ function Product() {
 	const [showFilters, setShowFilters] = useState<boolean>(false);
 	const [cardsCount, setCardsCount] = useState<number>(6);
 
-	const allProducts = useAppSelector(state => state.houses.entities);
+	const allProducts = useAppSelector(selectAllHouse);
 	let showingProducts = allProducts.slice(0, Math.min(allProducts.length, cardsCount))
 
 	if (currentCategory !== 'all') {
@@ -120,7 +121,7 @@ function Product() {
 					<ProductsContainer>
 						{showingProducts.length !== 0 &&
 							showingProducts.map((product) => (
-								<ProductCards key={`${product.id}`} product={product} />
+								<HouseCard key={`${product.id}`} product={product} />
 							))
 						}
 					</ProductsContainer>

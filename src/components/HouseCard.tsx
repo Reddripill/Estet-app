@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import styled from "styled-components";
 import { HouseCard } from "../utils/types";
-import Button from './Button';
+import Button from './UI/Button';
 import { IoIosArrowForward } from 'react-icons/io';
 import useIntersection from '../utils/hooks/useIntersection';
 import CustomSlider, { SliderItem } from './CustomSlider';
 import { priceConvertion } from '../utils/functions/priceConvertion';
+import { Link } from 'react-router-dom';
 
 interface ProductProps {
 	product: HouseCard;
@@ -109,7 +110,7 @@ const SliderContent = ({ image }: ContentProps) => {
 }
 
 
-export default function ProductCards({ product }: ProductProps) {
+export default React.memo(function HouseCard({ product }: ProductProps) {
 	const productTarget = useRef<HTMLDivElement>(null);
 	const prevArrow = useRef<HTMLDivElement>(null);
 	const nextArrow = useRef<HTMLDivElement>(null);
@@ -137,7 +138,9 @@ export default function ProductCards({ product }: ProductProps) {
 			<Information>
 				<Details>
 					<Price>{priceConvertion(product.price)} $</Price>
-					<Button isBlue={false}>View Details</Button>
+					<Link to={`/${product.id}`}>
+						<Button isBlue={false}>View Details</Button>
+					</Link>
 				</Details>
 				<Feature>
 					<FeatureItem>
@@ -155,4 +158,4 @@ export default function ProductCards({ product }: ProductProps) {
 			</Information>
 		</Card>
 	)
-}
+})

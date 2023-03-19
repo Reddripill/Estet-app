@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Container, Text, Title } from '../../utils/styles';
+import { Container, Text, Title } from '../../../utils/styles';
 
 
 const Content = styled.div`

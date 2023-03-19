@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
+import { selectAllHouse } from '../../features/housesSlice';
 import { HouseCard, HouseFilter } from '../types';
 
 
@@ -10,7 +11,7 @@ export default function useFiltering({
 	priceRange,
 	type,
 }: HouseFilter) {
-	const houses = useAppSelector(state => state.houses.entities);
+	const houses = useAppSelector(selectAllHouse);
 	const [housesCount, setHousesCount] = useState<number>(0);
 	const [filteredHouses, setFilteredHouses] = useState<HouseCard[] | undefined>();
 	useEffect(() => {

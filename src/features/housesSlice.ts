@@ -1,19 +1,21 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction, createEntityAdapter } from "@reduxjs/toolkit";
+import { RootState } from "../app/store";
 import { HouseCard } from "../utils/types";
 
+
 interface HousesState {
-	entities: HouseCard[];
 	filteredHouses: HouseCard[];
 	loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 	error: null | string
 }
 
-const initialState: HousesState = {
-	entities: [],
+const houseAdapter = createEntityAdapter<HouseCard>();
+
+const initialState = houseAdapter.getInitialState<HousesState>({
 	filteredHouses: [],
 	loading: 'idle',
 	error: null,
-}
+})
 
 export const fetchProducts = createAsyncThunk(
 	'houses/fetchProducts',
@@ -37,7 +39,7 @@ export const housesSlice = createSlice({
 				state.loading = 'pending';
 			})
 			.addCase(fetchProducts.fulfilled, (state, action) => {
-				state.entities = state.entities.concat(action.payload);
+				houseAdapter.addMany(state, action.payload)
 				state.loading = 'succeeded';
 			})
 			.addCase(fetchProducts.rejected, (state, action) => {
@@ -46,6 +48,11 @@ export const housesSlice = createSlice({
 			})
 	},
 });
+
+export const {
+	selectAll: selectAllHouse,
+	selectById: selectHouseById,
+} = houseAdapter.getSelectors<RootState>(state => state.houses)
 
 export const { addFilteredHouses } = housesSlice.actions;
 

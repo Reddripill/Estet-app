@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useAppDispatch } from '../../app/hooks'
-import { createConnect } from '../../features/connectSlice'
-import { useInput } from '../../utils/hooks/useInput'
-import { Container } from '../../utils/styles'
-import Button from '../Button'
+import { useAppDispatch } from '../../../app/hooks'
+import { createConnect } from '../../../features/connectSlice'
+import { useInput } from '../../../utils/hooks/useInput'
+import { Container } from '../../../utils/styles'
+import Button from '../../UI/Button'
 
 const Wrapper = styled.div`
 	padding: 220px 0;

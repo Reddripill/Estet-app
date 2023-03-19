@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import { IoIosArrowForward } from 'react-icons/io';
 import styled from 'styled-components';
-import { Title, Text, Arrow, Image } from '../../utils/styles';
-import { Sections } from '../../utils/types';
-import CustomSlider, { SliderItem } from '../CustomSlider';
+import { Title, Text, Arrow, Image } from '../../../utils/styles';
+import { Sections } from '../../../utils/types';
+import CustomSlider, { SliderItem } from '../../CustomSlider';
 
 interface IProps {
 	id: Sections

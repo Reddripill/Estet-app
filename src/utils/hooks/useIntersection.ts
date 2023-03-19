@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 export default function useIntersection(targetRef: React.RefObject<HTMLElement>, image?: boolean) {
 	const [isVisible, setIsVisible] = useState(!image);
 
-	const intersectionCallback: IntersectionObserverCallback = function (entries) {
+	const intersectionCallback: IntersectionObserverCallback = function (entries, observer) {
 		const [entry] = entries;
 		setIsVisible(entry.isIntersecting);
 	}
