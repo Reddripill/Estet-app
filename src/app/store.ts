@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import logger from 'redux-logger';
 import housesReducer from "../features/housesSlice";
 import connectReducer from "../features/connectSlice";
+import messagesReducer from "../features/messagesSlice";
 
 
 
@@ -9,6 +10,7 @@ const store = configureStore({
 	reducer: {
 		houses: housesReducer,
 		connect: connectReducer,
+		messages: messagesReducer,
 	},
 	middleware: getDefaultMiddleware().concat(logger)
 })

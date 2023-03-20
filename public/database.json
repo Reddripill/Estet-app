@@ -5,7 +5,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "Mark Siemens",
+		"user": {
+			"fullname": "Mark Siemens",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/1.jpg",
 			"./images/home/houses/2.jpg",
@@ -23,7 +26,10 @@
 		"type": "2 rooms",
 		"bath": 3,
 		"square": 1000,
-		"owner": "Mark Siemens",
+		"user": {
+			"fullname": "Mark Siemens",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/2.jpg",
 			"./images/home/houses/6.jpg",
@@ -39,7 +45,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "George Kvarz",
+		"user": {
+			"fullname": "George Kvarz",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/3.jpg",
 			"./images/home/houses/4.jpg"
@@ -54,7 +63,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "Mark Siemens",
+		"user": {
+			"fullname": "Mark Siemens",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/4.jpg",
 			"./images/home/houses/5.jpg"
@@ -69,7 +81,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "Teylor Lamar",
+		"user": {
+			"fullname": "Teylor Lamar",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/5.jpg",
 			"./images/home/houses/1.jpg",
@@ -85,7 +100,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "Mark Siemens",
+		"user": {
+			"fullname": "Mark Siemens",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/6.jpg",
 			"./images/home/houses/4.jpg"
@@ -100,7 +118,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "Mark Siemens",
+		"user": {
+			"fullname": "Mark Siemens",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/1.jpg",
 			"./images/home/houses/2.jpg",
@@ -116,7 +137,10 @@
 		"type": "2 rooms",
 		"bath": 3,
 		"square": 1000,
-		"owner": "Mark Siemens",
+		"user": {
+			"fullname": "Mark Siemens",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/2.jpg",
 			"./images/home/houses/4.jpg",
@@ -134,7 +158,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "George Kvarz",
+		"user": {
+			"fullname": "George Kvarz",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/3.jpg",
 			"./images/home/houses/6.jpg"
@@ -149,7 +176,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "Mark Siemens",
+		"user": {
+			"fullname": "Mark Siemens",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/4.jpg",
 			"./images/home/houses/3.jpg",
@@ -165,7 +195,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "Teylor Lamar",
+		"user": {
+			"fullname": "Teylor Lamar",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/5.jpg",
 			"./images/home/houses/2.jpg"
@@ -180,7 +213,10 @@
 		"type": "1 rooms",
 		"bath": 1,
 		"square": 535,
-		"owner": "Mark Siemens",
+		"user": {
+			"fullname": "Mark Siemens",
+			"photo": "./images/house/owner.png"
+		},
 		"url": [
 			"./images/home/houses/6.jpg"
 		],

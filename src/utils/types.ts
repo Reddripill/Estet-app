@@ -6,7 +6,10 @@ export type HouseCard = {
 	type: string,
 	bath: number,
 	square: number,
-	owner: string,
+	user: {
+		fullname: string,
+		photo: string,
+	},
 	url: string[],
 	productType: string,
 	service: string,
