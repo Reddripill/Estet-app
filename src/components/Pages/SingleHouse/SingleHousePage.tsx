@@ -1,20 +1,30 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { useAppSelector } from '../../../app/hooks';
 import { selectHouseById } from '../../../features/housesSlice';
+import NotFoundPage from '../../UI/NotFoundPage';
 import MainSingleSection from './MainSingleSection';
 
-// interface IParams {
-// 	houseId: string;
-// }
+interface RouteParams {
+	houseId: string;
+}
+
+const Wrappper = styled.div`
+	margin-top: 205px;
+`
 
 const SingleHousePage = () => {
-	// const { houseId }: { houseId: string } = useParams();
-	// const house = useAppSelector((state) => selectHouseById(state, houseId))
+	const { houseId } = useParams<keyof RouteParams>() as RouteParams;
+	const house = useAppSelector((state) => selectHouseById(state, houseId));
 	return (
-		<>
-			<MainSingleSection />
-		</>
+		<Wrappper>
+			{house ?
+				<MainSingleSection user={house} />
+				:
+				<NotFoundPage />
+			}
+		</Wrappper>
 	)
 }
 

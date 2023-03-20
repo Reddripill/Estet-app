@@ -33,7 +33,7 @@ const Item = styled.li`
 `
 
 function NavLinks() {
-	const [active, setActive] = useState('home');
+	const [active, setActive] = useState<string>();
 	const navigateHandler = (id: Sections) => {
 		const section = document.getElementById(id);
 		if (section) {
