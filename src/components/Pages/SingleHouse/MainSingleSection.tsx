@@ -2,8 +2,12 @@ import React from 'react'
 import styled from 'styled-components';
 import { Container } from '../../../utils/styles';
 import { HouseCard } from '../../../utils/types';
+import BriefCharacteristics from './BriefCharacteristics'
+import HoodMap from './HoodMap';
 import MessageForm from './MessageForm';
 import PhotoGallery from './PhotoGallery';
+import ProsList from './ProsList';
+import Video from './Video';
 
 interface Props {
 	user: HouseCard;
@@ -45,6 +49,24 @@ const OwnerName = styled.div`
 	line-height: 139.52%;
 	color: #FFFBFB;
 `
+const Description = styled.div`
+	margin-top: 55px;
+	margin-bottom: 50px;
+`
+const DescriptionTitle = styled.div`
+	font-family: 'Montserrat';
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 139.52%;
+	color: #1DAEFF;
+	margin-bottom: 25px;
+`
+const DescriptionText = styled.div`
+	font-family: 'Rubik';
+	font-size: 15px;
+	line-height: 30px;
+	color: rgba(255, 251, 251, 0.65);
+`
 
 const MainSingleSection = ({ user }: Props) => {
 	return (
@@ -52,6 +74,14 @@ const MainSingleSection = ({ user }: Props) => {
 			<SingleHouseContainer>
 				<InformationContent>
 					<PhotoGallery images={user.url} />
+					<BriefCharacteristics user={user} />
+					<Description>
+						<DescriptionTitle>Description</DescriptionTitle>
+						<DescriptionText>{user.description}</DescriptionText>
+					</Description>
+					<ProsList prosList={user.pros} />
+					<Video video={user.video} />
+					<HoodMap />
 				</InformationContent>
 				<Ownerinformation>
 					<Owner>

@@ -29,7 +29,6 @@ const ImagesRow = styled.ul`
 `
 const ImagesRowItem = styled.li`
 	flex: 1 1 auto;
-	max-width: 350px;
 	height: 100%;
 	position: relative;
 	border-radius: 5px;
@@ -88,13 +87,15 @@ const PhotoGallery = ({ images }: Props) => {
 					<img ref={mainImgRef} src={images[0]} alt="House" />
 				</Image>
 			</MainCanvas>
-			<ImagesRow>
-				<ImageItem
-					clickHandler={clickHandler}
-					images={images}
-					activeIndex={activeIndex}
-				/>
-			</ImagesRow>
+			{images.length > 1 &&
+				<ImagesRow>
+					<ImageItem
+						clickHandler={clickHandler}
+						images={images}
+						activeIndex={activeIndex}
+					/>
+				</ImagesRow>
+			}
 		</Wrapper>
 	)
 }

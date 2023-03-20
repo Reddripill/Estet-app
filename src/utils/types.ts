@@ -14,6 +14,13 @@ export type HouseCard = {
 	productType: string,
 	service: string,
 	location: string,
+	garage: number;
+	grid: number;
+	bed: number;
+	date: number;
+	description: string;
+	pros: string[];
+	video: string;
 }
 
 export type HouseFilter = {
