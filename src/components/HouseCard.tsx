@@ -28,7 +28,7 @@ const CardTop = styled.div`
 	height: 450px;
 	position: relative;
 `
-const Arrow = styled.div`
+const Arrow = styled.button`
 	position: absolute;
 	top: 0;
 	height: 100%;
@@ -112,8 +112,8 @@ const SliderContent = ({ image }: ContentProps) => {
 
 export default React.memo(function HouseCard({ product }: ProductProps) {
 	const productTarget = useRef<HTMLDivElement>(null);
-	const prevArrow = useRef<HTMLDivElement>(null);
-	const nextArrow = useRef<HTMLDivElement>(null);
+	const prevArrow = useRef<HTMLButtonElement>(null);
+	const nextArrow = useRef<HTMLButtonElement>(null);
 	const isVisible = useIntersection(productTarget, true);
 	return (
 		<Card>

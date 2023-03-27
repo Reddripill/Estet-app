@@ -38,7 +38,7 @@ function NavLinks() {
 		const section = document.getElementById(id);
 		if (section) {
 			const sectionTop = section.offsetTop;
-			setActive(id)
+			setActive(id);
 			window.scrollTo({
 				top: sectionTop,
 				behavior: 'smooth',

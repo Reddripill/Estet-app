@@ -7,10 +7,12 @@ import Layout from './components/UI/Layout';
 import NotFoundPage from './components/UI/NotFoundPage';
 import { fetchProducts } from './features/housesSlice';
 import SingleHousePage from './components/Pages/SingleHouse/SingleHousePage';
+// import { useGetHousesQuery } from './api/apiSlice';
 
 function App() {
 	const dispatch = useAppDispatch();
 	dispatch(fetchProducts());
+	// const { data: house, isSuccess } = useGetHousesQuery();
 	return (
 		<Routes>
 			<Route path='/' element={<Layout />}>

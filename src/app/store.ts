@@ -1,8 +1,9 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger';
 import housesReducer from "../features/housesSlice";
 import connectReducer from "../features/connectSlice";
 import messagesReducer from "../features/messagesSlice";
+import { apiSlice } from "../api/apiSlice";
 
 
 
@@ -11,8 +12,11 @@ const store = configureStore({
 		houses: housesReducer,
 		connect: connectReducer,
 		messages: messagesReducer,
+		[apiSlice.reducerPath]: apiSlice.reducer,
 	},
-	middleware: getDefaultMiddleware().concat(logger)
+	middleware: getDefaultMiddleware => (
+		getDefaultMiddleware().concat(apiSlice.middleware, logger)
+	)
 })
 
 
