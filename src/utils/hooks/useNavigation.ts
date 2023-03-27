@@ -36,4 +36,3 @@ export function useNavigation(targetIds: string[]) {
 	}, [targetIds, currentId])
 	return currentId;
 }
-// sdadkfjsaldjffkjsas
