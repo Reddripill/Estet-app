@@ -33,14 +33,12 @@ const Item = styled.li`
 `
 
 function NavLinks() {
-	const [active, setActive] = useState<string>();
-	const [isClicked, setIsClicked] = useState<boolean>(false);
+	const [active, setActive] = useState<string | null>();
 	const navigateHandler = (id: Sections) => {
 		const section = document.getElementById(id);
 		if (section) {
 			const sectionTop = section.offsetTop;
 			setActive(id);
-			setIsClicked(true)
 			window.scrollTo({
 				top: sectionTop,
 				behavior: 'smooth',
@@ -50,9 +48,7 @@ function NavLinks() {
 	}
 	const currentActiveId = useNavigation(['home', 'aboutUs', 'otherProjects']);
 	useEffect(() => {
-		if (currentActiveId) {
-			setActive(currentActiveId);
-		}
+		setActive(currentActiveId);
 	}, [currentActiveId])
 	return (
 		<Container>

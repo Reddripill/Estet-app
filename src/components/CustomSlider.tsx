@@ -7,6 +7,7 @@ interface Props {
 	nextElement: React.RefObject<HTMLDivElement | HTMLButtonElement>;
 	width: number;
 	productCount: number;
+	infinite?: boolean;
 }
 
 const SliderWrapper = styled.div`
@@ -33,7 +34,14 @@ const CustomSlider: FCWidthChildren<Props> = ({
 	nextElement,
 	productCount,
 }) => {
+	// const [slides, setSlides] = useState()
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
+	if (children) {
+		console.log(React.Children.toArray(children));
+	}
+	const calcMarginLeft = () => {
+		return `-${width * currentSlide}px`;
+	}
 	const prevArrowClickHandler = useCallback(() => {
 		setCurrentSlide(prev => {
 			if (prev === 0) {
@@ -66,7 +74,7 @@ const CustomSlider: FCWidthChildren<Props> = ({
 	}, [nextElement, prevElement, nextArrowClickHandler, prevArrowClickHandler])
 	return (
 		<SliderWrapper>
-			<SliderContainer style={{ left: `-${currentSlide * width}px` }}>
+			<SliderContainer style={{ left: calcMarginLeft() }}>
 				{children}
 			</SliderContainer>
 		</SliderWrapper >

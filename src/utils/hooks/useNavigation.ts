@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export function useNavigation(targetIds: string[]) {
-	const [currentId, setCurrentId] = useState<string>(targetIds[0]);
+	const [currentId, setCurrentId] = useState<string | null>(targetIds[0]);
 
 	useEffect(() => {
 		const intersectionHandler: IntersectionObserverCallback = (entries) => {
@@ -9,9 +9,8 @@ export function useNavigation(targetIds: string[]) {
 			const currentIdElement = entries.find(entry => entry.target.id === currentId);
 			if (currentActiveEntries.length !== 0) {
 				setCurrentId(currentActiveEntries[0].target.id)
-			} else if (currentIdElement && currentIdElement.boundingClientRect.y > 0) {
-				const index = targetIds.indexOf(currentId);
-				setCurrentId(targetIds[index - 1]);
+			} else {
+				setCurrentId(null)
 			}
 		}
 		const targets = targetIds.map(targetId => (

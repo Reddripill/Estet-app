@@ -9,6 +9,7 @@ import { SmallTitle } from '../../../utils/styles'
 const SimilarHousesContainer = styled.div`
 	margin-bottom: 240px;
 	margin-left: calc((100vw - 1170px) / 2);
+	overflow: hidden;
 `
 const HouseList = styled.ul`
 	display: flex;
