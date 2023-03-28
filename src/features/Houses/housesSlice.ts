@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction, createEntityAdapter } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
-import { HouseCard } from "../utils/types";
+import { RootState } from "../../app/store";
+import { HouseCard } from "../../utils/types";
 
 
 interface HousesState {
@@ -52,6 +52,7 @@ export const housesSlice = createSlice({
 export const {
 	selectAll: selectAllHouse,
 	selectById: selectHouseById,
+	selectIds: selectAllHouseIds,
 } = houseAdapter.getSelectors<RootState>(state => state.houses)
 
 export const { addFilteredHouses } = housesSlice.actions;

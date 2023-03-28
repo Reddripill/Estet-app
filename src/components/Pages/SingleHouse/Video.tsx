@@ -1,16 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { SmallTitle } from '../../../utils/styles'
 
 
 const Wrapper = styled.div`
 	margin-bottom: 50px;
 `
-const VideoTitle = styled.div`
-	font-family: 'Montserrat';
-	font-weight: 600;
-	font-size: 20px;
-	line-height: 139.52%;
-	color: #1DAEFF;
+const VideoTitle = styled(SmallTitle)`
 	margin-bottom: 20px;
 `
 

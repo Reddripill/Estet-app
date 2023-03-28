@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import styled from "styled-components";
-import { HouseCard } from "../utils/types";
-import Button from './UI/Button';
+import { HouseCard } from "../../utils/types";
+import Button from '../../components/UI/Button';
 import { IoIosArrowForward } from 'react-icons/io';
-import useIntersection from '../utils/hooks/useIntersection';
-import CustomSlider, { SliderItem } from './CustomSlider';
-import { priceConvertion } from '../utils/functions/priceConvertion';
+import useIntersection from '../../utils/hooks/useIntersection';
+import CustomSlider, { SliderItem } from '../../components/CustomSlider';
+import { priceConvertion } from '../../utils/functions/priceConvertion';
 import { Link } from 'react-router-dom';
 
 interface ProductProps {

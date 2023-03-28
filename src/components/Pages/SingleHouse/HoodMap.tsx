@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { SmallTitle } from '../../../utils/styles'
 
 
 const Wrapper = styled.div`
@@ -8,12 +9,7 @@ const Wrapper = styled.div`
 const MapFrame = styled.iframe`
 	border-radius: 8px;
 `
-const MapTitle = styled.div`
-	font-family: 'Montserrat';
-	font-weight: 600;
-	font-size: 20px;
-	line-height: 139.52%;
-	color: #1DAEFF;
+const MapTitle = styled(SmallTitle)`
 	margin-bottom: 20px;
 `
 

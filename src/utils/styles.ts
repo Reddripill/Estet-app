@@ -136,6 +136,13 @@ export const Title = styled.div`
 	font-size: 32px;
 	line-height: 139.52%;
 `
+export const SmallTitle = styled.div`
+	font-family: 'Montserrat';
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 139.52%;
+	color: #1DAEFF;
+`
 export const Text = styled.div`
 	font-family: 'Montserrat';
 	font-size: 16px;

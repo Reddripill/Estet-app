@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
-import { Container } from '../../../utils/styles';
+import { Container, SmallTitle } from '../../../utils/styles';
 import { HouseCard } from '../../../utils/types';
 import BriefCharacteristics from './BriefCharacteristics'
 import HoodMap from './HoodMap';
 import MessageForm from './MessageForm';
 import PhotoGallery from './PhotoGallery';
 import ProsList from './ProsList';
+import SimilarHouses from './SimilarHouses';
 import Video from './Video';
 
 interface Props {
@@ -53,12 +54,7 @@ const Description = styled.div`
 	margin-top: 55px;
 	margin-bottom: 50px;
 `
-const DescriptionTitle = styled.div`
-	font-family: 'Montserrat';
-	font-weight: 600;
-	font-size: 20px;
-	line-height: 139.52%;
-	color: #1DAEFF;
+const DescriptionTitle = styled(SmallTitle)`
 	margin-bottom: 25px;
 `
 const DescriptionText = styled.div`
@@ -93,6 +89,7 @@ const MainSingleSection = ({ user }: Props) => {
 					<MessageForm owner={user.user.fullname} />
 				</Ownerinformation>
 			</SingleHouseContainer>
+			<SimilarHouses />
 		</Wrapper>
 	)
 }

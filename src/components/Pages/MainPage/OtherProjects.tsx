@@ -18,6 +18,10 @@ const SliderWrapper = styled.div`
 `
 const SectionInformation = styled.div`
 	text-align: center;
+	margin-bottom: 32px;
+`
+const OtherProjectsText = styled(Text)`
+	color: rgba(255, 255, 255, 0.5);
 `
 const OtherProjectItem = styled.div`
 `
@@ -29,7 +33,7 @@ const OtherProjects = ({ id }: IProps) => {
 		<Wrapper id={id}>
 			<SectionInformation>
 				<Title>Other Projects</Title>
-				<Text>Other projects by us in different locations</Text>
+				<OtherProjectsText>Other projects by us in different locations</OtherProjectsText>
 			</SectionInformation>
 			<SliderWrapper>
 				<CustomSlider

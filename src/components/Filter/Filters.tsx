@@ -10,7 +10,7 @@ import PriceRangeFilter from './PriceRangeFilter';
 import { Link } from 'react-router-dom';
 import useFiltering from '../../utils/hooks/useFiltering';
 import { useAppDispatch } from '../../app/hooks';
-import { addFilteredHouses } from '../../features/housesSlice';
+import { addFilteredHouses } from '../../features/Houses/housesSlice';
 
 interface Props {
 	isActive: boolean;

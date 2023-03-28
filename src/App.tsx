@@ -5,7 +5,7 @@ import FilteredElements from './components/Filter/FilteredElements';
 import Home from './components/Pages/MainPage/Page';
 import Layout from './components/UI/Layout';
 import NotFoundPage from './components/UI/NotFoundPage';
-import { fetchProducts } from './features/housesSlice';
+import { fetchProducts } from './features/Houses/housesSlice';
 import SingleHousePage from './components/Pages/SingleHouse/SingleHousePage';
 // import { useGetHousesQuery } from './api/apiSlice';
 

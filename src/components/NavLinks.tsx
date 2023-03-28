@@ -34,11 +34,13 @@ const Item = styled.li`
 
 function NavLinks() {
 	const [active, setActive] = useState<string>();
+	const [isClicked, setIsClicked] = useState<boolean>(false);
 	const navigateHandler = (id: Sections) => {
 		const section = document.getElementById(id);
 		if (section) {
 			const sectionTop = section.offsetTop;
 			setActive(id);
+			setIsClicked(true)
 			window.scrollTo({
 				top: sectionTop,
 				behavior: 'smooth',

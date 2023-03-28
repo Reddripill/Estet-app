@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/hooks';
-import { selectAllHouse } from '../../features/housesSlice';
+import { selectAllHouse } from '../../features/Houses/housesSlice';
 import { HouseCard, HouseFilter } from '../types';
 
 

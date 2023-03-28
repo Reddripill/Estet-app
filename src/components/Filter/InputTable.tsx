@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useAppSelector } from '../../app/hooks';
-import { selectAllHouse } from '../../features/housesSlice';
+import { selectAllHouse } from '../../features/Houses/housesSlice';
 
 interface Props {
 	data: string;

@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../app/hooks';
-import { selectHouseById } from '../../../features/housesSlice';
+import { selectHouseById } from '../../../features/Houses/housesSlice';
 import NotFoundPage from '../../UI/NotFoundPage';
 import MainSingleSection from './MainSingleSection';
 
