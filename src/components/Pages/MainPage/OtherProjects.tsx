@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { IoIosArrowForward } from 'react-icons/io';
 import styled from 'styled-components';
-import { Title, Text, Arrow, Image } from '../../../utils/styles';
+import { Title, Text, Arrow } from '../../../utils/styles';
 import { Sections } from '../../../utils/types';
 import CustomSlider, { SliderItem } from '../../CustomSlider';
 
@@ -23,8 +23,16 @@ const SectionInformation = styled.div`
 const OtherProjectsText = styled(Text)`
 	color: rgba(255, 255, 255, 0.5);
 `
-const OtherProjectItem = styled.div`
+const ImageItem = styled.div`
+	height: 416px;
+	width: 100%;
+	border: 5px solid #FFFBFB;
+	img {
+		width: 100%;
+		height: 100%;
+	}
 `
+
 
 const OtherProjects = ({ id }: IProps) => {
 	const prevArrow = useRef<HTMLDivElement>(null);
@@ -39,41 +47,28 @@ const OtherProjects = ({ id }: IProps) => {
 				<CustomSlider
 					prevElement={prevArrow}
 					nextElement={nextArrow}
-					width={1440}
-					productCount={6}
+					width={1030}
+					infinite={true}
+					gap={24}
 				>
-					<OtherProjectItem>
-						<SliderItem>
-							<Image>
-								<img src='images/home/otherHouses/1.jpg' alt='Other Houses' />
-							</Image>
-						</SliderItem>
-						<SliderItem>
-							<Image>
-								<img src='images/home/otherHouses/2.jpg' alt='Other Houses' />
-							</Image>
-						</SliderItem>
-						<SliderItem>
-							<Image>
-								<img src='images/home/otherHouses/3.jpg' alt='Other Houses' />
-							</Image>
-						</SliderItem>
-						<SliderItem>
-							<Image>
-								<img src='images/home/otherHouses/1.jpg' alt='Other Houses' />
-							</Image>
-						</SliderItem>
-						<SliderItem>
-							<Image>
-								<img src='images/home/otherHouses/2.jpg' alt='Other Houses' />
-							</Image>
-						</SliderItem>
-						<SliderItem>
-							<Image>
-								<img src='images/home/otherHouses/3.jpg' alt='Other Houses' />
-							</Image>
-						</SliderItem>
-					</OtherProjectItem>
+					<ImageItem>
+						<img src='images/home/otherHouses/1.jpg' alt='Other Houses' />
+					</ImageItem>
+					<ImageItem>
+						<img src='images/home/otherHouses/2.jpg' alt='Other Houses' />
+					</ImageItem>
+					<ImageItem>
+						<img src='images/home/otherHouses/3.jpg' alt='Other Houses' />
+					</ImageItem>
+					<ImageItem>
+						<img src='images/home/otherHouses/1.jpg' alt='Other Houses' />
+					</ImageItem>
+					<ImageItem>
+						<img src='images/home/otherHouses/2.jpg' alt='Other Houses' />
+					</ImageItem>
+					<ImageItem>
+						<img src='images/home/otherHouses/3.jpg' alt='Other Houses' />
+					</ImageItem>
 				</CustomSlider>
 				<Arrow className='prev-arrow' ref={prevArrow}>
 					<IoIosArrowForward />

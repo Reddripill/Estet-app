@@ -7,6 +7,7 @@ import useIntersection from '../../utils/hooks/useIntersection';
 import CustomSlider, { SliderItem } from '../../components/CustomSlider';
 import { priceConvertion } from '../../utils/functions/priceConvertion';
 import { Link } from 'react-router-dom';
+import { truncateSync } from 'fs';
 
 interface ProductProps {
 	product: HouseCard;
@@ -87,12 +88,10 @@ const FeatureItem = styled.div`
 		border-right: 1px solid rgba(255, 251, 251, 0.35);
 	}
 `
-const ContentImage = styled(SliderItem)`
+const ContentImage = styled.div`
+	height: 100%;
 	img {
 		height: 100%;
-		width: 100%;
-		object-fit: cover;
-		object-position: center;
 	}
 `
 
@@ -122,11 +121,13 @@ export default React.memo(function HouseCard({ product }: ProductProps) {
 					prevElement={prevArrow}
 					nextElement={nextArrow}
 					width={577}
-					productCount={product.url.length}
+					infinite={true}
 				>
-					{isVisible &&
-						<SliderContent image={product.url} />
-					}
+					{product.url.map(item => (
+						<ContentImage key={item}>
+							<img src={item} alt="House" />
+						</ContentImage>
+					))}
 				</CustomSlider>
 				<Arrow className='prev-arrow' ref={prevArrow}>
 					<IoIosArrowForward />
