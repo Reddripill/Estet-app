@@ -4,10 +4,9 @@ import { HouseCard } from "../../utils/types";
 import Button from '../../components/UI/Button';
 import { IoIosArrowForward } from 'react-icons/io';
 import useIntersection from '../../utils/hooks/useIntersection';
-import CustomSlider, { SliderItem } from '../../components/CustomSlider';
+import CustomSlider from '../../components/CustomSlider';
 import { priceConvertion } from '../../utils/functions/priceConvertion';
 import { Link } from 'react-router-dom';
-import { truncateSync } from 'fs';
 
 interface ProductProps {
 	product: HouseCard;
@@ -95,19 +94,6 @@ const ContentImage = styled.div`
 	}
 `
 
-const SliderContent = ({ image }: ContentProps) => {
-	return (
-		<>
-			{image.map(item => (
-				<ContentImage key={item}>
-					<img src={item} alt="House" />
-				</ContentImage>
-			))
-			}
-		</>
-	)
-}
-
 
 export default React.memo(function HouseCard({ product }: ProductProps) {
 	const productTarget = useRef<HTMLDivElement>(null);
@@ -117,18 +103,20 @@ export default React.memo(function HouseCard({ product }: ProductProps) {
 	return (
 		<Card>
 			<CardTop ref={productTarget}>
-				<CustomSlider
-					prevElement={prevArrow}
-					nextElement={nextArrow}
-					width={577}
-					infinite={true}
-				>
-					{product.url.map(item => (
-						<ContentImage key={item}>
-							<img src={item} alt="House" />
-						</ContentImage>
-					))}
-				</CustomSlider>
+				{isVisible &&
+					<CustomSlider
+						prevElement={prevArrow}
+						nextElement={nextArrow}
+						width={577}
+						infinite={true}
+					>
+						{product.url.map(item => (
+							<ContentImage key={item}>
+								<img src={item} alt="House" />
+							</ContentImage>
+						))}
+					</CustomSlider>
+				}
 				<Arrow className='prev-arrow' ref={prevArrow}>
 					<IoIosArrowForward />
 				</Arrow>

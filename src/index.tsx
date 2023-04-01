@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Global } from './utils/styles';
 import { Provider } from 'react-redux';
 import store from './app/store';
+import ScrollToTop from './utils/ScrollToTop';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -12,8 +13,10 @@ const root = ReactDOM.createRoot(
 root.render(
 	<Provider store={store}>
 		<Router>
-			<App />
-			<Global />
+			<ScrollToTop>
+				<App />
+				<Global />
+			</ScrollToTop>
 		</Router>
 	</Provider>
 );
