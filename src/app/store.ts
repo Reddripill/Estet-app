@@ -3,7 +3,7 @@ import logger from 'redux-logger';
 import housesReducer from "../features/Houses/housesSlice";
 import connectReducer from "../features/connectSlice";
 import messagesReducer from "../features/messagesSlice";
-import { apiSlice } from "../api/apiSlice";
+import { apiSlice } from "./api/apiSlice";
 
 
 

@@ -5,7 +5,7 @@ import { CategoryType } from '../../../utils/types';
 import Button from '../../UI/Button';
 import CategoryButton from '../../CategoryButton';
 import { MdArrowForwardIos } from 'react-icons/md';
-import Filters from '../../Filter/Filters';
+import Filters from '../../UI/Filter/Filters';
 import { useAppSelector } from '../../../app/hooks';
 import HouseCard from '../../../features/Houses/HouseCard';
 import { selectAllHouse } from '../../../features/Houses/housesSlice';

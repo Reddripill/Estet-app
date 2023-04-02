@@ -10,7 +10,8 @@ interface IProps {
 }
 
 const Wrapper = styled.section`
-	
+	width: 1030px;
+	margin: 0 auto;
 `
 const SliderWrapper = styled.div`
 	position: relative;

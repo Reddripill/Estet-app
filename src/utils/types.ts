@@ -31,6 +31,16 @@ export type HouseFilter = {
 	type: string;
 }
 
+export type InputValidation = {
+	value: string,
+	onChangeHandler: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
+	onBlurHandler: () => void,
+	isClear: boolean,
+	isError: boolean,
+	sendData: () => void,
+	errors: boolean;
+}
+
 export type CategoryType = 'all' | '1 rooms' | '2 rooms' | 'studio';
 
 export type Sections = 'home' | 'aboutUs' | 'otherProjects';

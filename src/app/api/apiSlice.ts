@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { HouseCard } from '../utils/types';
+import { HouseCard } from '../../utils/types';
 
 export const apiSlice = createApi({
 	reducerPath: 'api',

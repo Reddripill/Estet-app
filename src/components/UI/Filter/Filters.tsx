@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Container } from '../../utils/styles';
-import Select from '../Select';
+import { Container } from '../../../utils/styles';
+import Select from '../../Select';
 import { FaHouseUser } from 'react-icons/fa';
 import { CgDollar } from 'react-icons/cg';
 import { BiEuro } from 'react-icons/bi';
 import FilterInput from './FilterInput';
 import PriceRangeFilter from './PriceRangeFilter';
 import { Link } from 'react-router-dom';
-import useFiltering from '../../utils/hooks/useFiltering';
-import { useAppDispatch } from '../../app/hooks';
-import { addFilteredHouses } from '../../features/Houses/housesSlice';
+import useFiltering from '../../../utils/hooks/useFiltering';
+import { useAppDispatch } from '../../../app/hooks';
+import { addFilteredHouses } from '../../../features/Houses/housesSlice';
 
 interface Props {
 	isActive: boolean;

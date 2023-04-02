@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 // import { MdOutlineWidthNormal } from 'react-icons/md';
 import styled from 'styled-components';
 import { FCWidthChildren } from '../utils/types';
@@ -59,6 +59,9 @@ const CustomSlider: FCWidthChildren<Props> = ({
 		}
 	}, [infinite, children]) */
 	const calcMarginLeft = () => {
+		if (gap) {
+			return `-${width * currentSlide + gap * currentSlide}px`;
+		}
 		return `-${width * currentSlide}px`;
 	}
 
