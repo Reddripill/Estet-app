@@ -5,7 +5,6 @@ import Main from './Main';
 import Map from './Map';
 import OtherProjects from './OtherProjects';
 import Product from './Product';
-import AutoRefs from '../../AutoRefs';
 
 function Page() {
 	return (

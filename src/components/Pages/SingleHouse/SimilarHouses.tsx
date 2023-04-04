@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { selectAllHouse } from '../../../features/Houses/housesSlice'
-import MiniHouseCard from '../../../features/Houses/MiniHouseCard'
+import { selectAllHouse } from '../../../features/houses/housesSlice'
+import MiniHouseCard from '../../../features/houses/MiniHouseCard'
 import { SmallTitle } from '../../../utils/styles'
 
 

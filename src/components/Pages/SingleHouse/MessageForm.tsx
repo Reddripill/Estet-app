@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid'
 import React from 'react'
 import styled from 'styled-components'
 import { useAppDispatch } from '../../../app/hooks'
-import { sendMessage } from '../../../features/messagesSlice'
+import { sendMessage } from '../../../features/message/messagesSlice'
 import { useInput } from '../../../utils/hooks/useInput'
 import Button from '../../UI/Button'
 

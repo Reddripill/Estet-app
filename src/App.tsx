@@ -5,16 +5,23 @@ import FilteredElements from './components/UI/Filter/FilteredElements';
 import Home from './components/Pages/MainPage/Page';
 import Layout from './components/UI/Layout';
 import NotFoundPage from './components/UI/NotFoundPage';
-import { fetchProducts } from './features/Houses/housesSlice';
+import { fetchProducts } from './features/houses/housesSlice';
 import SingleHousePage from './components/Pages/SingleHouse/SingleHousePage';
 import SignIn from './components/UI/SignActions/SignIn';
 import SignUp from './components/UI/SignActions/SignUp';
 // import { useGetHousesQuery } from './api/apiSlice';
 
+async function fluid() {
+	const response = await fetch('http://localhost:4444/auth/login');
+	const data = await response.json();
+	console.log(data);
+}
+
 function App() {
 	const dispatch = useAppDispatch();
 	dispatch(fetchProducts());
 	// const { data: house, isSuccess } = useGetHousesQuery();
+	fluid()
 	return (
 		<Routes>
 			<Route path='/' element={<Layout />}>
@@ -27,10 +34,8 @@ function App() {
 					path=':houseId'
 					element={<SingleHousePage />}
 				/>
-			</Route>
-			<Route path='/auth/'>
-				<Route path='signin' element={<SignIn />} />
-				<Route path='signup' element={<SignUp />} />
+				<Route path='auth/signin' element={<SignIn />} />
+				<Route path='auth/signup' element={<SignUp />} />
 			</Route>
 			<Route path='*' element={<NotFoundPage />} />
 		</Routes>

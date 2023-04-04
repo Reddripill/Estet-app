@@ -64,7 +64,9 @@ function Header() {
 					<Actions>
 						<NavLinks />
 						<Button isBlue={true}>
-							Sign In
+							<Link to='http://localhost:3000/auth/signin'>
+								Sign In
+							</Link>
 						</Button>
 					</Actions>
 				</HeaderContainer>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useAppDispatch } from '../../../app/hooks'
-import { createConnect } from '../../../features/connectSlice'
+import { createConnect } from '../../../features/connect/connectSlice'
 import { useInput } from '../../../utils/hooks/useInput'
 import { Container } from '../../../utils/styles'
 import Button from '../../UI/Button'

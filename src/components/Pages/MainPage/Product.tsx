@@ -7,8 +7,8 @@ import CategoryButton from '../../CategoryButton';
 import { MdArrowForwardIos } from 'react-icons/md';
 import Filters from '../../UI/Filter/Filters';
 import { useAppSelector } from '../../../app/hooks';
-import HouseCard from '../../../features/Houses/HouseCard';
-import { selectAllHouse } from '../../../features/Houses/housesSlice';
+import HouseCard from '../../../features/houses/HouseCard';
+import { selectAllHouse } from '../../../features/houses/housesSlice';
 
 const FilteredItems = styled.div`
 	display: flex;
