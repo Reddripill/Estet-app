@@ -9,19 +9,12 @@ import { fetchProducts } from './features/houses/housesSlice';
 import SingleHousePage from './components/Pages/SingleHouse/SingleHousePage';
 import SignIn from './components/UI/SignActions/SignIn';
 import SignUp from './components/UI/SignActions/SignUp';
-// import { useGetHousesQuery } from './api/apiSlice';
-
-async function fluid() {
-	const response = await fetch('http://localhost:4444/auth/login');
-	const data = await response.json();
-	console.log(data);
-}
+import RequireAuth from './features/auth/RequireAuth';
+import AuthorizedUser from './features/auth/AuthorizedUser';
 
 function App() {
 	const dispatch = useAppDispatch();
 	dispatch(fetchProducts());
-	// const { data: house, isSuccess } = useGetHousesQuery();
-	fluid()
 	return (
 		<Routes>
 			<Route path='/' element={<Layout />}>
@@ -36,6 +29,9 @@ function App() {
 				/>
 				<Route path='auth/signin' element={<SignIn />} />
 				<Route path='auth/signup' element={<SignUp />} />
+				<Route element={<RequireAuth />}>
+					<Route path='welcome' element={<AuthorizedUser />} />
+				</Route>
 			</Route>
 			<Route path='*' element={<NotFoundPage />} />
 		</Routes>

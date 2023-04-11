@@ -23,6 +23,18 @@ export type HouseCard = {
 	video: string;
 }
 
+export type UserCredentials = {
+	firstname: string,
+	lastname: string,
+	email: string,
+	password: string,
+	phoneNumber: string,
+	country: string,
+	refreshToken?: string;
+}
+
+export type UserCredentialsWithId = UserCredentials & { _id: string }
+
 export type HouseFilter = {
 	service: string;
 	location: string | null;
@@ -48,3 +60,15 @@ export type Sections = 'home' | 'aboutUs' | 'otherProjects';
 export type Currency = 'Dol' | 'Eu';
 
 export type FCWidthChildren<T> = FC<PropsWithChildren<T>>
+
+export type Credentials = {
+	user: {
+		firstname: string,
+		lastname: string,
+	} | null;
+	token: string | null;
+}
+
+export type Auth = {
+	accessToken: string;
+}

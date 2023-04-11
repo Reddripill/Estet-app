@@ -15,7 +15,6 @@ function Page() {
 			<AboutUs id='aboutUs' />
 			<OtherProjects id='otherProjects' />
 			<Connect />
-			{/* <AutoRefs /> */}
 		</>
 	)
 }

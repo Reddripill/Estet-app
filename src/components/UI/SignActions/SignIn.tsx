@@ -3,6 +3,7 @@ import { useInput } from '../../../utils/hooks/useInput'
 import styled from 'styled-components';
 import Input from '../Input';
 import Button from '../Button';
+import { Link } from 'react-router-dom';
 
 const SignInWrapper = styled.div`
 	height: 100%;
@@ -32,10 +33,10 @@ const Form = styled.form`
 	align-items: flex-start;
 	gap: 32px;
 `
-const SigninInputs = styled.div`
+const SignInInputs = styled.div`
 	width: 100%;
 `
-const SigninInput = styled.div`
+const SignInInput = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
@@ -45,7 +46,7 @@ const SigninInput = styled.div`
 		margin-bottom: 0px;
 	}
 `
-const SigninInputLabel = styled.label`
+const SignInInputLabel = styled.label`
 	font-family: 'Mulish';
 	font-weight: 800;
 	font-size: 12px;
@@ -54,8 +55,16 @@ const SigninInputLabel = styled.label`
 	text-transform: uppercase;
 	color: #CDCDCD;
 `
-const SigninButton = styled(Button)`
+const SignInBottom = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 20px;
+`
+const SignInButton = styled(Button)`
 	text-transform: uppercase;
+`
+const SignInLink = styled(Link)`
+	font-size: 14px;
 `
 
 const SignIn = () => {
@@ -66,17 +75,20 @@ const SignIn = () => {
 			<SignInBody>
 				<Title>Sign In</Title>
 				<Form>
-					<SigninInputs>
-						<SigninInput>
-							<SigninInputLabel htmlFor='signin-email'>email</SigninInputLabel>
+					<SignInInputs>
+						<SignInInput>
+							<SignInInputLabel htmlFor='signin-email'>email</SignInInputLabel>
 							<Input inputEntity={email} name='signin-email' />
-						</SigninInput>
-						<SigninInput>
-							<SigninInputLabel htmlFor='password-email'>password</SigninInputLabel>
+						</SignInInput>
+						<SignInInput>
+							<SignInInputLabel htmlFor='password-email'>password</SignInInputLabel>
 							<Input inputEntity={password} name='password-email' />
-						</SigninInput>
-					</SigninInputs>
-					<SigninButton isBlue={false}>SIGN IN</SigninButton>
+						</SignInInput>
+					</SignInInputs>
+					<SignInBottom>
+						<SignInButton isBlue={false}>SIGN IN</SignInButton>
+						<SignInLink to='http://localhost:3000/auth/signup'>Doesn't have an account?</SignInLink>
+					</SignInBottom>
 				</Form>
 			</SignInBody>
 		</SignInWrapper>
