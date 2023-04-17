@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useInput } from '../../../utils/hooks/useInput'
 import styled from 'styled-components';
 import Input from '../Input';
@@ -71,7 +71,7 @@ const SignUpLink = styled(Link)`
 `
 
 const SignUp = () => {
-	const [register, { isLoading, isSuccess, data: registerResponse }] = useRegisterUserMutation()
+	const [register, { isSuccess, data: registerResponse }] = useRegisterUserMutation()
 	const firstname = useInput('');
 	const lastname = useInput('');
 	const email = useInput('');
@@ -82,15 +82,7 @@ const SignUp = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const clickHandler = async () => {
-		await register({
-			firstname: firstname.value,
-			lastname: lastname.value,
-			email: email.value,
-			password: password.value,
-			phoneNumber: phonenumber.value,
-			country: country.value,
-		})
+	useEffect(() => {
 		if (isSuccess) {
 			dispatch(setCredentials({
 				user: {
@@ -109,6 +101,17 @@ const SignUp = () => {
 			country.sendData()
 			password.sendData()
 		}
+	})
+
+	const clickHandler = () => {
+		register({
+			firstname: firstname.value,
+			lastname: lastname.value,
+			email: email.value,
+			password: password.value,
+			phoneNumber: phonenumber.value,
+			country: country.value,
+		})
 	}
 	return (
 		<SignUpWrapper>
@@ -138,12 +141,12 @@ const SignUp = () => {
 						</SignUpInput>
 						<SignUpInput>
 							<SignUpInputLabel htmlFor='password-email'>password</SignUpInputLabel>
-							<Input inputEntity={password} name='password-email' />
+							<Input inputEntity={password} name='password-email' type='password' />
 						</SignUpInput>
 					</SignUpInputs>
 					<SignUpBottom>
 						<SignUpButton isBlue={false} clickHandler={clickHandler}>SIGN UP</SignUpButton>
-						<SignUpLink to='http://localhost:3000/auth/signin'>Already have an account?</SignUpLink>
+						<SignUpLink to='/auth/signin'>Already have an account?</SignUpLink>
 					</SignUpBottom>
 				</Form>
 			</SignUpBody>

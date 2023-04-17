@@ -33,6 +33,11 @@ export type UserCredentials = {
 	refreshToken?: string;
 }
 
+export type LoginUserCredentials = {
+	email: string,
+	password: string,
+}
+
 export type UserCredentialsWithId = UserCredentials & { _id: string }
 
 export type HouseFilter = {
@@ -71,4 +76,8 @@ export type Credentials = {
 
 export type Auth = {
 	accessToken: string;
+	user: {
+		firstname: string,
+		lastname: string,
+	};
 }

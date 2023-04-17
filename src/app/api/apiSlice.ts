@@ -6,6 +6,7 @@ import { setCredentials } from '../../features/auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: 'http://localhost:4444/',
+	credentials: 'include',
 	prepareHeaders(headers, api) {
 		const token = (api.getState() as RootState).auth.token;
 		if (token) {

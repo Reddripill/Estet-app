@@ -6,6 +6,7 @@ interface Props {
 	inputEntity: InputValidation;
 	name: string;
 	placeholder?: string;
+	type?: string;
 }
 
 const InputItem = styled.div`
@@ -33,11 +34,11 @@ const InputValidate = styled.label`
 	}
 `
 
-const Input = ({ inputEntity, name, placeholder }: Props) => {
+const Input = ({ inputEntity, name, placeholder, type }: Props) => {
 	return (
 		<InputItem>
 			<InputField
-				type="text"
+				type={type ? type : 'text'}
 				name={name}
 				value={inputEntity.value}
 				onChange={event => inputEntity.onChangeHandler(event)}

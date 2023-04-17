@@ -10,11 +10,15 @@ import SingleHousePage from './components/Pages/SingleHouse/SingleHousePage';
 import SignIn from './components/UI/SignActions/SignIn';
 import SignUp from './components/UI/SignActions/SignUp';
 import RequireAuth from './features/auth/RequireAuth';
-import AuthorizedUser from './features/auth/AuthorizedUser';
+import useAuth from './utils/hooks/useAuth';
+import PersistAuth from './features/auth/PersistAuth';
+import RootAccountPage from './components/Pages/AccountPages/RootAccountPage';
+import Profile from './components/Pages/AccountPages/Profile';
 
 function App() {
 	const dispatch = useAppDispatch();
 	dispatch(fetchProducts());
+	useAuth();
 	return (
 		<Routes>
 			<Route path='/' element={<Layout />}>
@@ -29,8 +33,12 @@ function App() {
 				/>
 				<Route path='auth/signin' element={<SignIn />} />
 				<Route path='auth/signup' element={<SignUp />} />
+			</Route>
+			<Route element={<PersistAuth />}>
 				<Route element={<RequireAuth />}>
-					<Route path='welcome' element={<AuthorizedUser />} />
+					<Route path='welcome' element={<RootAccountPage />}>
+						<Route path='profile' element={<Profile />} />
+					</Route>
 				</Route>
 			</Route>
 			<Route path='*' element={<NotFoundPage />} />

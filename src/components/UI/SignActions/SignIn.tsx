@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useInput } from '../../../utils/hooks/useInput'
 import styled from 'styled-components';
 import Input from '../Input';
 import Button from '../Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../../../features/auth/authWithApiSlice';
+import { useAppDispatch } from '../../../app/hooks';
+import { setCredentials } from '../../../features/auth/authSlice';
 
 const SignInWrapper = styled.div`
 	height: 100%;
@@ -70,6 +73,31 @@ const SignInLink = styled(Link)`
 const SignIn = () => {
 	const email = useInput('');
 	const password = useInput('');
+	const [login, { isSuccess, data: userData }] = useLoginMutation();
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (isSuccess && userData) {
+			dispatch(setCredentials({
+				user: {
+					firstname: userData.user.firstname,
+					lastname: userData.user.lastname,
+				},
+				token: userData.accessToken,
+			}))
+			email.sendData()
+			password.sendData()
+			navigate('/welcome', {
+				replace: true,
+			})
+		}
+	})
+	const clickHandler = () => {
+		login({
+			email: email.value,
+			password: password.value,
+		})
+	}
 	return (
 		<SignInWrapper>
 			<SignInBody>
@@ -82,12 +110,12 @@ const SignIn = () => {
 						</SignInInput>
 						<SignInInput>
 							<SignInInputLabel htmlFor='password-email'>password</SignInInputLabel>
-							<Input inputEntity={password} name='password-email' />
+							<Input inputEntity={password} name='password-email' type='password' />
 						</SignInInput>
 					</SignInInputs>
 					<SignInBottom>
-						<SignInButton isBlue={false}>SIGN IN</SignInButton>
-						<SignInLink to='http://localhost:3000/auth/signup'>Doesn't have an account?</SignInLink>
+						<SignInButton isBlue={false} clickHandler={clickHandler}>SIGN IN</SignInButton>
+						<SignInLink to='/auth/signup'>Doesn't have an account?</SignInLink>
 					</SignInBottom>
 				</Form>
 			</SignInBody>

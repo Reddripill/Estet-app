@@ -1,5 +1,5 @@
 import { apiSlice } from "../../app/api/apiSlice";
-import { Auth, UserCredentials } from "../../utils/types";
+import { Auth, LoginUserCredentials, UserCredentials } from "../../utils/types";
 
 export const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
@@ -9,10 +9,22 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				method: 'POST',
 				body: patch
 			})
+		}),
+		login: builder.mutation<Auth, LoginUserCredentials>({
+			query: (patch) => ({
+				url: 'auth/login',
+				method: 'POST',
+				body: patch,
+			})
+		}),
+		refresh: builder.query<Auth, void>({
+			query: () => '/refresh'
 		})
 	})
 })
 
 export const {
 	useRegisterUserMutation,
+	useLoginMutation,
+	useRefreshQuery,
 } = authApiSlice
