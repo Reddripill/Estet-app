@@ -22,7 +22,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 		}),
 		logout: builder.mutation<{ refreshToken: string }, void>({
 			query: () => ({
-				url: '/logout',
+				url: 'auth/logout',
 				method: 'DELETE',
 			})
 		})
