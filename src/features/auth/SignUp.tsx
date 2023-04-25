@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { useInput } from '../../../utils/hooks/useInput'
+import { useInput } from '../../utils/hooks/useInput';
 import styled from 'styled-components';
-import Input from '../Input';
-import Button from '../Button';
+import Input from '../../components/UI/Input';
+import Button from '../../components/UI/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRegisterUserMutation } from '../../../features/auth/authWithApiSlice';
-import { useAppDispatch } from '../../../app/hooks';
-import { setCredentials } from '../../../features/auth/authSlice';
+import { useRegisterUserMutation } from './authWithApiSlice';
+import { useAppDispatch } from '../../app/hooks';
+import { setCredentials } from './authSlice';
 
 const SignUpWrapper = styled.div`
 	height: 100%;
@@ -89,7 +89,8 @@ const SignUp = () => {
 					firstname: firstname.value,
 					lastname: lastname.value,
 				},
-				token: registerResponse?.accessToken as string,
+				accessToken: registerResponse?.accessToken as string,
+				id: registerResponse?.id as string,
 			}))
 			navigate('/welcome', {
 				replace: true,

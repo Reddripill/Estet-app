@@ -92,7 +92,7 @@ const AccountHeader = () => {
 						<BellLabel>9</BellLabel>
 					</ActionItem>
 					<ActionItem type='button'>
-						<FakePhoto to='/welcome/profile' />
+						<FakePhoto to='profile' />
 					</ActionItem>
 				</ActionsWrapper>
 			</AccountContainer>

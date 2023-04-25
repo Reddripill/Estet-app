@@ -38,7 +38,7 @@ export type LoginUserCredentials = {
 	password: string,
 }
 
-export type UserCredentialsWithId = UserCredentials & { _id: string }
+export type UserCredentialsWithId = UserCredentials & { id: string }
 
 export type HouseFilter = {
 	service: string;
@@ -71,7 +71,8 @@ export type Credentials = {
 		firstname: string,
 		lastname: string,
 	} | null;
-	token: string | null;
+	accessToken: string | null;
+	id: string | null;
 }
 
 export type Auth = {
@@ -80,4 +81,5 @@ export type Auth = {
 		firstname: string,
 		lastname: string,
 	};
+	id: string;
 }

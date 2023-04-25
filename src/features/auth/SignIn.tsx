@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { useInput } from '../../../utils/hooks/useInput'
+import { useInput } from '../../utils/hooks/useInput'
 import styled from 'styled-components';
-import Input from '../Input';
-import Button from '../Button';
+import Input from '../../components/UI/Input';
+import Button from '../../components/UI/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../../features/auth/authWithApiSlice';
-import { useAppDispatch } from '../../../app/hooks';
-import { setCredentials } from '../../../features/auth/authSlice';
+import { useLoginMutation } from './authWithApiSlice';
+import { useAppDispatch } from '../../app/hooks';
+import { setCredentials } from './authSlice';
 
 const SignInWrapper = styled.div`
 	height: 100%;
@@ -83,7 +83,8 @@ const SignIn = () => {
 					firstname: userData.user.firstname,
 					lastname: userData.user.lastname,
 				},
-				token: userData.accessToken,
+				accessToken: userData.accessToken,
+				id: userData.id,
 			}))
 			email.sendData()
 			password.sendData()

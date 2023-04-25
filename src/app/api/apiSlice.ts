@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
 	baseUrl: 'http://localhost:4444/',
 	credentials: 'include',
 	prepareHeaders(headers, api) {
-		const token = (api.getState() as RootState).auth.token;
+		const token = (api.getState() as RootState).auth.accessToken;
 		if (token) {
 			headers.set('authorization', `Bearer ${token}`)
 		}
@@ -18,11 +18,13 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
 	let result = await baseQuery(args, api, extraOptions);
-	if (result?.error?.status === 403) {
+	console.log('RESULT: ', result);
+	if (result?.error?.status === 'PARSING_ERROR') {
 		const refresh = await baseQuery('/refresh', api, extraOptions);
 		if (refresh.data) {
 			const user = (api.getState() as RootState).auth.user;
-			api.dispatch(setCredentials({ ...refresh.data, user } as Credentials))
+			const id = (api.getState() as RootState).auth.id;
+			api.dispatch(setCredentials({ ...refresh.data, user, id } as Credentials))
 			result = await baseQuery(args, api, extraOptions);
 		}
 	}
