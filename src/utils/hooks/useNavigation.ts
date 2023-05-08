@@ -17,7 +17,7 @@ export function useNavigation(targetIds: string[]) {
 			})
 			setCurrentId(id);
 			const timestamp = setInterval(() => {
-				if (sectionTop === window.scrollY) {
+				if (sectionTop === Math.trunc(window.scrollY)) {
 					setIsClicked(false)
 					clearInterval(timestamp);
 				}
@@ -42,7 +42,6 @@ export function useNavigation(targetIds: string[]) {
 			threshold: 0,
 		}
 		const observer = new IntersectionObserver(intersectionHandler, options);
-
 		if (targets.length !== 0) {
 			if (!isClicked) {
 				targets.forEach(target => {
