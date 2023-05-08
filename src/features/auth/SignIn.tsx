@@ -8,6 +8,7 @@ import { useLoginMutation } from './authWithApiSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { setCredentials } from './authSlice';
 
+
 const SignInWrapper = styled.div`
 	height: 100%;
 	display: flex;
@@ -93,7 +94,8 @@ const SignIn = () => {
 			})
 		}
 	})
-	const clickHandler = () => {
+	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 		login({
 			email: email.value,
 			password: password.value,
@@ -103,7 +105,7 @@ const SignIn = () => {
 		<SignInWrapper>
 			<SignInBody>
 				<Title>Sign In</Title>
-				<Form>
+				<Form onSubmit={e => submitHandler(e)}>
 					<SignInInputs>
 						<SignInInput>
 							<SignInInputLabel htmlFor='signin-email'>email</SignInInputLabel>
@@ -115,7 +117,7 @@ const SignIn = () => {
 						</SignInInput>
 					</SignInInputs>
 					<SignInBottom>
-						<SignInButton isBlue={false} clickHandler={clickHandler}>SIGN IN</SignInButton>
+						<SignInButton isBlue={false} isSubmit={true}>SIGN IN</SignInButton>
 						<SignInLink to='/auth/signup'>Doesn't have an account?</SignInLink>
 					</SignInBottom>
 				</Form>

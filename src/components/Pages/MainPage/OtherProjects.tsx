@@ -3,7 +3,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import styled from 'styled-components';
 import { Title, Text, Arrow } from '../../../utils/styles';
 import { Sections } from '../../../utils/types';
-import CustomSlider, { SliderItem } from '../../CustomSlider';
+import CustomSlider from '../../CustomSlider';
 
 interface IProps {
 	id: Sections

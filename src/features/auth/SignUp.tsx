@@ -13,7 +13,7 @@ const SignUpWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 205px;
+	margin-top: 105px;
 	margin-bottom: 100px;
 `
 const SignUpBody = styled.div`
@@ -104,7 +104,8 @@ const SignUp = () => {
 		}
 	})
 
-	const clickHandler = () => {
+	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
 		register({
 			firstname: firstname.value,
 			lastname: lastname.value,
@@ -118,7 +119,7 @@ const SignUp = () => {
 		<SignUpWrapper>
 			<SignUpBody>
 				<Title>Sign Up</Title>
-				<Form>
+				<Form onSubmit={e => submitHandler(e)}>
 					<SignUpInputs>
 						<SignUpInput>
 							<SignUpInputLabel htmlFor='signup-firstname'>firstname</SignUpInputLabel>
@@ -146,7 +147,7 @@ const SignUp = () => {
 						</SignUpInput>
 					</SignUpInputs>
 					<SignUpBottom>
-						<SignUpButton isBlue={false} clickHandler={clickHandler}>SIGN UP</SignUpButton>
+						<SignUpButton isBlue={false} isSubmit={true}>SIGN UP</SignUpButton>
 						<SignUpLink to='/auth/signin'>Already have an account?</SignUpLink>
 					</SignUpBottom>
 				</Form>

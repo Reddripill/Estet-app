@@ -37,7 +37,6 @@ const Profile = () => {
 	})
 	return (
 		<>
-			{content}
 			<Button isBlue={false} clickHandler={clickHandler}>
 				LogOut
 			</Button>

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useNavigation } from '../utils/hooks/useNavigation';
-import { Sections } from '../utils/types';
-
 const Container = styled.ul`
 	display: flex;
 	align-items: center;
@@ -33,40 +31,24 @@ const Item = styled.li`
 `
 
 function NavLinks() {
-	const [active, setActive] = useState<string | null>();
-	const navigateHandler = (id: Sections) => {
-		const section = document.getElementById(id);
-		if (section) {
-			const sectionTop = section.offsetTop;
-			setActive(id);
-			window.scrollTo({
-				top: sectionTop,
-				behavior: 'smooth',
-				left: 0
-			})
-		}
-	}
-	const currentActiveId = useNavigation(['home', 'aboutUs', 'otherProjects']);
-	useEffect(() => {
-		setActive(currentActiveId);
-	}, [currentActiveId])
+	const { currentId, navigateHandler } = useNavigation(['home', 'aboutUs', 'otherProjects']);
 	return (
 		<Container>
 			<Item
 				onClick={() => navigateHandler('home')}
-				className={active === 'home' ? '_active' : ''}
+				className={currentId === 'home' ? '_active' : ''}
 			>
 				Home
 			</Item>
 			<Item
 				onClick={() => navigateHandler('aboutUs')}
-				className={active === 'aboutUs' ? '_active' : ''}
+				className={currentId === 'aboutUs' ? '_active' : ''}
 			>
 				About Us
 			</Item>
 			<Item
 				onClick={() => navigateHandler('otherProjects')}
-				className={active === 'otherProjects' ? '_active' : ''}
+				className={currentId === 'otherProjects' ? '_active' : ''}
 			>
 				Other Projects
 			</Item>

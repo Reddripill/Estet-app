@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface Props {
 	isBlue: boolean;
 	clickHandler?: () => void;
+	isSubmit?: boolean;
 }
 
 const ButtonItem = styled.button<Props>`
@@ -18,10 +19,10 @@ const ButtonItem = styled.button<Props>`
 	}
 `
 
-function Button({ children, isBlue, clickHandler }: PropsWithChildren<Props>) {
+function Button({ children, isBlue, clickHandler, isSubmit }: PropsWithChildren<Props>) {
 	return (
 		<ButtonItem
-			type='button'
+			type={isSubmit ? 'submit' : 'button'}
 			isBlue={isBlue}
 			onClick={() => {
 				if (clickHandler) clickHandler();
