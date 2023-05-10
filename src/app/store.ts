@@ -17,7 +17,7 @@ const store = configureStore({
 		[apiSlice.reducerPath]: apiSlice.reducer,
 	},
 	middleware: getDefaultMiddleware => (
-		getDefaultMiddleware().concat(apiSlice.middleware, logger)
+		getDefaultMiddleware().concat(apiSlice.middleware)
 	),
 	devTools: true,
 })

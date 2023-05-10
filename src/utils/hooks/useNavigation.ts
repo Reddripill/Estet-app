@@ -24,16 +24,16 @@ export function useNavigation(targetIds: string[]) {
 			})
 		}
 	}
-
-	useEffect(() => {
-		const intersectionHandler: IntersectionObserverCallback = (entries) => {
-			const currentActiveEntries = entries.filter(entry => entry.isIntersecting);
-			if (currentActiveEntries.length !== 0) {
-				setCurrentId(currentActiveEntries[0].target.id)
-			} else {
-				setCurrentId(null)
-			}
+	const intersectionHandler: IntersectionObserverCallback = (entries) => {
+		const currentActiveEntries = entries.filter(entry => entry.isIntersecting);
+		if (currentActiveEntries.length !== 0) {
+			setCurrentId(currentActiveEntries[0].target.id)
+		} else {
+			setCurrentId(null)
 		}
+	}
+	useEffect(() => {
+
 		const targets = targetIds.map(targetId => (
 			document.getElementById(targetId)
 		))

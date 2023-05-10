@@ -12,10 +12,8 @@ const Item = styled.li`
 	font-weight: 600;
 	font-size: 14px;
 	line-height: 139.52%;
-	pointer-events: all;
 	cursor: pointer;
 	&._active {
-		pointer-events: none;
 		&::before {
 			content: '';
 			position: absolute;
