@@ -42,20 +42,37 @@ const CustomSlider: FCWidthChildren<Props> = ({
 	speed = 300,
 }) => {
 	const initialSlides = React.Children.toArray(children);
-	const [slides, setSlides] = useState([
-		initialSlides[initialSlides.length - 1],
-		...initialSlides.slice(),
-		initialSlides[0]
-	])
-	const [currentSlide, setCurrentSlide] = useState<number>(1);
+	const [slides, setSlides] = useState(
+		infinite ? (
+			[
+				initialSlides[initialSlides.length - 1],
+				...initialSlides.slice(),
+				initialSlides[0]
+			]
+		) : initialSlides
+	)
+	const [currentSlide, setCurrentSlide] = useState<number>(infinite ? 1 : 0);
 	const [translateX, setTranslateX] = useState<number>(0);
 	const [isClicked, setIsClicked] = useState<boolean>(false);
 	const sliderContainerElem = useRef<HTMLDivElement>(null);
 	const slidesCount = slides.length;
 
+	const getClassNames = (index: number) => {
+		if (index === currentSlide) {
+			return 'active-slide'
+		} else if (index === currentSlide - 1) {
+			return 'prev-slide'
+		} else if (index === currentSlide + 1) {
+			return 'next-slide'
+		}
+	}
+
+
 	useLayoutEffect(() => {
-		setTranslateX(-(width + gap))
-	}, [width, gap])
+		if (infinite) {
+			setTranslateX(-(width + gap))
+		}
+	}, [width, gap, infinite])
 
 	useEffect(() => {
 		if (prevElement.current && nextElement.current && sliderContainerElem.current) {
@@ -65,16 +82,34 @@ const CustomSlider: FCWidthChildren<Props> = ({
 				if (sliderContainerElem.current && !isClicked) {
 					sliderContainerElem.current.style.transitionDuration = `${speed}ms`;
 					setIsClicked(true)
-					setCurrentSlide(currentSlide - 1);
-					setTranslateX(-(width + gap) * (currentSlide - 1));
+					if (!infinite) {
+						if (currentSlide >= 1) {
+							setCurrentSlide(currentSlide - 1);
+							setTranslateX(-(width + gap) * (currentSlide - 1));
+						} else {
+							setIsClicked(false)
+						}
+					} else {
+						setCurrentSlide(currentSlide - 1);
+						setTranslateX(-(width + gap) * (currentSlide - 1));
+					}
 				}
 			}
 			const nextArrowClickHandler = () => {
 				if (sliderContainerElem.current && !isClicked) {
 					sliderContainerElem.current.style.transitionDuration = `${speed}ms`
 					setIsClicked(true)
-					setCurrentSlide(currentSlide + 1)
-					setTranslateX(-(width + gap) * (currentSlide + 1))
+					if (!infinite) {
+						if (currentSlide <= slides.length - 2) {
+							setCurrentSlide(currentSlide + 1);
+							setTranslateX(-(width + gap) * (currentSlide + 1))
+						} else {
+							setIsClicked(false)
+						}
+					} else {
+						setCurrentSlide(currentSlide + 1)
+						setTranslateX(-(width + gap) * (currentSlide + 1))
+					}
 				}
 			}
 			prev.addEventListener('click', prevArrowClickHandler)
@@ -84,18 +119,31 @@ const CustomSlider: FCWidthChildren<Props> = ({
 				next.removeEventListener('click', nextArrowClickHandler)
 			}
 		}
-	}, [nextElement, prevElement, currentSlide, slides, speed, width, gap, isClicked])
+	}, [nextElement, prevElement, currentSlide, slides, speed, width, gap, isClicked, infinite])
 
 	useEffect(() => {
 		const removeTransitionDuration = () => {
-			if (sliderContainerElem.current && currentSlide <= 0) {
-				if (currentSlide < 1) {
-					sliderContainerElem.current.style.transitionDuration = '0ms'
-					setSlides(prev => {
-						return [prev[prev.length - 1], ...prev.slice(0, prev.length - 1)]
-					})
-					setCurrentSlide(1);
-					setTranslateX(-(width + gap))
+			if (sliderContainerElem.current) {
+				sliderContainerElem.current.style.transitionDuration = '0ms'
+				if (infinite) {
+					if (currentSlide < 1) {
+						setSlides(prev => {
+							return [prev[prev.length - 1], ...prev.slice(0, prev.length - 1)]
+						})
+						setCurrentSlide(1);
+						setTranslateX(-(width + gap))
+						setIsClicked(false)
+					} else if (currentSlide > slidesCount - 2) {
+						setSlides(prev => {
+							return [...prev.slice(1, prev.length), prev[0]]
+						})
+						setCurrentSlide(slidesCount - 2);
+						setTranslateX(-(width + gap) * (slidesCount - 2))
+						setIsClicked(false)
+					} else {
+						setIsClicked(false)
+					}
+				} else {
 					setIsClicked(false)
 				}
 			}
@@ -104,7 +152,7 @@ const CustomSlider: FCWidthChildren<Props> = ({
 		return () => {
 			document.removeEventListener('transitionend', removeTransitionDuration);
 		}
-	}, [currentSlide, gap, width, slidesCount])
+	}, [currentSlide, gap, width, slidesCount, infinite])
 	return (
 		<SliderWrapper>
 			<SliderContainer
@@ -115,7 +163,7 @@ const CustomSlider: FCWidthChildren<Props> = ({
 				{slides.map((item, index) => (
 					<SliderItem
 						key={item.toString() + index}
-						className={index === currentSlide ? '_active' : ''}
+						className={getClassNames(index)}
 						style={{ width: width, flexShrink: 0 }}
 					>
 						{item}

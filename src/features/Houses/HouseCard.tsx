@@ -108,7 +108,7 @@ export default React.memo(function HouseCard({ product }: ProductProps) {
 						prevElement={prevArrow}
 						nextElement={nextArrow}
 						width={577}
-						infinite={true}
+						infinite={false}
 					>
 						{product.url.map(item => (
 							<ContentImage key={item}>
