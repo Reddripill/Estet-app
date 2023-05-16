@@ -8,7 +8,7 @@ export function useNavigation(targetIds: string[]) {
 	const navigateHandler = (id: Sections): void => {
 		const section = document.getElementById(id);
 		if (section) {
-			const sectionTop = section.offsetTop;
+			const sectionTop = section.offsetTop > 82 ? section.offsetTop - 82 : section.offsetTop;
 			setIsClicked(true);
 			window.scrollTo({
 				top: sectionTop,
@@ -37,8 +37,9 @@ export function useNavigation(targetIds: string[]) {
 		const targets = targetIds.map(targetId => (
 			document.getElementById(targetId)
 		))
-		const options = {
-			rootMargin: '0px 0px -90% 0px',
+		const options: IntersectionObserverInit = {
+			root: null,
+			rootMargin: '0px 0px -70% 0px',
 			threshold: 0,
 		}
 		const observer = new IntersectionObserver(intersectionHandler, options);

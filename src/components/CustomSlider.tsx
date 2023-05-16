@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
-// import { MdOutlineWidthNormal } from 'react-icons/md';
 import styled from 'styled-components';
 import { FCWidthChildren } from '../utils/types';
 
@@ -54,6 +53,7 @@ const CustomSlider: FCWidthChildren<Props> = ({
 	const [currentSlide, setCurrentSlide] = useState<number>(infinite ? 1 : 0);
 	const [translateX, setTranslateX] = useState<number>(0);
 	const [isClicked, setIsClicked] = useState<boolean>(false);
+	const [disabledArrow, setDisabledArrow] = useState<'prev' | 'next' | null>(infinite ? null : 'prev');
 	const sliderContainerElem = useRef<HTMLDivElement>(null);
 	const slidesCount = slides.length;
 
@@ -67,6 +67,24 @@ const CustomSlider: FCWidthChildren<Props> = ({
 		}
 	}
 
+	useEffect(() => {
+		if (nextElement.current && prevElement.current) {
+			if (disabledArrow) {
+				if (disabledArrow === 'prev') {
+					prevElement.current.classList.add('_disabled')
+				} else {
+					nextElement.current.classList.add('_disabled')
+				}
+			} else {
+				if (prevElement.current.classList.contains('_disabled')) {
+					prevElement.current.classList.remove('_disabled')
+				}
+				if (nextElement.current.classList.contains('_disabled')) {
+					nextElement.current.classList.remove('_disabled')
+				}
+			}
+		}
+	}, [nextElement, prevElement, disabledArrow])
 
 	useLayoutEffect(() => {
 		if (infinite) {
@@ -86,6 +104,7 @@ const CustomSlider: FCWidthChildren<Props> = ({
 						if (currentSlide >= 1) {
 							setCurrentSlide(currentSlide - 1);
 							setTranslateX(-(width + gap) * (currentSlide - 1));
+							currentSlide === 1 ? setDisabledArrow('prev') : setDisabledArrow(null)
 						} else {
 							setIsClicked(false)
 						}
@@ -103,6 +122,7 @@ const CustomSlider: FCWidthChildren<Props> = ({
 						if (currentSlide <= slides.length - 2) {
 							setCurrentSlide(currentSlide + 1);
 							setTranslateX(-(width + gap) * (currentSlide + 1))
+							currentSlide === slides.length - 2 ? setDisabledArrow('next') : setDisabledArrow(null)
 						} else {
 							setIsClicked(false)
 						}
