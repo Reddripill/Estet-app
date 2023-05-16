@@ -10,7 +10,7 @@ const RequireAuth = () => {
 			{token ?
 				<Outlet /> :
 				<Navigate
-					to='/auth/signup'
+					to='/'
 					replace={true}
 				/>
 			}
