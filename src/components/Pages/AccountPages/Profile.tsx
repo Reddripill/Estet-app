@@ -1,45 +1,45 @@
-import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { getId, logOut } from '../../../features/auth/authSlice';
+import React, { useState } from 'react'
+import { useAppSelector } from '../../../app/hooks';
+import { getId } from '../../../features/auth/authSlice';
 import { useGetUserQuery } from '../../../app/api/userApiSlice';
+import styled from 'styled-components';
 import Spinner from '../../UI/Spinner';
-import Button from '../../UI/Button';
-import { useLogoutMutation } from '../../../features/auth/authWithApiSlice';
-import { useNavigate } from 'react-router-dom';
+import ProfileContent from './ProfileContent';
+import EditUser from './EditUser';
 
+
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 137px;
+	gap: 40px;
+`
 
 
 const Profile = () => {
 	const id = useAppSelector(getId);
-	const navigate = useNavigate();
-	const dispatch = useAppDispatch()
 	const { data: currentUser, isLoading, isSuccess } = useGetUserQuery(id as string);
-	const [logout, { isSuccess: logoutSuccess }] = useLogoutMutation();
-	const clickHandler = () => {
-		logout();
-	}
+	const [isEdit, setIsEdit] = useState<boolean>(false)
+
 	let content;
+
 	if (isLoading) {
 		content = <Spinner />
 	}
+
 	if (isSuccess) {
-		content =
-			<div>
-				{currentUser.firstname}, {currentUser.lastname}
-			</div>
+		content = <ProfileContent currentUser={currentUser} editClickHandler={() => setIsEdit(true)} />
 	}
 
-	useEffect(() => {
-		if (logoutSuccess) {
-			dispatch(logOut());
-			navigate('/')
-		}
-	})
 	return (
 		<>
-			<Button isBlue={false} clickHandler={clickHandler}>
-				LogOut
-			</Button>
+			{isEdit && currentUser &&
+				<EditUser currentUser={currentUser} clickHandler={() => setIsEdit(false)} />
+			}
+			<Wrapper>
+				{content}
+			</Wrapper>
 		</>
 	)
 }

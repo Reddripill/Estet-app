@@ -7,6 +7,8 @@ import { VscBell } from 'react-icons/vsc';
 
 
 const Wrapper = styled.div`
+	position: fixed;
+	width: 100%;
 	height: 74px;
 	background-color: #161616;
 	display: flex;
