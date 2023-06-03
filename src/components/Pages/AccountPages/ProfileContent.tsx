@@ -6,6 +6,7 @@ import { useLogoutMutation } from '../../../features/auth/authWithApiSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { logOut } from '../../../features/auth/authSlice';
+import { useDeleteUserMutation } from '../../../app/api/userApiSlice';
 
 
 interface IProps {
@@ -26,7 +27,7 @@ const UserBlock = styled.div`
 	flex-direction: column;
 	align-items: center;
 	gap: 40px;
-	flex: 0 0 100%;
+	flex: 1 0 auto;
 `
 const UserInformation = styled.div`
 	display: flex;
@@ -60,7 +61,7 @@ const Actions = styled.div`
 	align-items: center;
 	gap: 24px;
 `
-const Footer = styled.div`
+const Footer = styled.footer`
 	margin-bottom: 12px;
 	display: flex;
 `
@@ -82,9 +83,10 @@ const FooterText = styled.div`
 const ProfileContent = ({ currentUser, editClickHandler }: IProps) => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch()
-	const [logout, { isSuccess: logoutSuccess }] = useLogoutMutation();
+	const [userLogout, { isSuccess: logoutSuccess }] = useLogoutMutation();
+	const [deleteUser, { isSuccess: isDeleteSuccess }] = useDeleteUserMutation()
 	const clickHandler = () => {
-		logout();
+		userLogout();
 	}
 
 	useEffect(() => {
@@ -92,11 +94,16 @@ const ProfileContent = ({ currentUser, editClickHandler }: IProps) => {
 			dispatch(logOut());
 			navigate('/')
 		}
-	})
+	}, [logoutSuccess, navigate, dispatch])
+	useEffect(() => {
+		if (isDeleteSuccess) {
+			navigate('/')
+		}
+	}, [isDeleteSuccess, navigate])
 	return (
 		<>
-			<Title>Here is your profile, {currentUser.firstname}</Title>
 			<UserBlock>
+				<Title>Here is your profile, {currentUser.firstname}</Title>
 				<UserInformation>
 					<UserAvatar />
 					<UserNickname>
@@ -105,17 +112,17 @@ const ProfileContent = ({ currentUser, editClickHandler }: IProps) => {
 					</UserNickname>
 				</UserInformation>
 				<Actions>
-					<ActionButton isBlue={true} clickHandler={editClickHandler}>
+					<ActionButton color='blue' clickHandler={editClickHandler}>
 						Edit
 					</ActionButton>
-					<ActionButton isBlue={false} clickHandler={clickHandler}>
+					<ActionButton color='red' clickHandler={clickHandler}>
 						LogOut
 					</ActionButton>
 				</Actions>
 			</UserBlock>
 			<Footer>
 				<FooterText>
-					You can also <span>delete</span> your account
+					You can also <span onClick={() => deleteUser()}>delete</span> your account
 				</FooterText>
 			</Footer>
 		</>

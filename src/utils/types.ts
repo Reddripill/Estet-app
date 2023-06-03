@@ -33,6 +33,15 @@ export type UserCredentials = {
 	refreshToken?: string;
 }
 
+export type ChangeUserCredentials = {
+	firstname?: string;
+	lastname?: string;
+	email?: string;
+	currentPassword?: string;
+	confirmNewPassword?: string;
+	newPassword?: string;
+}
+
 export type LoginUserCredentials = {
 	email: string,
 	password: string,
@@ -83,3 +92,12 @@ export type Auth = {
 	};
 	id: string;
 }
+
+export type ButtonColorObjectType = {
+	dark: string;
+	gradient: string;
+	blue: string;
+	red: string;
+};
+
+export type ButtonColorType = keyof ButtonColorObjectType;

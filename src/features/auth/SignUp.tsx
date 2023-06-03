@@ -123,7 +123,7 @@ const SignUp = () => {
 					<SignUpInputs>
 						<SignUpInput>
 							<SignUpInputLabel htmlFor='signup-firstname'>firstname</SignUpInputLabel>
-							<Input inputEntity={firstname} name='signup-firstname' />
+							<Input inputEntity={firstname} name='signup-firstname' autofocus={true} />
 						</SignUpInput>
 						<SignUpInput>
 							<SignUpInputLabel htmlFor='signup-lastname'>lastname</SignUpInputLabel>

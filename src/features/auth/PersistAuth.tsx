@@ -9,12 +9,12 @@ const PersistAuth = () => {
 	const token = useAppSelector(getAccessToken);
 	const {
 		data: userData,
-		isSuccess,
+		isLoading,
+		isError
 	} = useRefreshQuery();
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (userData) {
-			navigate('/welcome');
 			dispatch(setCredentials({
 				user: {
 					firstname: userData.user.firstname,
@@ -24,10 +24,10 @@ const PersistAuth = () => {
 				id: userData.id,
 			}))
 		}
-	}, [dispatch, userData, navigate, token])
+	}, [dispatch, userData, navigate, token, isError])
 	return (
 		<>
-			{isSuccess &&
+			{!isLoading &&
 				<Outlet />
 			}
 		</>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useInput } from '../../utils/hooks/useInput'
 import styled from 'styled-components';
 import Input from '../../components/UI/Input';
@@ -35,10 +35,10 @@ const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 32px;
 `
 const SignInInputs = styled.div`
 	width: 100%;
+	margin-bottom: 32px;
 `
 const SignInInput = styled.div`
 	display: flex;
@@ -70,11 +70,23 @@ const SignInButton = styled(Button)`
 const SignInLink = styled(Link)`
 	font-size: 14px;
 `
+const ErrorLabel = styled.label`
+	font-family: 'Montserrat';
+	font-size: 12px;
+	color: red;
+	opacity: 0;
+	visibility: hidden;
+	padding-bottom: 15px;
+	&._show {
+		opacity: 1;
+		visibility: visible;
+	}
+`
 
 const SignIn = () => {
-	const email = useInput('');
-	const password = useInput('');
-	const [login, { isSuccess, data: userData }] = useLoginMutation();
+	const [login, { isSuccess, data: userData, isError }] = useLoginMutation();
+	const email = useInput('', null);
+	const password = useInput('', null);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -109,13 +121,18 @@ const SignIn = () => {
 					<SignInInputs>
 						<SignInInput>
 							<SignInInputLabel htmlFor='signin-email'>email</SignInInputLabel>
-							<Input inputEntity={email} name='signin-email' />
+							<Input autoComplete='email' inputEntity={email} name='signin-email' autofocus={true} />
 						</SignInInput>
 						<SignInInput>
 							<SignInInputLabel htmlFor='password-email'>password</SignInInputLabel>
 							<Input inputEntity={password} name='password-email' type='password' />
 						</SignInInput>
 					</SignInInputs>
+					<ErrorLabel
+						className={(isError) ? '_show' : ''}
+					>
+						Incorrect email or password.
+					</ErrorLabel>
 					<SignInBottom>
 						<SignInButton isBlue={false} isSubmit={true}>SIGN IN</SignInButton>
 						<SignInLink to='/auth/signup'>Doesn't have an account?</SignInLink>

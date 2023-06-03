@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { InputValidation } from '../types';
 
-const useValidate = (value: string, checkList?: string[]) => {
+const useValidate = (value: string, checkList?: string[] | null) => {
 	const [errors, setErrors] = useState<boolean>(false);
 	const [isEmpty, setIsEmpty] = useState<boolean>(false);
 	useEffect(() => {
@@ -30,7 +30,7 @@ const useValidate = (value: string, checkList?: string[]) => {
 	}
 }
 
-export const useInput = (initial: string, checkList?: string[]): InputValidation => {
+export const useInput = (initial: string, checkList?: string[] | null): InputValidation => {
 	const [value, setValue] = useState(initial);
 	const [isClear, setIsClear] = useState<boolean>(true);
 	const [isError, setIsError] = useState<boolean>(false);

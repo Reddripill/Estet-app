@@ -18,7 +18,6 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
 	let result = await baseQuery(args, api, extraOptions);
-	console.log('RESULT: ', result);
 	if (result?.error?.status === 'PARSING_ERROR') {
 		const refresh = await baseQuery('/refresh', api, extraOptions);
 		if (refresh.data) {
@@ -35,6 +34,7 @@ const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
 	reducerPath: 'api',
 	baseQuery: baseQueryWithReauth,
+	tagTypes: ['User'],
 	endpoints: builder => ({
 		getAllUsers: builder.query<UserCredentialsWithId[], void>({
 			query: () => '/allUsers',
