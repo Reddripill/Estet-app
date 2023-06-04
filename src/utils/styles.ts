@@ -149,6 +149,12 @@ export const Text = styled.div`
 	line-height: 158.52%;
 	color: #FFFBFB;
 `
+export const MainText = styled.div`
+	font-family: 'Mulish';
+	font-size: 12px;
+	line-height: 20px;
+	color: #FFFFFF;
+`
 export const Image = styled.div`
 	img {
 		position: absolute;

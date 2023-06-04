@@ -6,12 +6,12 @@ import { useLogoutMutation } from '../../../features/auth/authWithApiSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { logOut } from '../../../features/auth/authSlice';
-import { useDeleteUserMutation } from '../../../app/api/userApiSlice';
 
 
 interface IProps {
 	currentUser: UserCredentials;
 	editClickHandler: () => void;
+	deleteClickHandler: () => void;
 }
 
 
@@ -80,11 +80,10 @@ const FooterText = styled.div`
 `
 
 
-const ProfileContent = ({ currentUser, editClickHandler }: IProps) => {
+const ProfileContent = ({ currentUser, editClickHandler, deleteClickHandler }: IProps) => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch()
 	const [userLogout, { isSuccess: logoutSuccess }] = useLogoutMutation();
-	const [deleteUser, { isSuccess: isDeleteSuccess }] = useDeleteUserMutation()
 	const clickHandler = () => {
 		userLogout();
 	}
@@ -95,11 +94,6 @@ const ProfileContent = ({ currentUser, editClickHandler }: IProps) => {
 			navigate('/')
 		}
 	}, [logoutSuccess, navigate, dispatch])
-	useEffect(() => {
-		if (isDeleteSuccess) {
-			navigate('/')
-		}
-	}, [isDeleteSuccess, navigate])
 	return (
 		<>
 			<UserBlock>
@@ -122,7 +116,7 @@ const ProfileContent = ({ currentUser, editClickHandler }: IProps) => {
 			</UserBlock>
 			<Footer>
 				<FooterText>
-					You can also <span onClick={() => deleteUser()}>delete</span> your account
+					You can also <span onClick={deleteClickHandler}>delete</span> your account
 				</FooterText>
 			</Footer>
 		</>

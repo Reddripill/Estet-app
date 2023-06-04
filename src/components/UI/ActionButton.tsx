@@ -5,6 +5,7 @@ import { ButtonColorObjectType, ButtonColorType } from '../../utils/types';
 interface IProps {
 	color: ButtonColorType;
 	clickHandler?: () => void;
+	disabled?: boolean;
 }
 
 type StyleType = {
@@ -34,14 +35,19 @@ const ActionButtonItem = styled.button<StyleType>`
 	text-transform: uppercase;
 	color: #FFFFFF;
 	min-width: 120px;
+	&:disabled {
+		opacity: 0.7;
+    	cursor: auto;
+	}
 `
 
-const ActionButton = ({ children, color, clickHandler }: PropsWithChildren<IProps>) => {
+const ActionButton = ({ children, color, clickHandler, disabled }: PropsWithChildren<IProps>) => {
 	return (
 		<ActionButtonItem
 			type='button'
 			color={buttonColor[color]}
 			onClick={clickHandler}
+			disabled={disabled}
 		>
 			{children}
 		</ActionButtonItem>

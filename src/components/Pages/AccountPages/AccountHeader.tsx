@@ -15,6 +15,8 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
+	z-index: 10;
+	
 `
 const AccountContainer = styled(Container)`
 	display: flex;

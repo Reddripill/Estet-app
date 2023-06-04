@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Spinner from '../../UI/Spinner';
 import ProfileContent from './ProfileContent';
 import EditUser from './EditUser';
+import DeletePopup from './DeletePopup';
 
 
 const Wrapper = styled.div`
@@ -21,7 +22,8 @@ const Wrapper = styled.div`
 const Profile = () => {
 	const id = useAppSelector(getId);
 	const { data: currentUser, isLoading, isSuccess } = useGetUserQuery(id as string);
-	const [isEdit, setIsEdit] = useState<boolean>(false)
+	const [isEditPopup, setIsEditPopup] = useState<boolean>(false);
+	const [isConfirmPopup, setIsConfirmPopup] = useState<boolean>(false);
 
 	let content;
 
@@ -30,13 +32,24 @@ const Profile = () => {
 	}
 
 	if (isSuccess) {
-		content = <ProfileContent currentUser={currentUser} editClickHandler={() => setIsEdit(true)} />
+		content = <ProfileContent
+			currentUser={currentUser}
+			editClickHandler={() => setIsEditPopup(true)}
+			deleteClickHandler={() => setIsConfirmPopup(true)}
+		/>
 	}
 
 	return (
 		<>
-			{isEdit && currentUser &&
-				<EditUser currentUser={currentUser} clickHandler={() => setIsEdit(false)} />
+			{isEditPopup && currentUser && !isConfirmPopup &&
+				<EditUser
+					currentUser={currentUser}
+					clickHandler={() => setIsEditPopup(false)}
+					setConfirm={() => setIsConfirmPopup(true)}
+				/>
+			}
+			{isConfirmPopup &&
+				<DeletePopup setState={setIsConfirmPopup} />
 			}
 			<Wrapper>
 				{content}

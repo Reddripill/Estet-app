@@ -4,39 +4,17 @@ import styled from 'styled-components';
 import Input from '../../UI/Input';
 import { useInput } from '../../../utils/hooks/useInput';
 import ActionButton from '../../UI/ActionButton';
-import { useChangeUserMutation, useDeleteUserMutation } from '../../../app/api/userApiSlice';
+import { useChangeUserMutation } from '../../../app/api/userApiSlice';
 import { useNavigate } from 'react-router-dom';
+import Popup from '../../UI/Popup';
 
 interface IProps {
 	clickHandler: () => void;
 	currentUser: UserCredentials;
+	setConfirm: () => void;
 }
 
-const Wrapper = styled.div`
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	left: 0;
-	top: 0;
-	z-index: 150;
-	background: rgba(0, 0, 0, 0.15);
-	backdrop-filter: blur(40px);
-`
-const BodyContainer = styled.div`
-	width: 100%;
-	padding: 20px 0;
-`
-const Body = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 40px;
-	padding: 40px;
-	width: 560px;
-	background: #0A0A0A;
-	box-shadow: 0px 17px 33px rgba(255, 255, 255, 0.2);
-	border-radius: 40px;
-	margin: 0px auto;
-`
+
 const Header = styled.div`
 	display: flex;
 	align-items: center;
@@ -117,14 +95,13 @@ const Actions = styled.div`
 	justify-content: space-between;
 `
 
-const EditUser = ({ clickHandler, currentUser }: IProps) => {
+const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 	const firstname = useInput(currentUser.firstname);
 	const lastname = useInput(currentUser.lastname);
 	const email = useInput(currentUser.email);
 	const currentPassword = useInput('');
 	const newPassword = useInput('');
 	const confirmNewPassword = useInput('');
-	const [deleteUser, { isSuccess: isDeleteSuccess }] = useDeleteUserMutation()
 	const [change, { isSuccess: isChangeSuccess }] = useChangeUserMutation();
 	const navigate = useNavigate()
 
@@ -148,95 +125,85 @@ const EditUser = ({ clickHandler, currentUser }: IProps) => {
 		}
 	}, [isChangeSuccess, clickHandler, navigate])
 
-	useEffect(() => {
-		if (isDeleteSuccess) {
-			navigate('/')
-		}
-	}, [isDeleteSuccess, navigate])
-
 	return (
-		<Wrapper>
-			<BodyContainer>
-				<Body>
-					<Header>
-						<Title>Edit Profile</Title>
-						<Cross onClick={clickHandler}></Cross>
-					</Header>
-					<Form onSubmit={e => submitHandler(e)}>
-						<MainInformation>
-							<UserAvatar />
-							<MainInputs>
-								<SignInInput>
-									<SignInInputLabel htmlFor='edit-firstname'>firstname</SignInInputLabel>
-									<Input
-										inputEntity={firstname}
-										name='edit-firstname'
-										placeholder='Enter firstname'
-									/>
-								</SignInInput>
-								<SignInInput>
-									<SignInInputLabel htmlFor='edit-lastname'>lastname</SignInInputLabel>
-									<Input
-										inputEntity={lastname}
-										name='edit-lastname'
-										placeholder='Enter lastname'
-									/>
-								</SignInInput>
-							</MainInputs>
-						</MainInformation>
+		<Popup>
+			<Header>
+				<Title>Edit Profile</Title>
+				<Cross onClick={clickHandler}></Cross>
+			</Header>
+			<Form onSubmit={e => submitHandler(e)}>
+				<MainInformation>
+					<UserAvatar />
+					<MainInputs>
 						<SignInInput>
-							<SignInInputLabel
-								htmlFor='edit-email'>email</SignInInputLabel>
+							<SignInInputLabel htmlFor='edit-firstname'>firstname</SignInInputLabel>
 							<Input
-								inputEntity={email}
-								name='edit-email'
-								placeholder='Enter email'
+								inputEntity={firstname}
+								name='edit-firstname'
+								placeholder='Enter firstname'
 							/>
 						</SignInInput>
 						<SignInInput>
-							<SignInInputLabel
-								htmlFor='edit-current-password'>current password</SignInInputLabel>
+							<SignInInputLabel htmlFor='edit-lastname'>lastname</SignInInputLabel>
 							<Input
-								inputEntity={currentPassword}
-								name='edit-current-password'
-								placeholder='Enter current password'
-								type='password'
+								inputEntity={lastname}
+								name='edit-lastname'
+								placeholder='Enter lastname'
 							/>
 						</SignInInput>
-						<SignInInput>
-							<SignInInputLabel
-								htmlFor='edit-new-password'>new password</SignInInputLabel>
-							<Input
-								inputEntity={newPassword}
-								name='edit-new-password'
-								placeholder='Enter new password'
-								type='password'
-							/>
-						</SignInInput>
-						<SignInInput>
-							<SignInInputLabel
-								htmlFor='edit-confirm-new-password'>
-								confirm new password
-							</SignInInputLabel>
-							<Input
-								inputEntity={confirmNewPassword}
-								name='edit-confirm-new-password'
-								placeholder='Enter new password'
-								type='password'
-							/>
-						</SignInInput>
-						<Actions>
-							<ActionButton color='dark' clickHandler={deleteUser}>
-								Delete Account
-							</ActionButton>
-							<ActionButton color='gradient' clickHandler={saveHandler}>
-								Save
-							</ActionButton>
-						</Actions>
-					</Form>
-				</Body>
-			</BodyContainer>
-		</Wrapper>
+					</MainInputs>
+				</MainInformation>
+				<SignInInput>
+					<SignInInputLabel
+						htmlFor='edit-email'>email</SignInInputLabel>
+					<Input
+						inputEntity={email}
+						name='edit-email'
+						placeholder='Enter email'
+					/>
+				</SignInInput>
+				<SignInInput>
+					<SignInInputLabel
+						htmlFor='edit-current-password'>current password</SignInInputLabel>
+					<Input
+						inputEntity={currentPassword}
+						name='edit-current-password'
+						placeholder='Enter current password'
+						type='password'
+					/>
+				</SignInInput>
+				<SignInInput>
+					<SignInInputLabel
+						htmlFor='edit-new-password'>new password</SignInInputLabel>
+					<Input
+						inputEntity={newPassword}
+						name='edit-new-password'
+						placeholder='Enter new password'
+						type='password'
+					/>
+				</SignInInput>
+				<SignInInput>
+					<SignInInputLabel
+						htmlFor='edit-confirm-new-password'>
+						confirm new password
+					</SignInInputLabel>
+					<Input
+						inputEntity={confirmNewPassword}
+						name='edit-confirm-new-password'
+						placeholder='Enter new password'
+						type='password'
+					/>
+				</SignInInput>
+				<Actions>
+					<ActionButton color='dark' clickHandler={setConfirm}>
+						Delete Account
+					</ActionButton>
+					<ActionButton color='gradient' clickHandler={saveHandler}>
+						Save
+					</ActionButton>
+				</Actions>
+			</Form>
+		</Popup>
 	)
 }
 
