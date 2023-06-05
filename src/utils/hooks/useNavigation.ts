@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Sections } from '../types';
+import { useLocation } from 'react-router-dom';
 
 
 export function useNavigation(targetIds: string[]) {
 	const [currentId, setCurrentId] = useState<string | null>(targetIds[0]);
 	const [isClicked, setIsClicked] = useState<boolean>(false);
+	const location = useLocation()
 	const navigateHandler = (id: Sections): void => {
 		const section = document.getElementById(id);
+		if (location.pathname !== '/') {
+			setCurrentId(id);
+		}
 		if (section) {
 			const sectionTop = section.offsetTop > 82 ? section.offsetTop - 82 : section.offsetTop;
 			setIsClicked(true);
@@ -33,7 +38,9 @@ export function useNavigation(targetIds: string[]) {
 		}
 	}
 	useEffect(() => {
-
+		if (location.pathname !== '/') {
+			setCurrentId(null)
+		}
 		const targets = targetIds.map(targetId => (
 			document.getElementById(targetId)
 		))
@@ -43,7 +50,7 @@ export function useNavigation(targetIds: string[]) {
 			threshold: 0,
 		}
 		const observer = new IntersectionObserver(intersectionHandler, options);
-		if (targets.length !== 0) {
+		if (targets.length !== 0 && location.pathname === '/') {
 			if (!isClicked) {
 				targets.forEach(target => {
 					if (target) observer.observe(target)
@@ -57,6 +64,6 @@ export function useNavigation(targetIds: string[]) {
 				observer.disconnect();
 			}
 		}
-	}, [targetIds, currentId, isClicked])
+	}, [targetIds, currentId, isClicked, location])
 	return { currentId, navigateHandler };
 }

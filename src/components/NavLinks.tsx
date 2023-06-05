@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigation } from '../utils/hooks/useNavigation';
+import { Link } from 'react-router-dom';
 const Container = styled.ul`
 	display: flex;
 	align-items: center;
 	gap: 50px;
 `
 
-const Item = styled.li`
+const Item = styled(Link)`
 	position: relative;
 	font-weight: 600;
 	font-size: 14px;
@@ -33,18 +34,21 @@ function NavLinks() {
 	return (
 		<Container>
 			<Item
+				to='/#home'
 				onClick={() => navigateHandler('home')}
 				className={currentId === 'home' ? '_active' : ''}
 			>
 				Home
 			</Item>
 			<Item
+				to='/#aboutUs'
 				onClick={() => navigateHandler('aboutUs')}
 				className={currentId === 'aboutUs' ? '_active' : ''}
 			>
 				About Us
 			</Item>
 			<Item
+				to='/#otherProjects'
 				onClick={() => navigateHandler('otherProjects')}
 				className={currentId === 'otherProjects' ? '_active' : ''}
 			>

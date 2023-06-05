@@ -4,10 +4,22 @@ import { useLocation } from 'react-router-dom'
 const ScrollToTop: FC<PropsWithChildren> = ({ children }) => {
 	const location = useLocation();
 	useEffect(() => {
-		window.scrollTo({
-			top: 0,
-			left: 0,
-		})
+		if (!location.hash) {
+			window.scrollTo({
+				top: 0,
+				left: 0,
+			})
+		} else {
+			const section = document.getElementById(location.hash.slice(1));
+			if (section) {
+				const sectionTop = section.offsetTop > 82 ? section.offsetTop - 82 : section.offsetTop;
+				window.scrollTo({
+					top: sectionTop,
+					behavior: 'smooth',
+					left: 0
+				})
+			}
+		}
 	}, [location])
 	return (
 		<>{children}</>
