@@ -128,7 +128,11 @@ export const Container = styled.div`
 	padding: 0 15px;
 	margin: 0 auto;
 `
-
+export const AccountContainer = styled.div`
+	max-width: 1400px;
+	padding: 0 15px;
+	margin: 0 auto;
+`
 export const Title = styled.div`
 	font-family: 'Montserrat';
 	color: #1DAEFF;

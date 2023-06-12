@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Container } from '../../../utils/styles'
+import { AccountContainer } from '../../../utils/styles'
 import { Link } from 'react-router-dom'
-import SearchInput from './SearchInput';
 import { VscBell } from 'react-icons/vsc';
+import SearchInput from './SearchInput';
 
 
 const Wrapper = styled.div`
@@ -16,9 +16,8 @@ const Wrapper = styled.div`
 	justify-content: center;
 	width: 100%;
 	z-index: 10;
-	
 `
-const AccountContainer = styled(Container)`
+const Container = styled(AccountContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -44,9 +43,6 @@ const Logo = styled(Link)`
 	img {
 		max-width: 30px;
 	}
-`
-const SearchInputField = styled(SearchInput)`
-	flex: 1 1 auto;
 `
 const ActionItem = styled.button`
 	color: #fff;
@@ -78,11 +74,14 @@ const BellLabel = styled.div`
 	color: #FFFFFF;
 	border-radius: 50%;
 `
+const SearchInputField = styled(SearchInput)`
+	width: 600px;
+`
 
 const AccountHeader = () => {
 	return (
 		<Wrapper>
-			<AccountContainer>
+			<Container>
 				<LogoWrapper>
 					<Logo to='/welcome'>
 						<img src="./images/icons/homeLogo.svg" alt="Logo" />
@@ -99,7 +98,7 @@ const AccountHeader = () => {
 						<FakePhoto to='profile' />
 					</ActionItem>
 				</ActionsWrapper>
-			</AccountContainer>
+			</Container>
 		</Wrapper>
 	)
 }

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { GrSearch } from 'react-icons/gr';
 
 const Wrapper = styled.div`
-	width: 600px;
 	display: flex;
 	justify-content: space-between;
 	border-radius: 15px;
