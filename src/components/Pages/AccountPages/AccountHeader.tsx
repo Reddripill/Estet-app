@@ -28,6 +28,9 @@ const LogoWrapper = styled.div`
 	justify-content: flex-start;
 	flex: 0 0 150px;
 `
+const SearchInputField = styled(SearchInput)`
+	flex: 0 0 600px;
+`
 const ActionsWrapper = styled.div`
 	display: flex;
 	justify-content: flex-end;
@@ -73,9 +76,6 @@ const BellLabel = styled.div`
 	text-transform: uppercase;
 	color: #FFFFFF;
 	border-radius: 50%;
-`
-const SearchInputField = styled(SearchInput)`
-	width: 600px;
 `
 
 const AccountHeader = () => {

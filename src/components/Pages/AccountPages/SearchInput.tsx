@@ -2,6 +2,10 @@ import React from 'react'
 import styled from 'styled-components';
 import { GrSearch } from 'react-icons/gr';
 
+interface IProps {
+	className?: string;
+}
+
 const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -31,9 +35,9 @@ const SearchIcon = styled.button`
 	color: #fff;
 `
 
-const SearchInput = () => {
+const SearchInput = ({ className }: IProps) => {
 	return (
-		<Wrapper>
+		<Wrapper className={className}>
 			<InputField
 				type='text'
 				placeholder='Search'

@@ -12,7 +12,6 @@ const MainAccountContainer = styled(AccountContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 100%;
 `
 const SectionTitles = styled.div`
 	display: flex;
@@ -33,9 +32,10 @@ const Actions = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 16px;
+	justify-content: flex-end;
 `
-const ActionFilters = styled(Actions)`
-	flex: 1 1 200px;
+const ProjectSearchInput = styled(SearchInput)`
+	flex: 0 0 200px;
 `
 
 
@@ -44,16 +44,14 @@ const MainAccountHeader = () => {
 		<Wrapper>
 			<MainAccountContainer>
 				<SectionTitles>
-					<SectionTitle to='/'>Dashboard</SectionTitle>
-					<SectionTitle to='/'>Requests</SectionTitle>
-					<SectionTitle to='/' className='_active'>Projects</SectionTitle>
+					<SectionTitle to='/welcome'>Dashboard</SectionTitle>
+					<SectionTitle to='/welcome'>Requests</SectionTitle>
+					<SectionTitle to='/welcome/projects' className='_active'>Projects</SectionTitle>
 				</SectionTitles>
 				<Actions>
-					<ActionFilters>
-						<SearchInput />
-						<SearchInput />
-						<ActionButton color='gradient'>Create Project</ActionButton>
-					</ActionFilters>
+					<ProjectSearchInput />
+					<ProjectSearchInput />
+					<ActionButton color='gradient'>Create Project</ActionButton>
 				</Actions>
 			</MainAccountContainer>
 		</Wrapper>

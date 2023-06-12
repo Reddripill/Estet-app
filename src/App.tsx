@@ -5,6 +5,7 @@ import NotFoundPage from './components/UI/NotFoundPage';
 import { fetchProducts } from './features/houses/housesSlice';
 import SingleHousePage from './components/Pages/SingleHouse/SingleHousePage';
 import ScrollToTop from './utils/ScrollToTop';
+// import PageRestoration from './utils/PageRestoration';
 // import PersistAuth from './features/auth/PersistAuth';
 const Layout = React.lazy(() => import('./components/UI/Layout'))
 const Home = React.lazy(() => import('./components/Pages/MainPage/Page'))
@@ -15,6 +16,7 @@ const RequireAuth = React.lazy(() => import('./features/auth/RequireAuth'))
 const RootAccountPage = React.lazy(() => import('./components/Pages/AccountPages/RootAccountPage'))
 const Profile = React.lazy(() => import('./components/Pages/AccountPages/Profile'))
 const MainAccountPage = React.lazy(() => import('./components/Pages/AccountPages/MainAccountPage'))
+const ProjectsTable = React.lazy(() => import('./components/Pages/AccountPages/Projects/ProjectsTable'))
 
 
 const router = createBrowserRouter(
@@ -35,7 +37,10 @@ const router = createBrowserRouter(
 			</Route>
 			<Route element={<RequireAuth />}>
 				<Route path='welcome' element={<RootAccountPage />}>
-					<Route index element={<MainAccountPage />}></Route>
+					<Route index element={<MainAccountPage />} />
+					<Route element={<MainAccountPage />}>
+						<Route path='projects' element={<ProjectsTable />}></Route>
+					</Route>
 					<Route path='profile' element={<Profile />} />
 				</Route>
 			</Route>
