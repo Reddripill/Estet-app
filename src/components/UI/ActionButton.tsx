@@ -10,6 +10,7 @@ interface IProps {
 
 type StyleType = {
 	color: string;
+	colorType: ButtonColorType;
 }
 
 const buttonColor: ButtonColorObjectType = {
@@ -35,9 +36,13 @@ const ActionButtonItem = styled.button<StyleType>`
 	text-transform: uppercase;
 	color: #FFFFFF;
 	min-width: 120px;
+	transition: all 0.3s 0s;
 	&:disabled {
 		opacity: 0.7;
     	cursor: auto;
+	}
+	&:hover {
+		box-shadow: ${props => props.colorType === 'gradient' ? '0px 17px 33px rgba(255, 255, 255, 0.2);' : ''}
 	}
 `
 
@@ -46,6 +51,7 @@ const ActionButton = ({ children, color, clickHandler, disabled }: PropsWithChil
 		<ActionButtonItem
 			type='button'
 			color={buttonColor[color]}
+			colorType={color}
 			onClick={clickHandler}
 			disabled={disabled}
 		>

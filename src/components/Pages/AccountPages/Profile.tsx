@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	height: 100%;
-	padding-top: 137px;
+	padding-top: 132px;
 	gap: 40px;
 `
 
@@ -51,9 +51,11 @@ const Profile = () => {
 			{isConfirmPopup &&
 				<DeletePopup setState={setIsConfirmPopup} />
 			}
-			<Wrapper>
-				{content}
-			</Wrapper>
+			{!isEditPopup && !isConfirmPopup &&
+				<Wrapper>
+					{content}
+				</Wrapper>
+			}
 		</>
 	)
 }

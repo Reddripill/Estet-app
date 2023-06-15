@@ -73,6 +73,8 @@ export type Sections = 'home' | 'aboutUs' | 'otherProjects';
 
 export type Currency = 'Dol' | 'Eu';
 
+export type ProjectType = 'villa' | 'apartment' | 'house'
+
 export type FCWidthChildren<T> = FC<PropsWithChildren<T>>
 
 export type Credentials = {

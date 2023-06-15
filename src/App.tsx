@@ -17,6 +17,8 @@ const RootAccountPage = React.lazy(() => import('./components/Pages/AccountPages
 const Profile = React.lazy(() => import('./components/Pages/AccountPages/Profile'))
 const MainAccountPage = React.lazy(() => import('./components/Pages/AccountPages/MainAccountPage'))
 const ProjectsTable = React.lazy(() => import('./components/Pages/AccountPages/Projects/ProjectsTable'))
+const NewProject = React.lazy(() => import('./components/Pages/AccountPages/Projects/NewProject'))
+const RequestsTable = React.lazy(() => import('./components/Pages/AccountPages/Requests/RequestsTable'))
 
 
 const router = createBrowserRouter(
@@ -39,8 +41,10 @@ const router = createBrowserRouter(
 				<Route path='welcome' element={<RootAccountPage />}>
 					<Route index element={<MainAccountPage />} />
 					<Route element={<MainAccountPage />}>
-						<Route path='projects' element={<ProjectsTable />}></Route>
+						<Route path='projects' element={<ProjectsTable />} />
+						<Route path='requests' element={<RequestsTable />}></Route>
 					</Route>
+					<Route path='newProject' element={<NewProject />} />
 					<Route path='profile' element={<Profile />} />
 				</Route>
 			</Route>

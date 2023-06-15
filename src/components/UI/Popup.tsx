@@ -13,12 +13,12 @@ const Wrapper = styled.div<IProps>`
 	left: 0;
 	top: 0;
 	z-index: 150;
-	background: rgba(0, 0, 0, 0.15);
-	backdrop-filter: blur(40px);
 	display: ${props => props.isSmall && 'flex'};
 	align-items: ${props => props.isSmall && 'center'};
-`
+	`
 const PopupContainer = styled.div`
+	background: rgba(0, 0, 0, 0.15);
+	backdrop-filter: blur(40px);
 	width: 100%;
 	padding: 20px 0;
 `

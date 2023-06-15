@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { AccountContainer } from '../../../utils/styles'
 import SearchInput from './SearchInput'
 import ActionButton from '../../UI/ActionButton'
+
+type AccountSectionLink = 'dashboard' | 'projects' | 'requests';
 
 const Wrapper = styled.div`
 	padding-top: 132px;
@@ -40,18 +42,47 @@ const ProjectSearchInput = styled(SearchInput)`
 
 
 const MainAccountHeader = () => {
+	const [activeLink, setActiveLink] = useState<AccountSectionLink>('projects')
 	return (
 		<Wrapper>
 			<MainAccountContainer>
 				<SectionTitles>
-					<SectionTitle to='/welcome'>Dashboard</SectionTitle>
-					<SectionTitle to='/welcome'>Requests</SectionTitle>
-					<SectionTitle to='/welcome/projects' className='_active'>Projects</SectionTitle>
+					<SectionTitle
+						to='/welcome'
+						className={activeLink === 'dashboard' ? '_active' : ''}
+						onClick={() => setActiveLink('dashboard')}
+					>
+						Dashboard
+					</SectionTitle>
+					<SectionTitle
+						to='/welcome/requests'
+						className={activeLink === 'requests' ? '_active' : ''}
+						onClick={() => setActiveLink('requests')}
+					>
+						Requests
+					</SectionTitle>
+					<SectionTitle
+						to='/welcome/projects'
+						className={activeLink === 'projects' ? '_active' : ''}
+						onClick={() => setActiveLink('projects')}
+					>
+						Projects
+					</SectionTitle>
 				</SectionTitles>
 				<Actions>
-					<ProjectSearchInput />
-					<ProjectSearchInput />
-					<ActionButton color='gradient'>Create Project</ActionButton>
+					{activeLink === 'projects' ?
+						<>
+							<ProjectSearchInput />
+							<ProjectSearchInput />
+							<Link to='/welcome/newProject'>
+								<ActionButton color='gradient'>Create Project</ActionButton>
+							</Link>
+						</> :
+						<>
+							<ProjectSearchInput />
+							<ProjectSearchInput />
+						</>
+					}
 				</Actions>
 			</MainAccountContainer>
 		</Wrapper>

@@ -6,6 +6,7 @@ import { useLogoutMutation } from '../../../features/auth/authWithApiSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { logOut } from '../../../features/auth/authSlice';
+import AccountHeader from './AccountHeader';
 
 
 interface IProps {
@@ -15,6 +16,9 @@ interface IProps {
 }
 
 
+const Container = styled(AccountHeader)`
+	position: relative;
+`
 const Title = styled.div`
 	font-family: 'Mulish';
 	font-weight: 700;

@@ -141,6 +141,7 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 								inputEntity={firstname}
 								name='edit-firstname'
 								placeholder='Enter firstname'
+								autoComplete='off'
 							/>
 						</SignInInput>
 						<SignInInput>
@@ -149,6 +150,7 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 								inputEntity={lastname}
 								name='edit-lastname'
 								placeholder='Enter lastname'
+								autoComplete='off'
 							/>
 						</SignInInput>
 					</MainInputs>
@@ -160,6 +162,7 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 						inputEntity={email}
 						name='edit-email'
 						placeholder='Enter email'
+						autoComplete='off'
 					/>
 				</SignInInput>
 				<SignInInput>
@@ -170,6 +173,7 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 						name='edit-current-password'
 						placeholder='Enter current password'
 						type='password'
+						autoComplete='new-password'
 					/>
 				</SignInInput>
 				<SignInInput>
@@ -180,6 +184,7 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 						name='edit-new-password'
 						placeholder='Enter new password'
 						type='password'
+						autoComplete='off'
 					/>
 				</SignInInput>
 				<SignInInput>
@@ -192,6 +197,7 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 						name='edit-confirm-new-password'
 						placeholder='Enter new password'
 						type='password'
+						autoComplete='off'
 					/>
 				</SignInInput>
 				<Actions>

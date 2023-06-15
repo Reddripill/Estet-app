@@ -77,8 +77,6 @@ const Select: React.FC<SelectProps> = ({ options, icon, state, stateChanger }) =
 	const [currentIcon, setCurrentIcon] = useState<number>(0);
 
 	const selectOptionHandler = (event: React.MouseEvent<HTMLLIElement>, item: string) => {
-		// const target = event.target as HTMLLIElement;
-		// const targetContainer = target.closest('ul');
 		const index = options.findIndex(option => option === item);
 		stateChanger(options[index]);
 		setCurrentIcon(index);
