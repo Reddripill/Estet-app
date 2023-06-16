@@ -11,12 +11,35 @@ import { useGetUserQuery } from '../../../../app/api/userApiSlice'
 import { useAppSelector } from '../../../../app/hooks'
 import { getId } from '../../../../features/auth/authSlice'
 import Spinner from '../../../UI/Spinner'
+import { useImmer } from 'use-immer'
+import ProjectCredentials from './ProjectCredentials'
+import CreatorCredentials from './CreatorCredentials'
+import AdditionSection from './AdditionSection';
+import { RxImage } from 'react-icons/rx'
 
-type AddedUserType = {
+
+
+export type AddedUserType = {
 	firstname: string;
 	lastname: string;
 	phone: string;
 	email: string;
+}
+
+interface IProjectProperties {
+	address?: string;
+	price?: string;
+	neighbourhood?: string;
+	creators?: AddedUserType[];
+	checkboxes?: {
+		isExplor?: boolean;
+		isAccept?: boolean;
+	}
+	currency?: string;
+	bedrooms?: number;
+	bathrooms?: number;
+	year?: number;
+	floors?: number;
 }
 
 const Wrapper = styled.div`
@@ -51,191 +74,36 @@ const MainContent = styled.div`
 	flex-direction: column;
 	flex: 1 0 auto;
 `
-const AddImageSection = styled.div`
-	
-`
-const ProjectCredentials = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 12px 40px;
-	margin-bottom: 12px;
-`
-const SignInInput = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-	margin-bottom: 16px;
-	width: 100%;
-	&:last-child {
-		margin-bottom: 0px;
-	}
-`
-const SignInInputLabel = styled.label`
-	font-family: 'Mulish';
-	font-weight: 800;
-	font-size: 12px;
-	line-height: 20px;
-	letter-spacing: 0.21em;
-	text-transform: uppercase;
-	color: #CDCDCD;
-`
 const CryptoSection = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 30px;
 	margin-bottom: 100px;
 `
-const CreatorCredentials = styled.div`
-	margin-bottom: 36px;
+const AddImageSection = styled.div`
+	flex: 0 0 350px;
 `
-const CreatorCredentialFields = styled(ProjectCredentials)`
-	margin-bottom: 36px;
-`
-const AddedUsers = styled.div`
-	display: flex;
-	gap: 20px;
-`
-const AddedUser = styled.div`
+const AddImageBlock = styled.div`
+	width: 100%;
+	height: 450px;
+	background: #0E0E0E;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+	border-radius: 18px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	justify-content: center;
-	gap: 8px;
-	position: relative;
-	max-width: 80px;
-`
-const UserAvatar = styled.div`
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	background-color: #ffffff96;
-`
-const Text = styled.div`
-	font-family: 'Mulish';
-	font-weight: 800;
-	font-size: 9px;
-	line-height: 12px;
-	letter-spacing: 0.21em;
-	text-transform: uppercase;
-	color: #FFFFFF;
-	text-align: center;
-`
-const DeleteButton = styled.div`
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	background-color: #FF453A;
-	cursor: pointer;
-`
-const DeleteButtonBody = styled.div`
-	position: relative;
-	height: 100%;
-	width: 100%;
-	&::before,
-	&::after {
-		content:'';
-		position: absolute;
-		top: calc(50% - 6px);
-		left: calc(50% - 1px);
-		width: 2px;
-		height: 10px;
-		background-color: #fff;
-	}
-	&::before {
-		transform: rotate(45deg);
-	}
-	&::after {
-		transform: rotate(-45deg);
-	}
-`
-const AddPerson = styled(AddedUser)``
-const AddPersonCircle = styled.div`
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	border: 2px solid #0E0E0E;
-	background-color: transparent;
-	position: relative;
-	cursor: pointer;
-	&::before,
-	&::after {
-		content:'';
-		position: absolute;
-		top: calc(50% - 1px);
-		left: calc(50% - 8px);
-		background-color: #1DAEFF;
-		height: 2px;
-		width: 16px;
-		border-radius: 4px;
-	}
-	&::before {
-		transform: rotate(90deg);
-	}
-`
-const TextBlue = styled(Text)`
-	color: #1DAEFF;
+	gap: 40px;
 `
 
 
 const NewProject = () => {
 	const id = useAppSelector(getId);
-	const { data: currentUser, isLoading, isSuccess } = useGetUserQuery(id as string);
-	const [currentPropertyType, setCurrentPropertyType] = useState<number>(0);
+	const { isLoading } = useGetUserQuery(id as string);
 	const [isExplore, setIsExplore] = useState<boolean>(false);
 	const [isAccept, setIsAccept] = useState<boolean>(false);
-	const [addedUsers, setAddedUsers] = useState<AddedUserType[]>([]);
-	const address = useInput('', ['emptyCheck']);
-	const price = useInput('', ['emptyCheck']);
-	const neighbourhood = useInput('', ['emptyCheck']);
-	const firstname = useInput('', ['emptyCheck']);
-	const lastname = useInput('', ['emptyCheck']);
-	const phone = useInput('', ['emptyCheck']);
-	const email = useInput('', ['emptyCheck']);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		if (isSuccess && currentUser) {
-			setAddedUsers([
-				{
-					firstname: currentUser.firstname,
-					lastname: currentUser.lastname,
-					email: currentUser.email,
-					phone: currentUser.phoneNumber
-				}
-			])
-		}
-	}, [isSuccess, currentUser])
-
-	const addPersonHandler = () => {
-		if (firstname.value && lastname.value && phone.value && email.value) {
-			const duplicated = addedUsers.filter(item => item.email === email.value);
-			if (!duplicated.length) {
-				setAddedUsers([
-					{
-						firstname: firstname.value,
-						lastname: lastname.value,
-						email: email.value,
-						phone: phone.value
-					},
-					...addedUsers
-				])
-				firstname.sendData()
-				lastname.sendData()
-				email.sendData()
-				phone.sendData()
-			}
-		}
-	}
-	const deletePersonHandler = (email: string) => {
-		const person = addedUsers.find(user => user.email === email);
-		if (person) {
-			setAddedUsers(prev => (
-				prev.filter(user => user !== person)
-			))
-		}
-	}
 	if (isLoading) {
 		return <Spinner />
 	}
@@ -252,73 +120,19 @@ const NewProject = () => {
 				</Head>
 				<Content>
 					<MainContent>
-						<ProjectCredentials>
-							<SignInInput>
-								<SignInInputLabel htmlFor='adress'>address</SignInInputLabel>
-								<Input inputEntity={address} name='adress' type='text' />
-							</SignInInput>
-							<SignInInput>
-								<SignInInputLabel htmlFor='price'>price</SignInInputLabel>
-								<Input inputEntity={price} name='price' type='text' />
-							</SignInInput>
-							<SignInInput>
-								<SignInInputLabel htmlFor='neighbourhood'>neighbourhood</SignInInputLabel>
-								<Input inputEntity={neighbourhood} name='neighbourhood' type='text' />
-							</SignInInput>
-							<SignInInput>
-								<SignInInputLabel htmlFor='property-type'>property type</SignInInputLabel>
-								<DropDown
-									options={['house', 'villa', 'apartment']}
-									currentOption={currentPropertyType}
-									setCurrentOption={setCurrentPropertyType}
-								/>
-							</SignInInput>
-						</ProjectCredentials>
+						<ProjectCredentials />
 						<CryptoSection>
 							<Checkbox setState={setIsExplore}>I want explore selling as an NFT</Checkbox>
 							<Checkbox setState={setIsAccept}>I’ll also accept cryptocurrencies</Checkbox>
 						</CryptoSection>
-						<CreatorCredentials>
-							<CreatorCredentialFields>
-								<SignInInput>
-									<SignInInputLabel htmlFor='firstname'>firstname</SignInInputLabel>
-									<Input inputEntity={firstname} name='firstname' type='text' />
-								</SignInInput>
-								<SignInInput>
-									<SignInInputLabel htmlFor='lastname'>lastname</SignInInputLabel>
-									<Input inputEntity={lastname} name='lastname' type='text' />
-								</SignInInput>
-								<SignInInput>
-									<SignInInputLabel htmlFor='email-address'>email address</SignInInputLabel>
-									<Input inputEntity={email} name='email-address' type='email' />
-								</SignInInput>
-								<SignInInput>
-									<SignInInputLabel htmlFor='phone-number'>phone number</SignInInputLabel>
-									<Input inputEntity={phone} name='phone-number' type='phone' />
-								</SignInInput>
-							</CreatorCredentialFields>
-							<AddedUsers>
-								<AddPerson>
-									<AddPersonCircle onClick={addPersonHandler} />
-									<TextBlue>add person</TextBlue>
-								</AddPerson>
-								{addedUsers.map(addedUser => (
-									<AddedUser key={addedUser.email}>
-										<UserAvatar />
-										<Text>{addedUser.firstname} {addedUser.lastname}</Text>
-										{addedUser.email !== currentUser?.email &&
-											<>
-												<DeleteButton onClick={() => deletePersonHandler(addedUser.email)}>
-													<DeleteButtonBody />
-												</DeleteButton>
-											</>
-										}
-									</AddedUser>
-								))}
-							</AddedUsers>
-						</CreatorCredentials>
+						<CreatorCredentials />
+						<AdditionSection />
 					</MainContent>
 					<AddImageSection>
+						<AddImageBlock>
+							<RxImage style={{ fontSize: 60 }} />
+							<ActionButton color='blue'>Upload Poster</ActionButton>
+						</AddImageBlock>
 					</AddImageSection>
 				</Content>
 			</AccountContainer>

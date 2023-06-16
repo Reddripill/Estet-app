@@ -16,7 +16,7 @@ const DropDonwOption = styled.div`
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 20px;
-	color: #CDCDCD;
+	color: #fff;
 	cursor: pointer;
 	height: 40px;
 	display: flex;
@@ -41,8 +41,7 @@ const DropDownText = styled.div`
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20px;
-	color: #5F5F5F;
-	/* text-transform: uppercase; */
+	color: #fff;
 `
 const DropDownOptions = styled.div`
 	position: absolute;
@@ -83,7 +82,7 @@ const DropDown = ({ options, currentOption, setCurrentOption }: IProps) => {
 		<DropDownElement>
 			<DropDownVisible onClick={() => setIsActive(!isActive)}>
 				<DropDownText>{options[currentOption]}</DropDownText>
-				<DropDownArrow className={isActive ? '_active' : ''}></DropDownArrow>
+				<DropDownArrow className={isActive ? '_active' : ''} />
 			</DropDownVisible>
 			<DropDownOptions className={isActive ? '_show' : ''}>
 				{options.map((option, index) => (
