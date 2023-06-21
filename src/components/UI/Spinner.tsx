@@ -17,9 +17,9 @@ const SpinnerContainer = styled.div`
 const SpinnerItem = styled.div`
 	width: 50px;
 	height: 50px;
-	border: 10px solid #161616;
+	border: 10px solid transparent;
 	border-radius: 50%;
-	border-top: 10px solid red;
+	border-top: 10px solid #1DAEFF;
 	animation: ${spinner} 1.5s linear infinite;
 `
 

@@ -6,8 +6,14 @@ import { useInput } from '../../../../utils/hooks/useInput'
 import { useGetUserQuery } from '../../../../app/api/userApiSlice'
 import { useAppSelector } from '../../../../app/hooks'
 import { getId } from '../../../../features/auth/authSlice'
-import { AddedUserType } from './NewProject'
+import { IProjectProperties } from './NewProject';
+import { Updater } from 'use-immer'
+import { AddedUserType } from '../../../../utils/types'
 
+
+interface IProps {
+	changeMainState: Updater<IProjectProperties>;
+}
 
 const CreatorCredentialsItem = styled.div`
 	margin-bottom: 36px;
@@ -121,7 +127,7 @@ const SignInInputLabel = styled.label`
 	color: #CDCDCD;
 `
 
-const CreatorCredentials = () => {
+const CreatorCredentials = ({ changeMainState }: IProps) => {
 	const id = useAppSelector(getId);
 	const { data: currentUser, isSuccess } = useGetUserQuery(id as string);
 	const firstname = useInput('', ['emptyCheck']);
@@ -171,6 +177,12 @@ const CreatorCredentials = () => {
 			])
 		}
 	}, [isSuccess, currentUser])
+
+	useEffect(() => {
+		changeMainState(prev => {
+			prev.creators = addedUsers;
+		})
+	}, [changeMainState, addedUsers])
 	return (
 		<CreatorCredentialsItem>
 			<CreatorCredentialFields>

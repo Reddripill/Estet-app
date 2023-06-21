@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useInput } from '../../../../utils/hooks/useInput'
 import DropDown from '../../../UI/DropDown'
 import Input from '../../../UI/Input'
+import { IProjectProperties } from './NewProject'
+import { Updater } from 'use-immer'
+
+interface IProps {
+	changeMainState: Updater<IProjectProperties>;
+}
 
 export const ProjectCredentialsItem = styled.div`
 	display: grid;
@@ -31,11 +37,19 @@ const SignInInputLabel = styled.label`
 `
 
 
-const ProjectCredentials = () => {
+const ProjectCredentials = ({ changeMainState }: IProps) => {
 	const address = useInput('', ['emptyCheck']);
 	const price = useInput('', ['emptyCheck']);
 	const neighbourhood = useInput('', ['emptyCheck']);
-	const [currentPropertyType, setCurrentPropertyType] = useState<number>(0);
+	const [currentPropertyType, setCurrentPropertyType] = useState<string>('House');
+	useEffect(() => {
+		changeMainState(prev => {
+			prev.address = address.value;
+			prev.price = price.value;
+			prev.neighbourhood = neighbourhood.value;
+			prev.projectType = currentPropertyType;
+		})
+	}, [changeMainState, address, price, neighbourhood, currentPropertyType])
 	return (
 		<ProjectCredentialsItem>
 			<SignInInput>

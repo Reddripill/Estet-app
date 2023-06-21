@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useInput } from '../../../../utils/hooks/useInput'
 import Input from '../../../UI/Input'
 import { ProjectCredentialsItem } from './ProjectCredentials'
 import DropDown from '../../../UI/DropDown'
-import Textarea from '../../../UI/Textarea'
+import Textarea from '../../../UI/Textarea';
+import { Updater } from 'use-immer'
+import { IProjectProperties } from './NewProject'
 
+interface IProps {
+	changeMainState: Updater<IProjectProperties>;
+}
 
 const AdditionSectionItem = styled.div`
 	padding-bottom: 100px;
@@ -81,9 +86,9 @@ const AgentTextareaSection = styled(TextareaSection)`
 `
 
 
-const AdditionSection = () => {
+const AdditionSection = ({ changeMainState }: IProps) => {
 	const [isActive, setIsActive] = useState<boolean>(false);
-	const [currentCurrency, setCurrentCurrency] = useState<number>(0);
+	const [currentCurrency, setCurrentCurrency] = useState<string>('Dollar $');
 	const [textareaValue, setTextareaValue] = useState<string>('');
 	const [textareaAgentValue, setTextareaAgentValue] = useState<string>('');
 	const size = useInput('', ['emptyCheck']);
@@ -92,6 +97,20 @@ const AdditionSection = () => {
 	const year = useInput('', ['emptyCheck']);
 	const floors = useInput('', ['emptyCheck']);
 	const videoLinks = useInput('');
+
+	useEffect(() => {
+		changeMainState(prev => {
+			prev.size = +size.value;
+			prev.bedrooms = +bedrooms.value;
+			prev.bathrooms = +bathrooms.value;
+			prev.year = +year.value;
+			prev.floors = +floors.value;
+			prev.videoLinks = videoLinks.value;
+			prev.currency = currentCurrency
+			prev.description = textareaValue
+			prev.agentRemarks = textareaAgentValue
+		})
+	}, [changeMainState, size, bedrooms, bathrooms, year, floors, videoLinks, currentCurrency, textareaValue, textareaAgentValue])
 	return (
 		<AdditionSectionItem>
 			<AdditionSectionTitle type='button' onClick={() => setIsActive(!isActive)}>

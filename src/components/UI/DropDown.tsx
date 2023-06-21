@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 interface IProps {
 	options: string[];
-	currentOption: number;
-	setCurrentOption: (val: number) => void;
+	currentOption: string;
+	setCurrentOption: (val: string) => void;
 }
 
 const DropDownElement = styled.div`
@@ -74,22 +74,22 @@ const DropDownArrow = styled.div`
 
 const DropDown = ({ options, currentOption, setCurrentOption }: IProps) => {
 	const [isActive, setIsActive] = useState<boolean>(false);
-	const clickHandler = (index: number) => {
-		setCurrentOption(index);
+	const clickHandler = (item: string) => {
+		setCurrentOption(item);
 		setIsActive(false);
 	}
 	return (
 		<DropDownElement>
 			<DropDownVisible onClick={() => setIsActive(!isActive)}>
-				<DropDownText>{options[currentOption]}</DropDownText>
+				<DropDownText>{currentOption}</DropDownText>
 				<DropDownArrow className={isActive ? '_active' : ''} />
 			</DropDownVisible>
 			<DropDownOptions className={isActive ? '_show' : ''}>
-				{options.map((option, index) => (
+				{options.map(option => (
 					<DropDonwOption
 						key={option}
-						onClick={() => clickHandler(index)}
-						className={currentOption === index ? '_active' : ''}
+						onClick={() => clickHandler(option)}
+						className={currentOption === option ? '_active' : ''}
 					>
 						{option}
 					</DropDonwOption>

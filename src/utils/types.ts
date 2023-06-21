@@ -23,6 +23,40 @@ export type HouseCard = {
 	video: string;
 }
 
+export type AddedUserType = {
+	firstname: string;
+	lastname: string;
+	phone: string;
+	email: string;
+}
+
+export type ProductType = {
+	id: string;
+	price: string;
+	aprtmentType?: string;
+	service: string;
+	bathrooms: number;
+	images: string[];
+	projectType: string;
+	creators: AddedUserType[];
+	checkboxes: {
+		isExplore: boolean;
+		isAccept: boolean;
+	},
+	buildYear: number;
+	county: string;
+	neighbourhood: string;
+	address: string;
+	floors: number;
+	square: number;
+	bedrooms: number;
+	currency: string;
+	garage: number;
+	description: string;
+	pros: string[];
+	videoLinks: string[];
+}
+
 export type UserCredentials = {
 	firstname: string,
 	lastname: string,

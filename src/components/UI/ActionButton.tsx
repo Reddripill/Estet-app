@@ -6,6 +6,7 @@ interface IProps {
 	color: ButtonColorType;
 	clickHandler?: () => void;
 	disabled?: boolean;
+	type?: string;
 }
 
 type StyleType = {
