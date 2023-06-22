@@ -104,6 +104,9 @@ export const Global = createGlobalStyle`
 	ul li {
 		list-style: none;
 	}
+	ul {
+		list-style-type: none;
+	}
 	img {
 		vertical-align: top;
 	}

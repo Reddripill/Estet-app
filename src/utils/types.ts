@@ -31,12 +31,11 @@ export type AddedUserType = {
 }
 
 export type ProductType = {
-	id: string;
 	price: string;
-	aprtmentType?: string;
+	apartmentType?: string;
 	service: string;
 	bathrooms: number;
-	images: string[];
+	images?: string[];
 	projectType: string;
 	creators: AddedUserType[];
 	checkboxes: {
@@ -44,7 +43,7 @@ export type ProductType = {
 		isAccept: boolean;
 	},
 	buildYear: number;
-	county: string;
+	country: string;
 	neighbourhood: string;
 	address: string;
 	floors: number;
@@ -53,9 +52,11 @@ export type ProductType = {
 	currency: string;
 	garage: number;
 	description: string;
-	pros: string[];
-	videoLinks: string[];
+	pros?: string[];
+	videoLinks?: string[];
 }
+
+export type ProductTypeWithId = ProductType & { id: string }
 
 export type UserCredentials = {
 	firstname: string,

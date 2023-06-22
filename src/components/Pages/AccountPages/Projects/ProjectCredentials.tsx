@@ -3,18 +3,18 @@ import styled from 'styled-components'
 import { useInput } from '../../../../utils/hooks/useInput'
 import DropDown from '../../../UI/DropDown'
 import Input from '../../../UI/Input'
-import { IProjectProperties } from './NewProject'
 import { Updater } from 'use-immer'
+import { ProductType } from '../../../../utils/types'
 
 interface IProps {
-	changeMainState: Updater<IProjectProperties>;
+	changeMainState: Updater<ProductType>;
 }
 
 export const ProjectCredentialsItem = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 12px 40px;
-	margin-bottom: 12px;
+	margin-bottom: 20px;
 `
 const SignInInput = styled.div`
 	display: flex;
@@ -39,19 +39,31 @@ const SignInInputLabel = styled.label`
 
 const ProjectCredentials = ({ changeMainState }: IProps) => {
 	const address = useInput('', ['emptyCheck']);
+	const country = useInput('', ['emptyCheck']);
 	const price = useInput('', ['emptyCheck']);
 	const neighbourhood = useInput('', ['emptyCheck']);
 	const [currentPropertyType, setCurrentPropertyType] = useState<string>('House');
+	const [service, setService] = useState<string>('Rent');
 	useEffect(() => {
 		changeMainState(prev => {
+			prev.country = country.value;
+			prev.service = service;
 			prev.address = address.value;
 			prev.price = price.value;
 			prev.neighbourhood = neighbourhood.value;
 			prev.projectType = currentPropertyType;
 		})
-	}, [changeMainState, address, price, neighbourhood, currentPropertyType])
+	}, [changeMainState, country, service, address, price, neighbourhood, currentPropertyType])
 	return (
 		<ProjectCredentialsItem>
+			<SignInInput>
+				<SignInInputLabel htmlFor='country'>country</SignInInputLabel>
+				<Input inputEntity={country} name='country' type='text' />
+			</SignInInput>
+			<SignInInput>
+				<SignInInputLabel htmlFor='neighbourhood'>neighbourhood</SignInInputLabel>
+				<Input inputEntity={neighbourhood} name='neighbourhood' type='text' />
+			</SignInInput>
 			<SignInInput>
 				<SignInInputLabel htmlFor='adress'>address</SignInInputLabel>
 				<Input inputEntity={address} name='adress' type='text' />
@@ -61,15 +73,19 @@ const ProjectCredentials = ({ changeMainState }: IProps) => {
 				<Input inputEntity={price} name='price' type='text' />
 			</SignInInput>
 			<SignInInput>
-				<SignInInputLabel htmlFor='neighbourhood'>neighbourhood</SignInInputLabel>
-				<Input inputEntity={neighbourhood} name='neighbourhood' type='text' />
-			</SignInInput>
-			<SignInInput>
 				<SignInInputLabel htmlFor='property-type'>property type</SignInInputLabel>
 				<DropDown
 					options={['House', 'Villa', 'Apartment']}
 					currentOption={currentPropertyType}
 					setCurrentOption={setCurrentPropertyType}
+				/>
+			</SignInInput>
+			<SignInInput>
+				<SignInInputLabel htmlFor='service'>service</SignInInputLabel>
+				<DropDown
+					options={['Rent', 'Buy']}
+					currentOption={service}
+					setCurrentOption={setService}
 				/>
 			</SignInInput>
 		</ProjectCredentialsItem>

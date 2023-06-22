@@ -6,13 +6,12 @@ import { useInput } from '../../../../utils/hooks/useInput'
 import { useGetUserQuery } from '../../../../app/api/userApiSlice'
 import { useAppSelector } from '../../../../app/hooks'
 import { getId } from '../../../../features/auth/authSlice'
-import { IProjectProperties } from './NewProject';
 import { Updater } from 'use-immer'
-import { AddedUserType } from '../../../../utils/types'
+import { AddedUserType, ProductType } from '../../../../utils/types'
 
 
 interface IProps {
-	changeMainState: Updater<IProjectProperties>;
+	changeMainState: Updater<ProductType>;
 }
 
 const CreatorCredentialsItem = styled.div`

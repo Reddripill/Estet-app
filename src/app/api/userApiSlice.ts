@@ -1,5 +1,5 @@
-import { ChangeUserCredentials, UserCredentials } from "../../utils/types";
 import { apiSlice } from "./apiSlice";
+import { ChangeUserCredentials, UserCredentials } from "../../utils/types";
 
 
 const userApiSlice = apiSlice.injectEndpoints({

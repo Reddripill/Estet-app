@@ -13,29 +13,9 @@ import ProjectCredentials from './ProjectCredentials'
 import CreatorCredentials from './CreatorCredentials'
 import AdditionSection from './AdditionSection';
 import { RxImage } from 'react-icons/rx'
-import { AddedUserType } from '../../../../utils/types'
+import { useCreateProjectMutation } from '../../../../app/api/projectApiSlice'
+import { ProductType } from '../../../../utils/types'
 
-export interface IProjectProperties {
-	address: string;
-	price: string;
-	neighbourhood: string;
-	creators: AddedUserType[];
-	checkboxes: {
-		isExplore: boolean;
-		isAccept: boolean;
-	}
-	currency: string;
-	bedrooms: number;
-	bathrooms: number;
-	year: number;
-	floors: number;
-	images: string;
-	projectType: string;
-	size: number;
-	videoLinks: string;
-	description: string;
-	agentRemarks: string;
-}
 
 const Wrapper = styled.div`
 	padding-top: 132px;
@@ -142,15 +122,15 @@ const DeleteButtonBody = styled.div`
 	}
 `
 
-
 const NewProject = () => {
+	const [createProject] = useCreateProjectMutation()
 	const [isExplore, setIsExplore] = useState<boolean>(false);
 	const [isAccept, setIsAccept] = useState<boolean>(false);
 	const [isDragging, setIsDragging] = useState<boolean>(false)
 	const [images, setImages] = useState<string[]>([]);
 	const inputFile = useRef<HTMLInputElement>(null)
 	const id = useAppSelector(getId);
-	const initialState: IProjectProperties = {
+	const initialState: ProductType = {
 		address: '',
 		price: '',
 		neighbourhood: '',
@@ -162,16 +142,19 @@ const NewProject = () => {
 		currency: '',
 		bedrooms: 0,
 		bathrooms: 0,
-		year: 0,
+		buildYear: 0,
 		floors: 0,
-		images: '',
+		images: images,
 		projectType: '',
-		size: 0,
-		videoLinks: '',
+		square: 0,
+		videoLinks: [],
 		description: '',
-		agentRemarks: '',
+		service: '',
+		country: '',
+		garage: 0,
+		pros: [],
 	}
-	const [projectProperties, setProjectProperties] = useImmer<IProjectProperties>(initialState);
+	const [projectProperties, setProjectProperties] = useImmer<ProductType>(initialState);
 	const { isLoading } = useGetUserQuery(id as string);
 	const navigate = useNavigate();
 
@@ -179,8 +162,9 @@ const NewProject = () => {
 		setProjectProperties(prev => {
 			prev.checkboxes.isAccept = isAccept;
 			prev.checkboxes.isExplore = isExplore;
+			prev.images = images;
 		})
-	}, [isExplore, isAccept, setProjectProperties])
+	}, [isExplore, isAccept, setProjectProperties, images])
 
 	const dragOverHandler = (e: React.DragEvent) => {
 		e.preventDefault()
@@ -241,7 +225,7 @@ const NewProject = () => {
 					<Title>New Project</Title>
 					<Actions>
 						<ActionButton color='dark' clickHandler={() => navigate(-1)}>back</ActionButton>
-						<ActionButton color='gradient'>create</ActionButton>
+						<ActionButton color='gradient' clickHandler={() => createProject(projectProperties)}>create</ActionButton>
 					</Actions>
 				</Head>
 				<Content>
