@@ -38,6 +38,7 @@ const SignInInputLabel = styled.label`
 
 
 const ProjectCredentials = ({ changeMainState }: IProps) => {
+	const projectName = useInput('', ['emptyCheck']);
 	const address = useInput('', ['emptyCheck']);
 	const country = useInput('', ['emptyCheck']);
 	const price = useInput('', ['emptyCheck']);
@@ -52,10 +53,23 @@ const ProjectCredentials = ({ changeMainState }: IProps) => {
 			prev.price = price.value;
 			prev.neighbourhood = neighbourhood.value;
 			prev.projectType = currentPropertyType;
+			prev.projectName = projectName.value;
 		})
-	}, [changeMainState, country, service, address, price, neighbourhood, currentPropertyType])
+	}, [changeMainState,
+		country.value,
+		service,
+		address.value,
+		price.value,
+		neighbourhood.value,
+		currentPropertyType,
+		projectName.value
+	])
 	return (
 		<ProjectCredentialsItem>
+			<SignInInput>
+				<SignInInputLabel htmlFor='project-name'>project name</SignInInputLabel>
+				<Input inputEntity={projectName} name='project-name' type='text' />
+			</SignInInput>
 			<SignInInput>
 				<SignInInputLabel htmlFor='country'>country</SignInInputLabel>
 				<Input inputEntity={country} name='country' type='text' />

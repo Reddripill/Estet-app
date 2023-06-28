@@ -8,8 +8,8 @@ const spinner = keyframes`
 `
 
 const SpinnerContainer = styled.div`
-	height: 100px;
-	width: 100px;
+	height: 100%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -26,8 +26,7 @@ const SpinnerItem = styled.div`
 const Spinner = () => {
 	return (
 		<SpinnerContainer>
-			<SpinnerItem>
-			</SpinnerItem>
+			<SpinnerItem />
 		</SpinnerContainer>
 	)
 }

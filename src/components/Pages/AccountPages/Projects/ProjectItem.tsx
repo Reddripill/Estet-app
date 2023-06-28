@@ -1,9 +1,9 @@
 import React from 'react'
-import { IProjectItem } from './ProjectsTable'
 import styled from 'styled-components'
+import { ProductTypeWithDate } from '../../../../utils/types';
 
 interface IProps {
-	project: IProjectItem;
+	project: ProductTypeWithDate;
 	itemIndex: number;
 }
 
@@ -104,26 +104,27 @@ const Ellipsis = styled.div`
 `
 
 const ProjectItem = ({ project, itemIndex }: IProps) => {
+	const currency = project.currency.split(' ')[1];
 	return (
 		<Wrapper index={itemIndex}>
 			<ProjectInformation>
 				<ProjectFeature>
 					<MainFeature>
 						<FakeAvatar />
-						<Text>{project.name}</Text>
+						<Text>{project.projectName}</Text>
 					</MainFeature>
 				</ProjectFeature>
 				<ProjectFeature>
-					<Text>{project.type}</Text>
+					<Text>{project.projectType}</Text>
 				</ProjectFeature>
 				<ProjectFeature>
-					<Text>{project.size}</Text>
+					<Text>{project.square}</Text>
 				</ProjectFeature>
 				<ProjectFeature>
-					<TextBlue>{project.price}</TextBlue>
+					<TextBlue>{project.price + ' ' + currency}</TextBlue>
 				</ProjectFeature>
 				<ProjectFeature>
-					<Text>{project.creationData}</Text>
+					<Text>{project.creationDate}</Text>
 				</ProjectFeature>
 			</ProjectInformation>
 			<ProjectActions>

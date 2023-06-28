@@ -145,11 +145,13 @@ const AdditionSection = ({ changeMainState }: IProps) => {
 
 	const submitHandler = (e: React.FormEvent<HTMLFormElement>, changeState: React.Dispatch<React.SetStateAction<string[]>>, stateEntity: InputValidation) => {
 		e.preventDefault();
-		changeState(prev => [
-			...prev,
-			stateEntity.value,
-		])
-		stateEntity.sendData()
+		if (stateEntity.value.length !== 0) {
+			changeState(prev => [
+				...prev,
+				stateEntity.value,
+			])
+			stateEntity.sendData()
+		}
 	}
 
 	useEffect(() => {
@@ -238,19 +240,19 @@ const AdditionSection = ({ changeMainState }: IProps) => {
 					<SignInInput>
 						<SignInInputLabel htmlFor='video-links'>video links</SignInInputLabel>
 						<Input inputEntity={videoLinksEntity} name='video-links' type='text' />
-						{videoLinks.length !== 0 &&
-							<InputListBlock>
-								{videoLinks.map((item, index) => (
-									<InputListItem key={item + index}>
-										{item}
-										<DeleteButton onClick={() => setVideoLinks(prev => prev.filter(videoLink => videoLink !== item))}>
-											<DeleteButtonBody />
-										</DeleteButton>
-									</InputListItem>
-								))}
-							</InputListBlock>
-						}
 					</SignInInput>
+					{videoLinks.length !== 0 &&
+						<InputListBlock>
+							{videoLinks.map((item, index) => (
+								<InputListItem key={item + index}>
+									{item}
+									<DeleteButton onClick={() => setVideoLinks(prev => prev.filter(videoLink => videoLink !== item))}>
+										<DeleteButtonBody />
+									</DeleteButton>
+								</InputListItem>
+							))}
+						</InputListBlock>
+					}
 				</InputList>
 			</Content>
 		</AdditionSectionItem>

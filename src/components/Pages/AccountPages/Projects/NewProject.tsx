@@ -123,7 +123,7 @@ const DeleteButtonBody = styled.div`
 `
 
 const NewProject = () => {
-	const [createProject] = useCreateProjectMutation()
+	const [createProject, { isSuccess }] = useCreateProjectMutation()
 	const [isExplore, setIsExplore] = useState<boolean>(false);
 	const [isAccept, setIsAccept] = useState<boolean>(false);
 	const [isDragging, setIsDragging] = useState<boolean>(false)
@@ -131,10 +131,17 @@ const NewProject = () => {
 	const inputFile = useRef<HTMLInputElement>(null)
 	const id = useAppSelector(getId);
 	const initialState: ProductType = {
+		projectName: '',
+		userId: id as string,
 		address: '',
 		price: '',
 		neighbourhood: '',
-		creators: [],
+		creator: {
+			firstname: '',
+			lastname: '',
+			email: '',
+			phone: '',
+		},
 		checkboxes: {
 			isExplore: isExplore,
 			isAccept: isAccept,
@@ -153,9 +160,10 @@ const NewProject = () => {
 		country: '',
 		garage: 0,
 		pros: [],
+		status: 'inProgress',
 	}
 	const [projectProperties, setProjectProperties] = useImmer<ProductType>(initialState);
-	const { isLoading } = useGetUserQuery(id as string);
+	const { data: currentUser, isLoading, isSuccess: isSuccessCurrentUser } = useGetUserQuery(id as string);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -165,6 +173,12 @@ const NewProject = () => {
 			prev.images = images;
 		})
 	}, [isExplore, isAccept, setProjectProperties, images])
+
+	useEffect(() => {
+		if (isSuccess) {
+			navigate('/welcome/projects')
+		}
+	}, [isSuccess, navigate])
 
 	const dragOverHandler = (e: React.DragEvent) => {
 		e.preventDefault()
@@ -219,63 +233,67 @@ const NewProject = () => {
 	}
 
 	return (
-		<Wrapper>
-			<AccountContainer>
-				<Head>
-					<Title>New Project</Title>
-					<Actions>
-						<ActionButton color='dark' clickHandler={() => navigate(-1)}>back</ActionButton>
-						<ActionButton color='gradient' clickHandler={() => createProject(projectProperties)}>create</ActionButton>
-					</Actions>
-				</Head>
-				<Content>
-					<MainContent>
-						<ProjectCredentials changeMainState={setProjectProperties} />
-						<CryptoSection>
-							<Checkbox setState={setIsExplore}>I want explore selling as an NFT</Checkbox>
-							<Checkbox setState={setIsAccept}>I’ll also accept cryptocurrencies</Checkbox>
-						</CryptoSection>
-						<CreatorCredentials changeMainState={setProjectProperties} />
-						<AdditionSection changeMainState={setProjectProperties} />
-					</MainContent>
-					<AddImageSection>
-						<AddImageBlock
-							onDragOver={dragOverHandler}
-							onDrop={dropHandler}
-							onDragOverCapture={e => onDragOverHandler(e)}
-							onDragLeave={e => onDragLeaveHandler(e)}
-							onDropCapture={e => onDropHandler(e)}
-							className={isDragging ? '_droppable' : ''}
-						>
-							<RxImage style={{ fontSize: 60 }} />
-							<ActionButton color='blue' clickHandler={clickHandler}>Upload Poster</ActionButton>
-							<InputFileElement
-								type="file"
-								ref={inputFile}
-								onChange={e => convertImages(e.target.files)}
-								multiple={true}
-							/>
-						</AddImageBlock>
-						{images.length !== 0 &&
-							<PreviewImages>
-								{images.map(image => (
-									<PreviewImageItem key={image}>
-										<PreviewImage src={image} alt='house image' />
-										<DeleteButton onClick={() => {
-											setImages(prev => {
-												return prev.filter(imageItem => imageItem !== image)
-											})
-										}}>
-											<DeleteButtonBody />
-										</DeleteButton>
-									</PreviewImageItem>
-								))}
-							</PreviewImages>
-						}
-					</AddImageSection>
-				</Content>
-			</AccountContainer>
-		</Wrapper>
+		<>
+			{isSuccessCurrentUser && currentUser &&
+				<Wrapper>
+					<AccountContainer>
+						<Head>
+							<Title>New Project</Title>
+							<Actions>
+								<ActionButton color='dark' clickHandler={() => navigate(-1)}>back</ActionButton>
+								<ActionButton color='gradient' clickHandler={() => createProject(projectProperties)}>create</ActionButton>
+							</Actions>
+						</Head>
+						<Content>
+							<MainContent>
+								<ProjectCredentials changeMainState={setProjectProperties} />
+								<CryptoSection>
+									<Checkbox setState={setIsExplore}>I want explore selling as an NFT</Checkbox>
+									<Checkbox setState={setIsAccept}>I’ll also accept cryptocurrencies</Checkbox>
+								</CryptoSection>
+								<CreatorCredentials changeMainState={setProjectProperties} currentUser={currentUser} />
+								<AdditionSection changeMainState={setProjectProperties} />
+							</MainContent>
+							<AddImageSection>
+								<AddImageBlock
+									onDragOver={dragOverHandler}
+									onDrop={dropHandler}
+									onDragOverCapture={e => onDragOverHandler(e)}
+									onDragLeave={e => onDragLeaveHandler(e)}
+									onDropCapture={e => onDropHandler(e)}
+									className={isDragging ? '_droppable' : ''}
+								>
+									<RxImage style={{ fontSize: 60 }} />
+									<ActionButton color='blue' clickHandler={clickHandler}>Upload Poster</ActionButton>
+									<InputFileElement
+										type="file"
+										ref={inputFile}
+										onChange={e => convertImages(e.target.files)}
+										multiple={true}
+									/>
+								</AddImageBlock>
+								{images.length !== 0 &&
+									<PreviewImages>
+										{images.map(image => (
+											<PreviewImageItem key={image}>
+												<PreviewImage src={image} alt='house image' />
+												<DeleteButton onClick={() => {
+													setImages(prev => {
+														return prev.filter(imageItem => imageItem !== image)
+													})
+												}}>
+													<DeleteButtonBody />
+												</DeleteButton>
+											</PreviewImageItem>
+										))}
+									</PreviewImages>
+								}
+							</AddImageSection>
+						</Content>
+					</AccountContainer>
+				</Wrapper>
+			}
+		</>
 	)
 }
 

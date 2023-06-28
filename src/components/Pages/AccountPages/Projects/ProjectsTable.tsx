@@ -2,6 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { AccountContainer } from '../../../../utils/styles'
 import ProjectItem from './ProjectItem';
+import { useAppSelector } from '../../../../app/hooks';
+import { getId } from '../../../../features/auth/authSlice';
+import { useGetProjectsQuery } from '../../../../app/api/projectApiSlice';
+import Spinner from '../../../UI/Spinner';
 
 export interface IProjectItem {
 	name: string;
@@ -43,62 +47,36 @@ const ProjectsField = styled.ul`
 	overflow: hidden;
 `
 
-const test: IProjectItem[] = [
-	{
-		name: 'Malto House',
-		type: 'Apartment',
-		size: 20,
-		price: '$12,0000',
-		creationData: '2/16/2022',
-		id: 1,
-	},
-	{
-		name: 'Malto House',
-		type: 'Apartment',
-		size: 20,
-		price: '$12,0000',
-		creationData: '2/16/2022',
-		id: 2,
-	},
-	{
-		name: 'Malto House',
-		type: 'Apartment',
-		size: 20,
-		price: '$12,0000',
-		creationData: '2/16/2022',
-		id: 3,
-	},
-	{
-		name: 'Malto House',
-		type: 'Apartment',
-		size: 20,
-		price: '$12,0000',
-		creationData: '2/16/2022',
-		id: 4,
-	},
-]
-
 const ProjectsTable = () => {
+	const id = useAppSelector(getId);
+	const { data: projects, isFetching, isSuccess } = useGetProjectsQuery(id as string);
 	return (
 		<Wrapper>
-			<ProjectsContainer>
-				<ColumnTitles>
-					<ColumnTitle>name</ColumnTitle>
-					<ColumnTitle>type</ColumnTitle>
-					<ColumnTitle>size</ColumnTitle>
-					<ColumnTitle>price</ColumnTitle>
-					<ColumnTitle>creation data</ColumnTitle>
-				</ColumnTitles>
-				<ProjectsField>
-					{test.map((item, index) => (
-						<ProjectItem
-							key={item.id}
-							project={item}
-							itemIndex={index}
-						/>
-					))}
-				</ProjectsField>
-			</ProjectsContainer>
+			{isFetching ?
+				<Spinner /> :
+				<>
+					{isSuccess && projects &&
+						<ProjectsContainer>
+							<ColumnTitles>
+								<ColumnTitle>name</ColumnTitle>
+								<ColumnTitle>type</ColumnTitle>
+								<ColumnTitle>size</ColumnTitle>
+								<ColumnTitle>price</ColumnTitle>
+								<ColumnTitle>creation data</ColumnTitle>
+							</ColumnTitles>
+							<ProjectsField>
+								{projects.slice().reverse().map((item, index) => (
+									<ProjectItem
+										key={item.projectName}
+										project={item}
+										itemIndex={index}
+									/>
+								))}
+							</ProjectsField>
+						</ProjectsContainer>
+					}
+				</>
+			}
 		</Wrapper>
 	)
 }

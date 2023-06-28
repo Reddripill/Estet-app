@@ -4,7 +4,11 @@ import { AccountContainer } from '../../../utils/styles'
 import { Link } from 'react-router-dom'
 import { VscBell } from 'react-icons/vsc';
 import SearchInput from './SearchInput';
+import { UserCredentials } from '../../../utils/types';
 
+interface IProps {
+	user: UserCredentials;
+}
 
 const Wrapper = styled.div`
 	position: fixed;
@@ -51,12 +55,17 @@ const ActionItem = styled.button`
 	color: #fff;
 	position: relative;
 `
-const FakePhoto = styled(Link)`
-	display: inline-block;
-	height: 40px;
+const Avatar = styled(Link)`
 	width: 40px;
+	height: 40px;
 	border-radius: 50%;
-	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+`
+const AvatarImage = styled.img`
+	transform: scale(0.35);
 `
 const BellLabel = styled.div`
 	position: absolute;
@@ -78,7 +87,7 @@ const BellLabel = styled.div`
 	border-radius: 50%;
 `
 
-const AccountHeader = () => {
+const AccountHeader = ({ user }: IProps) => {
 	return (
 		<Wrapper>
 			<Container>
@@ -94,9 +103,9 @@ const AccountHeader = () => {
 						<VscBell style={{ fontSize: 24 }} />
 						<BellLabel>9</BellLabel>
 					</ActionItem>
-					<ActionItem type='button'>
-						<FakePhoto to='profile' />
-					</ActionItem>
+					<Avatar to='profile'>
+						<AvatarImage src={user.avatar} alt="avatar" />
+					</Avatar>
 				</ActionsWrapper>
 			</Container>
 		</Wrapper>

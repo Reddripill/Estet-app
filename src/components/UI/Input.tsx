@@ -9,6 +9,7 @@ interface Props {
 	type?: string;
 	autofocus?: boolean;
 	autoComplete?: string;
+	readonly?: boolean;
 }
 
 const InputItem = styled.div`
@@ -36,18 +37,19 @@ const InputValidate = styled.label`
 	}
 `
 
-const Input = ({ inputEntity, name, placeholder, type, autofocus, autoComplete }: Props) => {
+const Input = ({ inputEntity, name, placeholder, type, autofocus, autoComplete, readonly }: Props) => {
 	return (
 		<InputItem>
 			<InputField
 				type={type ? type : 'text'}
 				name={name}
 				value={inputEntity.value}
-				onChange={event => inputEntity.onChangeHandler(event)}
+				onChange={!readonly ? event => inputEntity.onChangeHandler(event) : undefined}
 				onBlur={inputEntity.onBlurHandler}
 				placeholder={placeholder}
 				autoFocus={autofocus}
 				autoComplete={autoComplete}
+				readOnly={readonly}
 			/>
 			<InputValidate
 				htmlFor={name}

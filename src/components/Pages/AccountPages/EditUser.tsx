@@ -65,7 +65,14 @@ const UserAvatar = styled.div`
 	width: 120px;
 	height: 120px;
 	border-radius: 50%;
-	background-color: #ffffff85;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+`
+const UserAvatarImage = styled.img`
+	height: 100%;
+	width: 100%;
 `
 const MainInputs = styled.div`
 	width: 100%;
@@ -133,7 +140,9 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 			</Header>
 			<Form onSubmit={e => submitHandler(e)}>
 				<MainInformation>
-					<UserAvatar />
+					<UserAvatar>
+						<UserAvatarImage src={currentUser.avatar} alt='user avatar' />
+					</UserAvatar>
 					<MainInputs>
 						<SignInInput>
 							<SignInInputLabel htmlFor='edit-firstname'>firstname</SignInInputLabel>

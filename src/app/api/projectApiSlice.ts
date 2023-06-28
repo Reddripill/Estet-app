@@ -1,19 +1,27 @@
-import { ProductType, ProductTypeWithId } from "../../utils/types";
+import { ProductType, ProductTypeWithDate } from "../../utils/types";
 import { apiSlice } from "./apiSlice";
 
 
 const projectApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
-		createProject: builder.mutation<ProductTypeWithId, ProductType>({
+		createProject: builder.mutation<ProductType, ProductType>({
 			query: (patch) => ({
-				url: '/createProject',
+				url: '/project/createProject',
 				method: 'POST',
 				body: patch
-			})
+			}),
+			invalidatesTags: ['Projects']
 		}),
+		getProjects: builder.query<ProductTypeWithDate[], string>({
+			query: (id) => ({
+				url: `/project/${id}`
+			}),
+			providesTags: ['Projects'],
+		})
 	})
 })
 
 export const {
-	useCreateProjectMutation
+	useCreateProjectMutation,
+	useGetProjectsQuery,
 } = projectApiSlice

@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterUserMutation } from './authWithApiSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { setCredentials } from './authSlice';
+import { nanoid } from 'nanoid';
 
 const SignUpWrapper = styled.div`
 	height: 100%;
@@ -83,14 +84,14 @@ const SignUp = () => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isSuccess && registerResponse) {
 			dispatch(setCredentials({
 				user: {
 					firstname: firstname.value,
 					lastname: lastname.value,
 				},
 				accessToken: registerResponse?.accessToken as string,
-				id: registerResponse?.id as string,
+				id: registerResponse.id as string,
 			}))
 			navigate('/welcome', {
 				replace: true,
@@ -105,14 +106,26 @@ const SignUp = () => {
 	})
 
 	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		register({
-			firstname: firstname.value,
-			lastname: lastname.value,
-			email: email.value,
-			password: password.value,
-			phoneNumber: phonenumber.value,
-			country: country.value,
+		e.preventDefault();
+		import('jdenticon').then(({ toSvg }) => {
+			const svgAvatar = toSvg(nanoid(), 130);
+			const blob = new Blob([svgAvatar], { type: 'image/svg+xml' });
+			const reader = new FileReader();
+			reader.readAsDataURL(blob);
+			reader.onload = () => {
+				if (reader.result) {
+					console.log(reader.result);
+					register({
+						firstname: firstname.value,
+						lastname: lastname.value,
+						email: email.value,
+						password: password.value,
+						phoneNumber: phonenumber.value,
+						country: country.value,
+						avatar: reader.result as string,
+					})
+				}
+			}
 		})
 	}
 	return (

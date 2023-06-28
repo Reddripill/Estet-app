@@ -42,7 +42,14 @@ const UserAvatar = styled.div`
 	width: 120px;
 	height: 120px;
 	border-radius: 50%;
-	background-color: #ffffff85;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+`
+const UserAvatarImage = styled.img`
+	height: 100%;
+	width: 100
 `
 const UserNickname = styled.div``
 const UserFullName = styled.div`
@@ -103,7 +110,9 @@ const ProfileContent = ({ currentUser, editClickHandler, deleteClickHandler }: I
 			<UserBlock>
 				<Title>Here is your profile, {currentUser.firstname}</Title>
 				<UserInformation>
-					<UserAvatar />
+					<UserAvatar>
+						<UserAvatarImage src={currentUser.avatar} alt='user avatar' />
+					</UserAvatar>
 					<UserNickname>
 						<UserFullName>{currentUser.firstname + ' ' + currentUser.lastname}</UserFullName>
 						<UserId>{'@' + currentUser.firstname.toLowerCase() + currentUser.lastname.toLowerCase()}</UserId>
