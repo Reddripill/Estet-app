@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MainAccountHeader from './MainAccountHeader'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -9,6 +9,12 @@ const Wrapper = styled.div`
 `
 
 const MainAccountPage = () => {
+	const navigate = useNavigate();
+	const location = useLocation();
+	useEffect(() => {
+		if (location.pathname === '/welcome')
+			navigate('/welcome/projects')
+	}, [navigate, location])
 	return (
 		<>
 			<MainAccountHeader />
