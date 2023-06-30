@@ -38,7 +38,7 @@ export type ProductType = {
 	apartmentType?: string;
 	service: string;
 	bathrooms: number;
-	images?: string[];
+	images: string[];
 	projectType: string;
 	creator: AddedUserType;
 	checkboxes: {
@@ -57,9 +57,12 @@ export type ProductType = {
 	description: string;
 	pros?: string[];
 	videoLinks?: string[];
+	previewPhoto: string;
 }
 
 export type ProductTypeWithDate = ProductType & { creationDate: string }
+
+// export type ProductTypeWithId = ProductTypeWithDate & { _id: string }
 
 export type UserCredentials = {
 	firstname: string,

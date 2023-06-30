@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ProductTypeWithDate } from '../../../../utils/types';
+import EditProjectPopup from './EditProjectPopup';
 
 interface IProps {
 	project: ProductTypeWithDate;
@@ -34,11 +35,15 @@ const ProjectFeature = styled.div`
 	flex: 1;
 	padding-left: 16px;
 `
-const FakeAvatar = styled.div`
+const Avatar = styled.div`
 	width: 24px;
 	height: 24px;
 	border-radius: 8px;
-	background-color: #ffffff6a;
+	overflow: hidden;
+`
+const AvatarImage = styled.img`
+	width: 100%;
+	height: 100%;
 `
 const Text = styled.div`
 	font-family: 'Mulish';
@@ -105,33 +110,47 @@ const Ellipsis = styled.div`
 
 const ProjectItem = ({ project, itemIndex }: IProps) => {
 	const currency = project.currency.split(' ')[1];
+	const [isEditProject, setIsEditProject] = useState(false)
 	return (
-		<Wrapper index={itemIndex}>
-			<ProjectInformation>
-				<ProjectFeature>
-					<MainFeature>
-						<FakeAvatar />
-						<Text>{project.projectName}</Text>
-					</MainFeature>
-				</ProjectFeature>
-				<ProjectFeature>
-					<Text>{project.projectType}</Text>
-				</ProjectFeature>
-				<ProjectFeature>
-					<Text>{project.square}</Text>
-				</ProjectFeature>
-				<ProjectFeature>
-					<TextBlue>{project.price + ' ' + currency}</TextBlue>
-				</ProjectFeature>
-				<ProjectFeature>
-					<Text>{project.creationDate}</Text>
-				</ProjectFeature>
-			</ProjectInformation>
-			<ProjectActions>
-				<EditButton type='button'>Edit</EditButton>
-				<Ellipsis><span></span></Ellipsis>
-			</ProjectActions>
-		</Wrapper>
+		<>
+			<Wrapper index={itemIndex}>
+				<ProjectInformation>
+					<ProjectFeature>
+						<MainFeature>
+							<Avatar>
+								<AvatarImage
+									src={project.previewPhoto}
+									alt='project avatar'
+								/>
+							</Avatar>
+							<Text>{project.projectName}</Text>
+						</MainFeature>
+					</ProjectFeature>
+					<ProjectFeature>
+						<Text>{project.projectType}</Text>
+					</ProjectFeature>
+					<ProjectFeature>
+						<Text>{project.square} sq ft</Text>
+					</ProjectFeature>
+					<ProjectFeature>
+						<TextBlue>{project.price + ' ' + currency}</TextBlue>
+					</ProjectFeature>
+					<ProjectFeature>
+						<Text>{project.creationDate}</Text>
+					</ProjectFeature>
+				</ProjectInformation>
+				<ProjectActions>
+					<EditButton type='button' onClick={() => setIsEditProject(true)}>Edit</EditButton>
+					<Ellipsis><span></span></Ellipsis>
+				</ProjectActions>
+			</Wrapper>
+			{isEditProject &&
+				<EditProjectPopup
+					project={project}
+					clickHandler={() => setIsEditProject(false)}
+				/>
+			}
+		</>
 	)
 }
 

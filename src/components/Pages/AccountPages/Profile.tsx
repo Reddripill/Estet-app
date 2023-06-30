@@ -5,7 +5,7 @@ import { useGetUserQuery } from '../../../app/api/userApiSlice';
 import styled from 'styled-components';
 import Spinner from '../../UI/Spinner';
 import ProfileContent from './ProfileContent';
-import EditUser from './EditUser';
+import EditUser from './EditUserPopup';
 import DeletePopup from './DeletePopup';
 
 

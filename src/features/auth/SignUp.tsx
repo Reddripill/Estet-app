@@ -114,7 +114,6 @@ const SignUp = () => {
 			reader.readAsDataURL(blob);
 			reader.onload = () => {
 				if (reader.result) {
-					console.log(reader.result);
 					register({
 						firstname: firstname.value,
 						lastname: lastname.value,

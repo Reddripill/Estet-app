@@ -69,11 +69,11 @@ const DeletePopup = ({ setState }: IProps) => {
 		}
 	}, [isDeleteSuccess, navigate])
 	return (
-		<Popup isSmall={true}>
-			<Header>
-				<Title>Delete Account</Title>
-				<Cross onClick={() => setState(false)}></Cross>
-			</Header>
+		<Popup
+			title='Delete Account'
+			clickHandler={() => setState(false)}
+			isSmall={true}
+		>
 			<Form onSubmit={e => submitHandler(e)}>
 				<MainText>This action can not be undone. We highly recommend to export your account.</MainText>
 				<Checkbox setState={setIsConfirm}>Confirm account deletion</Checkbox>

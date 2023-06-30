@@ -7,11 +7,13 @@ interface IProps {
 	clickHandler?: () => void;
 	disabled?: boolean;
 	type?: string;
+	classname?: string;
 }
 
 type StyleType = {
 	color: string;
 	colorType: ButtonColorType;
+	isDisabled?: boolean;
 }
 
 const buttonColor: ButtonColorObjectType = {
@@ -39,15 +41,16 @@ const ActionButtonItem = styled.button<StyleType>`
 	min-width: 120px;
 	transition: all 0.3s 0s;
 	&:disabled {
-		opacity: 0.7;
+		opacity: 0.6;
     	cursor: auto;
 	}
 	&:hover {
-		box-shadow: ${props => props.colorType === 'gradient' ? '0px 17px 33px rgba(255, 255, 255, 0.2);' : ''}
+		box-shadow: ${props => (props.colorType === 'gradient' && !props.isDisabled) ?
+		'0px 17px 33px rgba(255, 255, 255, 0.2);' : ''}
 	}
 `
 
-const ActionButton = ({ children, color, clickHandler, disabled }: PropsWithChildren<IProps>) => {
+const ActionButton = ({ children, color, clickHandler, disabled, classname }: PropsWithChildren<IProps>) => {
 	return (
 		<ActionButtonItem
 			type='button'
@@ -55,6 +58,8 @@ const ActionButton = ({ children, color, clickHandler, disabled }: PropsWithChil
 			colorType={color}
 			onClick={clickHandler}
 			disabled={disabled}
+			isDisabled={disabled}
+			className={classname}
 		>
 			{children}
 		</ActionButtonItem>

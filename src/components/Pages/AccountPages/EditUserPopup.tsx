@@ -102,7 +102,7 @@ const Actions = styled.div`
 	justify-content: space-between;
 `
 
-const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
+const EditUserPopup = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 	const firstname = useInput(currentUser.firstname);
 	const lastname = useInput(currentUser.lastname);
 	const email = useInput(currentUser.email);
@@ -133,11 +133,10 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 	}, [isChangeSuccess, clickHandler, navigate])
 
 	return (
-		<Popup>
-			<Header>
-				<Title>Edit Profile</Title>
-				<Cross onClick={clickHandler}></Cross>
-			</Header>
+		<Popup
+			title='Edit Profile'
+			clickHandler={clickHandler}
+		>
 			<Form onSubmit={e => submitHandler(e)}>
 				<MainInformation>
 					<UserAvatar>
@@ -222,4 +221,4 @@ const EditUser = ({ clickHandler, currentUser, setConfirm }: IProps) => {
 	)
 }
 
-export default EditUser
+export default EditUserPopup;

@@ -48,8 +48,8 @@ const UserAvatar = styled.div`
 	overflow: hidden;
 `
 const UserAvatarImage = styled.img`
+	width: 100%;
 	height: 100%;
-	width: 100
 `
 const UserNickname = styled.div``
 const UserFullName = styled.div`

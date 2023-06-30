@@ -161,6 +161,7 @@ const NewProject = () => {
 		garage: 0,
 		pros: [],
 		status: 'inProgress',
+		previewPhoto: '',
 	}
 	const [projectProperties, setProjectProperties] = useImmer<ProductType>(initialState);
 	const { data: currentUser, isLoading, isSuccess: isSuccessCurrentUser } = useGetUserQuery(id as string);
@@ -171,6 +172,9 @@ const NewProject = () => {
 			prev.checkboxes.isAccept = isAccept;
 			prev.checkboxes.isExplore = isExplore;
 			prev.images = images;
+			if (images) {
+				prev.previewPhoto = images[0]
+			}
 		})
 	}, [isExplore, isAccept, setProjectProperties, images])
 
