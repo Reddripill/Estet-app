@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 	left: 0;
 	top: 0;
 	z-index: 150;
+	cursor: pointer;
 `
 const PopupContainer = styled.div<ContainerType>`
 	background: rgba(0, 0, 0, 0.15);
@@ -42,6 +43,7 @@ const PopupItem = styled.div<PopupItemType>`
 	box-shadow: 0px 17px 33px rgba(255, 255, 255, 0.2);
 	border-radius: 40px;
 	margin: 0px auto;
+	cursor: auto;
 `
 const Header = styled.div`
 	display: flex;

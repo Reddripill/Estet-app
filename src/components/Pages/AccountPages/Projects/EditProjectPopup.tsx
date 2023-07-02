@@ -7,7 +7,9 @@ import Input from '../../../UI/Input';
 import DropDown from '../../../UI/DropDown';
 import ActionButton from '../../../UI/ActionButton';
 import { BsCameraFill } from 'react-icons/bs'
-import { useChangeProjectMutation } from '../../../../app/api/projectApiSlice';
+import { useChangeProjectMutation, useDeleteProjectMutation } from '../../../../app/api/projectApiSlice';
+import DeletePopup from '../DeletePopup';
+import DeleteProjectPopup from './DeleteProjectPopup';
 
 interface IProps {
 	clickHandler: () => void;
@@ -24,7 +26,6 @@ export type ChangeProjectCredentials = {
 const Content = styled.div`
 	display: flex;
 	gap: 40px;
-	margin-bottom: 40px;
 `
 const ProjectPhoto = styled.div`
 	flex: 0 0 auto;
@@ -87,7 +88,7 @@ const Action = styled.div`
 	flex: 1;
 `
 const DeleteActionButton = styled(ActionButton)`
-	color: #DD5E5E;
+	color: #DD5E5E !important;
 `
 const InputFileElement = styled.input`
 	display: none;
@@ -95,7 +96,9 @@ const InputFileElement = styled.input`
 
 
 const EditProjectPopup = ({ clickHandler, project }: IProps) => {
-	const [changeProject] = useChangeProjectMutation()
+	const [deleteProject] = useDeleteProjectMutation();
+	const [changeProject] = useChangeProjectMutation();
+	const [isConfirmPopup, setIsConfirmPopup] = useState<boolean>(false);
 	const [previewImage, setPreviewImage] = useState<string>(project.previewPhoto)
 	const projectName = useInput(project.projectName, ['emptyCheck']);
 	const [currentPropertyType, setCurrentPropertyType] = useState<string>(project.projectType);
@@ -130,73 +133,88 @@ const EditProjectPopup = ({ clickHandler, project }: IProps) => {
 		})
 	}
 	return (
-		<Popup
-			title='Edit Project'
-			clickHandler={clickHandler}
-			isSmall={true}
-			width={640}
-		>
-			<Content>
-				<ProjectPhoto onClick={clickInputFileHandler}>
-					<ProjectPhotoImage
-						src={previewImage}
-						alt='project photo'
-					/>
-					<ProjectPhotoIcon>
-						<BsCameraFill
-							style={{
-								color: '#1DAEFF',
-								fontSize: 32,
-							}}
-						/>
-					</ProjectPhotoIcon>
-					<InputFileElement
-						type="file"
-						ref={inputFileRef}
-						onChange={e => changePreviewPhoto(e.target.files)}
-					/>
-				</ProjectPhoto>
-				<ProjectFields>
-					<SignInInput>
-						<SignInInputLabel
-							htmlFor='project-name'>name</SignInInputLabel>
-						<Input
-							inputEntity={projectName}
-							name='project-name'
-							autoComplete='off'
-						/>
-					</SignInInput>
-					<SignInInput>
-						<SignInInputLabel htmlFor='property-type'>property type</SignInInputLabel>
-						<DropDown
-							options={['House', 'Villa', 'Apartment']}
-							currentOption={currentPropertyType}
-							setCurrentOption={setCurrentPropertyType}
-						/>
-					</SignInInput>
-				</ProjectFields>
-			</Content>
-			<Actions>
-				<Action>
-					<DeleteActionButton color='dark'>delete</DeleteActionButton>
-				</Action>
-				<Action>
-					<ActionButton color='dark'>suspend</ActionButton>
-				</Action>
-				<Action>
-					<ActionButton color='dark'>export</ActionButton>
-				</Action>
-				<Action>
-					<ActionButton
-						color='gradient'
-						disabled={projectName.isError}
-						clickHandler={saveHandler}
-					>
-						save
-					</ActionButton>
-				</Action>
-			</Actions>
-		</Popup>
+		<>
+			{!isConfirmPopup &&
+				<Popup
+					title='Edit Project'
+					clickHandler={clickHandler}
+					isSmall={true}
+					width={640}
+				>
+					<Content>
+						<ProjectPhoto onClick={clickInputFileHandler}>
+							<ProjectPhotoImage
+								src={previewImage}
+								alt='project photo'
+							/>
+							<ProjectPhotoIcon>
+								<BsCameraFill
+									style={{
+										color: '#1DAEFF',
+										fontSize: 32,
+									}}
+								/>
+							</ProjectPhotoIcon>
+							<InputFileElement
+								type="file"
+								ref={inputFileRef}
+								onChange={e => changePreviewPhoto(e.target.files)}
+							/>
+						</ProjectPhoto>
+						<ProjectFields>
+							<SignInInput>
+								<SignInInputLabel
+									htmlFor='project-name'>name</SignInInputLabel>
+								<Input
+									inputEntity={projectName}
+									name='project-name'
+									autoComplete='off'
+								/>
+							</SignInInput>
+							<SignInInput>
+								<SignInInputLabel htmlFor='property-type'>property type</SignInInputLabel>
+								<DropDown
+									options={['House', 'Villa', 'Apartment']}
+									currentOption={currentPropertyType}
+									setCurrentOption={setCurrentPropertyType}
+								/>
+							</SignInInput>
+						</ProjectFields>
+					</Content>
+					<Actions>
+						<Action>
+							<DeleteActionButton
+								clickHandler={() => setIsConfirmPopup(true)}
+								color='dark'
+							>
+								delete
+							</DeleteActionButton>
+						</Action>
+						<Action>
+							<ActionButton color='dark'>suspend</ActionButton>
+						</Action>
+						<Action>
+							<ActionButton color='dark'>export</ActionButton>
+						</Action>
+						<Action>
+							<ActionButton
+								color='gradient'
+								disabled={projectName.isError}
+								clickHandler={saveHandler}
+							>
+								save
+							</ActionButton>
+						</Action>
+					</Actions>
+				</Popup>
+			}
+			{isConfirmPopup &&
+				<DeleteProjectPopup
+					setState={setIsConfirmPopup}
+					project={project}
+				/>
+			}
+		</>
 	)
 }
 

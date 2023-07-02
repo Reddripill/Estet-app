@@ -37,6 +37,8 @@ const DropDownVisible = styled.div`
 	cursor: pointer;
 `
 const DropDownText = styled.div`
+	display: inline-block;
+	flex: 1 1 auto;
 	font-family: 'Mulish';
 	font-weight: 400;
 	font-size: 14px;

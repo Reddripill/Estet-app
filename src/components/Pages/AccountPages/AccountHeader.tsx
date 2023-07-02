@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { AccountContainer } from '../../../utils/styles'
 import { Link } from 'react-router-dom'
@@ -88,6 +88,7 @@ const BellLabel = styled.div`
 `
 
 const AccountHeader = ({ user }: IProps) => {
+	const [searchProject, setSearchProject] = useState<string>('')
 	return (
 		<Wrapper>
 			<Container>
@@ -97,7 +98,10 @@ const AccountHeader = ({ user }: IProps) => {
 						Homeverse.io
 					</Logo>
 				</LogoWrapper>
-				<SearchInputField />
+				<SearchInputField
+					value={searchProject}
+					changeHandler={setSearchProject}
+				/>
 				<ActionsWrapper>
 					<ActionItem type='button'>
 						<VscBell style={{ fontSize: 24 }} />

@@ -11,40 +11,6 @@ interface IProps {
 	setState: (value: boolean) => void;
 }
 
-const Header = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-`
-const Title = styled.div`
-	font-family: 'Mulish';
-	font-weight: 700;
-	font-size: 36px;
-	line-height: 40px;
-	color: #FFFFFF;
-`
-const Cross = styled.div`
-	height: 24px;
-	width: 24px;
-	cursor: pointer;
-	position: relative;
-	&::before,
-	&::after {
-		content:'';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		height: 1px;
-		width: 24px;
-		background-color: #fff;
-	}
-	&::before {
-		transform: translate(-50%) rotate(-45deg)
-	}
-	&::after {
-		transform: translate(-50%) rotate(45deg)
-	}
-`
 const Actions = styled.div`
 	display: flex;
 	align-items: center;

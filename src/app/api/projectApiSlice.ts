@@ -27,6 +27,14 @@ const projectApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ['Projects']
 		}),
+		deleteProject: builder.mutation<ProductType, ProductType>({
+			query: (patch) => ({
+				url: '/project/deleteProject',
+				method: 'DELETE',
+				body: patch
+			}),
+			invalidatesTags: ['Projects']
+		}),
 	})
 })
 
@@ -34,4 +42,5 @@ export const {
 	useCreateProjectMutation,
 	useGetProjectsQuery,
 	useChangeProjectMutation,
+	useDeleteProjectMutation,
 } = projectApiSlice

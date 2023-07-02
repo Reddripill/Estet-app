@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { AccountContainer } from '../../../../utils/styles'
 import ProjectItem from './ProjectItem';
@@ -6,6 +6,10 @@ import { useAppSelector } from '../../../../app/hooks';
 import { getId } from '../../../../features/auth/authSlice';
 import { useGetProjectsQuery } from '../../../../app/api/projectApiSlice';
 import Spinner from '../../../UI/Spinner';
+import { useOutletContext } from 'react-router-dom';
+import { ProjectsFiltersType } from '../MainAccountPage';
+import { ProductTypeWithDate } from '../../../../utils/types';
+import useProjectsFiltering from '../../../../utils/hooks/useProjectsFiltering';
 
 export interface IProjectItem {
 	name: string;
@@ -47,15 +51,23 @@ const ProjectsField = styled.ul`
 	overflow: hidden;
 `
 
+const array: (keyof ProductTypeWithDate)[] = ['projectName', 'projectType', 'square', 'price', 'creationDate']
+
 const ProjectsTable = () => {
+	const projectsFilters = useOutletContext<ProjectsFiltersType>();
 	const id = useAppSelector(getId);
-	const { data: projects, isFetching, isSuccess } = useGetProjectsQuery(id as string);
+	const { data: currentProjects, isFetching } = useGetProjectsQuery(id as string);
+	const filteredProjects = useProjectsFiltering(
+		projectsFilters,
+		array,
+		currentProjects
+	)
 	return (
 		<Wrapper>
 			{isFetching ?
 				<Spinner /> :
 				<>
-					{isSuccess && projects &&
+					{filteredProjects.length !== 0 &&
 						<ProjectsContainer>
 							<ColumnTitles>
 								<ColumnTitle>name</ColumnTitle>
@@ -65,7 +77,7 @@ const ProjectsTable = () => {
 								<ColumnTitle>creation data</ColumnTitle>
 							</ColumnTitles>
 							<ProjectsField>
-								{projects.slice().reverse().map((item, index) => (
+								{filteredProjects.slice().reverse().map((item, index) => (
 									<ProjectItem
 										key={item.projectName}
 										project={item}

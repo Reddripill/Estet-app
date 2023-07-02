@@ -7,7 +7,7 @@ interface IProps {
 	clickHandler?: () => void;
 	disabled?: boolean;
 	type?: string;
-	classname?: string;
+	className?: string;
 }
 
 type StyleType = {
@@ -50,7 +50,7 @@ const ActionButtonItem = styled.button<StyleType>`
 	}
 `
 
-const ActionButton = ({ children, color, clickHandler, disabled, classname }: PropsWithChildren<IProps>) => {
+const ActionButton = ({ children, color, clickHandler, disabled, className }: PropsWithChildren<IProps>) => {
 	return (
 		<ActionButtonItem
 			type='button'
@@ -59,7 +59,7 @@ const ActionButton = ({ children, color, clickHandler, disabled, classname }: Pr
 			onClick={clickHandler}
 			disabled={disabled}
 			isDisabled={disabled}
-			className={classname}
+			className={className}
 		>
 			{children}
 		</ActionButtonItem>

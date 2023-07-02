@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
-import { GrSearch } from 'react-icons/gr';
+import { BiSearch } from 'react-icons/bi';
 
 interface IProps {
 	className?: string;
+	changeHandler: (val: string) => void;
+	value: string;
 }
 
 const Wrapper = styled.div`
@@ -32,18 +34,22 @@ const SearchIcon = styled.button`
 	justify-content: center;
 	align-items: center;
 	padding: 0 20px;
-	color: #fff;
 `
 
-const SearchInput = ({ className }: IProps) => {
+const SearchInput = ({ className, changeHandler, value }: IProps) => {
 	return (
 		<Wrapper className={className}>
 			<InputField
 				type='text'
 				placeholder='Search'
+				value={value}
+				onChange={e => changeHandler(e.target.value)}
 			/>
 			<SearchIcon>
-				<GrSearch style={{ fontSize: 24 }} />
+				<BiSearch style={{
+					fontSize: 24,
+					color: '#fff'
+				}} />
 			</SearchIcon>
 		</Wrapper>
 	)
