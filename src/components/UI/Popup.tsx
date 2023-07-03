@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FCWidthChildren } from '../../utils/types';
+import { createPortal } from 'react-dom';
 
 interface IProps {
 	isSmall?: boolean;
@@ -82,17 +83,22 @@ const Cross = styled.div`
 
 const Popup: FCWidthChildren<IProps> = ({ children, isSmall, clickHandler, title, width }) => {
 	return (
-		<Wrapper>
-			<PopupContainer isSmall={isSmall}>
-				<PopupItem width={width}>
-					<Header>
-						<Title>{title}</Title>
-						<Cross onClick={clickHandler}></Cross>
-					</Header>
-					{children}
-				</PopupItem>
-			</PopupContainer>
-		</Wrapper>
+		<>
+			{createPortal(
+				<Wrapper onClick={clickHandler}>
+					<PopupContainer isSmall={isSmall}>
+						<PopupItem width={width} onClick={e => e.stopPropagation()}>
+							<Header>
+								<Title>{title}</Title>
+								<Cross onClick={clickHandler}></Cross>
+							</Header>
+							{children}
+						</PopupItem>
+					</PopupContainer>
+				</Wrapper>,
+				document.getElementById('root-popup') as HTMLElement
+			)}
+		</>
 	)
 }
 

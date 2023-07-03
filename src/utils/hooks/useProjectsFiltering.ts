@@ -22,7 +22,7 @@ export default function useProjectsFiltering(
 					if (filters.searchFilter) {
 						content = content.filter(project => {
 							const selectedItems = visibleFields.map(field => project[field]);
-							return selectedItems.some(item => item?.toString().includes(filters.searchFilter))
+							return selectedItems.some(item => item?.toString().toLowerCase().includes(filters.searchFilter.toLowerCase()))
 						})
 					}
 					return content;

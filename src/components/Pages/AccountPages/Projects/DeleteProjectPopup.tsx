@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Popup from '../../../UI/Popup'
 import styled from 'styled-components'
 import ActionButton from '../../../UI/ActionButton'

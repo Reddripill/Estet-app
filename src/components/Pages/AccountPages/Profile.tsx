@@ -5,17 +5,13 @@ import { useGetUserQuery } from '../../../app/api/userApiSlice';
 import styled from 'styled-components';
 import Spinner from '../../UI/Spinner';
 import ProfileContent from './ProfileContent';
-import EditUser from './EditUserPopup';
+import EditUserPopup from './EditUserPopup';
 import DeletePopup from './DeletePopup';
 
 
 const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	height: 100%;
 	padding-top: 132px;
-	gap: 40px;
 `
 
 
@@ -42,14 +38,16 @@ const Profile = () => {
 	return (
 		<>
 			{isEditPopup && currentUser && !isConfirmPopup &&
-				<EditUser
+				<EditUserPopup
 					currentUser={currentUser}
 					clickHandler={() => setIsEditPopup(false)}
 					setConfirm={() => setIsConfirmPopup(true)}
 				/>
 			}
 			{isConfirmPopup &&
-				<DeletePopup setState={setIsConfirmPopup} />
+				<DeletePopup
+					setState={setIsConfirmPopup}
+				/>
 			}
 			{!isEditPopup && !isConfirmPopup &&
 				<Wrapper>

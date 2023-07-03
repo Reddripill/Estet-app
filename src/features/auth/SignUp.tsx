@@ -84,6 +84,9 @@ const SignUp = () => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
+		document.title = 'Sign Up'
+	}, [])
+	useEffect(() => {
 		if (isSuccess && registerResponse) {
 			dispatch(setCredentials({
 				user: {

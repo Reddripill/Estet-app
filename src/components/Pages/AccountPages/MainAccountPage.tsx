@@ -25,6 +25,7 @@ const MainAccountPage = () => {
 	});
 	const navigate = useNavigate();
 	const location = useLocation();
+
 	useEffect(() => {
 		if (location.pathname === '/welcome')
 			navigate('/welcome/projects')

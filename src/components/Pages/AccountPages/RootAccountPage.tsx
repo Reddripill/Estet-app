@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import AccountHeader from './AccountHeader';
 import { Outlet } from 'react-router-dom';
@@ -16,6 +16,12 @@ const Wrapper = styled.div`
 const RootAccountPage = () => {
 	const id = useAppSelector(getId);
 	const { data: currentUser, isLoading, isSuccess } = useGetUserQuery(id as string);
+
+	useEffect(() => {
+		if (currentUser && isSuccess) {
+			document.title = `${currentUser.firstname + ' ' + currentUser.lastname}`
+		}
+	}, [currentUser, isSuccess])
 
 	if (isLoading) {
 		return <Spinner />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useInput } from '../../utils/hooks/useInput'
 import styled from 'styled-components';
 import Input from '../../components/UI/Input';
@@ -89,6 +89,10 @@ const SignIn = () => {
 	const password = useInput('', null);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		document.title = 'Sign In'
+	}, [])
 	useEffect(() => {
 		if (isSuccess && userData) {
 			dispatch(setCredentials({

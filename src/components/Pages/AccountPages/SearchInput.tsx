@@ -20,7 +20,7 @@ const InputField = styled.input`
 	background-color: transparent;
 	height: 100%;
 	padding: 0 16px;
-	color: #5F5F5F;
+	color: #fff;
 	width: 100%;
 	&::placeholder {
 		font-family: 'Mulish';

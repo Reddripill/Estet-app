@@ -147,7 +147,7 @@ const ProjectItem = ({ project, itemIndex }: IProps) => {
 			{isEditProject &&
 				<EditProjectPopup
 					project={project}
-					clickHandler={() => setIsEditProject(false)}
+					clickHandler={() => { setIsEditProject(false) }}
 				/>
 			}
 		</>

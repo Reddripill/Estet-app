@@ -6,7 +6,9 @@ import { useLogoutMutation } from '../../../features/auth/authWithApiSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { logOut } from '../../../features/auth/authSlice';
-import AccountHeader from './AccountHeader';
+import { BiRightArrowAlt } from 'react-icons/bi'
+import { AccountContainer } from '../../../utils/styles';
+import { Link } from 'react-router-dom';
 
 
 interface IProps {
@@ -16,8 +18,13 @@ interface IProps {
 }
 
 
-const Container = styled(AccountHeader)`
+const Container = styled(AccountContainer)`
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 40px;
+	height: 100%;
 `
 const Title = styled.div`
 	font-family: 'Mulish';
@@ -89,6 +96,21 @@ const FooterText = styled.div`
 		cursor: pointer;
 	}
 `
+const BackButton = styled(Link)`
+	position: absolute;
+	top: 0px;
+	left: 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+`
+const BackButtonText = styled.div`
+	color: #1DAEFF;
+	font-size: 24px;
+	font-family: 'Mulish';
+	font-weight: 700;
+	line-height: 24px;
+`
 
 
 const ProfileContent = ({ currentUser, editClickHandler, deleteClickHandler }: IProps) => {
@@ -107,31 +129,44 @@ const ProfileContent = ({ currentUser, editClickHandler, deleteClickHandler }: I
 	}, [logoutSuccess, navigate, dispatch])
 	return (
 		<>
-			<UserBlock>
-				<Title>Here is your profile, {currentUser.firstname}</Title>
-				<UserInformation>
-					<UserAvatar>
-						<UserAvatarImage src={currentUser.avatar} alt='user avatar' />
-					</UserAvatar>
-					<UserNickname>
-						<UserFullName>{currentUser.firstname + ' ' + currentUser.lastname}</UserFullName>
-						<UserId>{'@' + currentUser.firstname.toLowerCase() + currentUser.lastname.toLowerCase()}</UserId>
-					</UserNickname>
-				</UserInformation>
-				<Actions>
-					<ActionButton color='blue' clickHandler={editClickHandler}>
-						Edit
-					</ActionButton>
-					<ActionButton color='red' clickHandler={clickHandler}>
-						LogOut
-					</ActionButton>
-				</Actions>
-			</UserBlock>
-			<Footer>
-				<FooterText>
-					You can also <span onClick={deleteClickHandler}>delete</span> your account
-				</FooterText>
-			</Footer>
+			<Container>
+				<UserBlock>
+					<Title>Here is your profile, {currentUser.firstname}</Title>
+					<UserInformation>
+						<UserAvatar>
+							<UserAvatarImage src={currentUser.avatar} alt='user avatar' />
+						</UserAvatar>
+						<UserNickname>
+							<UserFullName>{currentUser.firstname + ' ' + currentUser.lastname}</UserFullName>
+							<UserId>{'@' + currentUser.firstname.toLowerCase() + currentUser.lastname.toLowerCase()}</UserId>
+						</UserNickname>
+					</UserInformation>
+					<Actions>
+						<ActionButton color='blue' clickHandler={editClickHandler}>
+							Edit
+						</ActionButton>
+						<ActionButton color='red' clickHandler={clickHandler}>
+							LogOut
+						</ActionButton>
+					</Actions>
+				</UserBlock>
+				<Footer>
+					<FooterText>
+						You can also <span onClick={deleteClickHandler}>delete</span> your account
+					</FooterText>
+				</Footer>
+				<BackButton to='/welcome/projects'>
+					<BiRightArrowAlt
+						style={{
+							width: 32,
+							height: 32,
+							color: '#1DAEFF',
+							transform: 'rotate(180deg)'
+						}}
+					/>
+					<BackButtonText>Back to Projects</BackButtonText>
+				</BackButton>
+			</Container>
 		</>
 	)
 }
